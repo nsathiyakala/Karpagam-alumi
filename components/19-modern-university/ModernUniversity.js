@@ -110,7 +110,7 @@ const ModernUniversity = ({ blogdata }) => {
                               y2="27.5"
                               gradientUnits="userSpaceOnUse"
                             >
-                              <stop offset="0" stopColor="#2F57EF" />
+                              <stop offset="0" stopColor="#005385" />
                               <stop offset="1" stopColor="#C586EE" />
                             </linearGradient>
                           </defs>

@@ -14,7 +14,7 @@ const ColorPalette = () => {
             <div className="color-box-inner">
               <div className="color-box bg-color-primary radius-10"></div>
               <div className="content mt--10">
-                <span className="rbt-title-style-2">#2f57ef</span>
+                <span className="rbt-title-style-2">#005385</span>
                 <h6 className="title mb--0">Primary Color</h6>
               </div>
             </div>
@@ -24,7 +24,7 @@ const ColorPalette = () => {
             <div className="color-box-inner">
               <div className="color-box bg-color-secondary radius-10"></div>
               <div className="content mt--10">
-                <span className="rbt-title-style-2">#b966e7</span>
+                <span className="rbt-title-style-2">#0091ff</span>
                 <h6 className="title mb--0">Secondary Color</h6>
               </div>
             </div>
@@ -214,7 +214,7 @@ const ColorPalette = () => {
             <div className="color-box-inner">
               <div className="color-box bg-color-primary-opacity radius-10"></div>
               <div className="content mt--10">
-                <span className="rbt-title-style-2">#2f57ef21</span>
+                <span className="rbt-title-style-2">#00538521</span>
                 <h6 className="title mb--0">primary opacity Color</h6>
               </div>
             </div>
@@ -224,7 +224,7 @@ const ColorPalette = () => {
             <div className="color-box-inner">
               <div className="color-box bg-color-secondary-opacity radius-10"></div>
               <div className="content mt--10">
-                <span className="rbt-title-style-2">#b966e721</span>
+                <span className="rbt-title-style-2">#0091ff21</span>
                 <h6 className="title mb--0">secondary opacity Color</h6>
               </div>
             </div>

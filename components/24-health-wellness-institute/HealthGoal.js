@@ -128,7 +128,7 @@ const HealthGoal = () => {
                             y2="27.5"
                             gradientUnits="userSpaceOnUse"
                           >
-                            <stop offset="0" stopColor="#2F57EF"></stop>
+                            <stop offset="0" stopColor="#005385"></stop>
                             <stop offset="1" stopColor="#C586EE"></stop>
                           </linearGradient>
                         </defs>

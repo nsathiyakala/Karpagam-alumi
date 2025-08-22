@@ -17,12 +17,12 @@ const CallToActionFour = ({ btnClass }) => {
                 <div className="inner">
                   <div className="content text-left">
                     <h2 className="title" data-sal="slide-up">
-                      {data.title}
+                      Alumni Strength, United Forever.
                     </h2>
                     <div className="call-to-btn text-start mt--30">
                       <Link className={btnClass} href="#">
                         <span className="icon-reverse-wrapper">
-                          <span className="btn-text">Purchase Histudy</span>
+                          <span className="btn-text">Register Now</span>
                           <span className="btn-icon">
                             <i className="feather-arrow-right"></i>
                           </span>

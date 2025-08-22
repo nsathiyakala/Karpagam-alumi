@@ -21,18 +21,20 @@ const Gallery = () => {
     });
   }, []);
   return (
-    <div className="rbt-instagram-area bg-color-white rbt-section-gapTop">
+    <div className="rbt-instagram-area bg-color-white section-pad">
       <div className="container">
         <div className="row">
           <div className="col-lg-12 mb--60 mb_sm--50">
             <div className="section-title text-center">
-              <h6 className="b2 mb--15">
+              {/* <h6 className="b2 mb--15">
                 <span className="theme-gradient">Instagram</span>
-              </h6>
+              </h6> */}
               <h2 className="title w-600">
-                Follow Histudy On{" "}
-                <span className="theme-gradient">Instagram</span>
+                Latest Pictures
+                {/* <span className="theme-gradient">Instagram</span> */}
               </h2>
+
+               <p className="mt-4">Equal blame belongs to those who fail in their duty through weakness of will, which is the <br /> same as saying through shrinking from toil and pain.</p>
             </div>
           </div>
         </div>

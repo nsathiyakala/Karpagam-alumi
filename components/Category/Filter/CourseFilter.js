@@ -81,10 +81,10 @@ const CourseFilter = ({ filterToggle }) => {
                       range
                       value={value}
                       onChange={handleSliderChange}
-                      trackStyle={{ backgroundColor: "#2f57ef" }}
+                      trackStyle={{ backgroundColor: "#005385" }}
                       handleStyle={{
-                        borderColor: "#2f57ef",
-                        backgroundColor: "#2f57ef",
+                        borderColor: "#005385",
+                        backgroundColor: "#005385",
                         opacity: "1",
                         boxShadow: "none",
                         outline: "0",

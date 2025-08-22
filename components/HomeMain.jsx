@@ -48,7 +48,7 @@ const HomeMain = ({ blogs }) => {
 
       {/* ----------testimonial start----------- */}
 
-      <div className="rbt-testimonial-area bg-color-white rbt-section-gapBottom overflow-hidden">
+      <div className="rbt-testimonial-area bg-color-white rbt-section-gapBottom overflow-hidden section-pad">
         <div className="container-fluid">
           <div className="row g-5 align-items-center">
             <div className="col-xl-3">
@@ -93,8 +93,22 @@ const HomeMain = ({ blogs }) => {
       {/* ----------Event List end----------- */}
 
       {/* ----------Job list start----------- */}
-      <div className="">
+      <div className="section-pad">
+        
         <div className="container">
+          <div className="row mb--50">
+            <div className="col-lg-12">
+              <div className="section-title text-center">
+               
+                <h2 className="title w-600">
+                 Latest Jobs  
+              
+                </h2>
+                <p className="mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do  eiusmod tempor <br /> incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+            </div>
+          </div>
+
           <JobList
             isPagination={true}
             parentClass="card-list-2 event-list-card"
@@ -107,7 +121,7 @@ const HomeMain = ({ blogs }) => {
       {/* ----------Job list end----------- */}
 
       {/* ----------Team start----------- */}
-      <div className="rbt-team-area bg-color-white rbt-section-gap">
+      <div className="rbt-team-area bg-color-extra2 section-pad">
         <Members />
       </div>
 

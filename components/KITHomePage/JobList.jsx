@@ -35,10 +35,77 @@ const JobList = ({
     setTotalPages(Math.ceil(getEvents.events.length / 6));
   }, [setTotalPages, setEvents]);
 
+
+  const Jobdata =[
+  {
+    id: "event-1",
+    img: "/images/event/grid-type-01.jpg",
+    date: "11 Jan 2025",
+    location: "IAC",
+    time: "8:00 am - 5:00 pm",
+    title: "International Education Fair 2025",
+    buttonText: "Get Ticket",
+    buttonLink: "/events/international-education-fair-2025"
+  },
+  {
+    id: "event-2",
+    img: "/images/event/grid-type-01.jpg",
+    date: "20 Feb 2025",
+    location: "Chennai",
+    time: "10:00 am - 6:00 pm",
+    title: "Global Tech Conference 2025",
+    buttonText: "Register Now",
+    buttonLink: "/events/global-tech-conference-2025"
+  },
+  {
+    id: "event-3",
+    img: "/images/event/grid-type-01.jpg",
+    date: "5 Mar 2025",
+    location: "Coimbatore",
+    time: "9:00 am - 4:00 pm",
+    title: "Startup & Entrepreneurship Summit",
+    buttonText: "Book Seat",
+    buttonLink: "/events/startup-entrepreneurship-summit"
+  },
+   {
+    id: "event-3",
+    img: "/images/event/grid-type-01.jpg",
+    date: "5 Mar 2025",
+    location: "Coimbatore",
+    time: "9:00 am - 4:00 pm",
+    title: "Startup & Entrepreneurship Summit",
+    buttonText: "Book Seat",
+    buttonLink: "/events/startup-entrepreneurship-summit"
+  },
+   {
+    id: "event-3",
+    img: "/images/event/grid-type-01.jpg",
+    date: "5 Mar 2025",
+    location: "Coimbatore",
+    time: "9:00 am - 4:00 pm",
+    title: "Startup & Entrepreneurship Summit",
+    buttonText: "Book Seat",
+    buttonLink: "/events/startup-entrepreneurship-summit"
+  },
+   {
+    id: "event-3",
+    img: "/images/event/grid-type-01.jpg",
+    date: "5 Mar 2025",
+    location: "Coimbatore",
+    time: "9:00 am - 4:00 pm",
+    title: "Startup & Entrepreneurship Summit",
+    buttonText: "Book Seat",
+    buttonLink: "/events/startup-entrepreneurship-summit"
+  }
+]
+
+
+
   return (
     <>
+    
       <div className="row g-5">
-        {getSelectedEvent.slice(start, end).map((data, index) => (
+        {Jobdata.map((data, index) => (
           <div className={`${childClass}`} key={index}>
             <div className={`rbt-card ${parentClass} variation-01 rbt-hover`}>
               <div className="rbt-card-img">
@@ -50,10 +117,10 @@ const JobList = ({
                     priority
                     alt="Card image"
                   />
-                  <div className="rbt-badge-3 bg-white">
+                  {/* <div className="rbt-badge-3 bg-white">
                     <span>{data.badgeDate}</span>
                     <span>{data.badgeYear}</span>
-                  </div>
+                  </div> */}
                 </Link>
               </div>
               <div className="rbt-card-body">
@@ -79,7 +146,7 @@ const JobList = ({
                     href={`/event-details/${data.id}`}
                   >
                     <span className="icon-reverse-wrapper">
-                      <span className="btn-text">Get Ticket</span>
+                      <span className="btn-text">Browse Job</span>
                       <span className="btn-icon">
                         <i className="feather-arrow-right"></i>
                       </span>
@@ -94,8 +161,7 @@ const JobList = ({
           </div>
         ))}
       </div>
-
-      {isPagination ? (
+       {isPagination ? (
         <div className="row">
           <div className="col-lg-12 mt--60">
             <Pagination
@@ -108,6 +174,10 @@ const JobList = ({
       ) : (
         ""
       )}
+   
+      
+
+     
     </>
   );
 };

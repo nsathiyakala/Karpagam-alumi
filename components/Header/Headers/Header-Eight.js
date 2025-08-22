@@ -12,6 +12,7 @@ import Nav from "../Nav";
 import logo from "../../../public/images/logo/logo.png";
 import logoLight from "../../../public/images/dark/logo/logo-light.png";
 import { useAppContext } from "@/context/Context";
+import KITNav from "../KITNav";
 
 const HeaderEight = ({
   headerType,
@@ -80,7 +81,7 @@ const HeaderEight = ({
             </div>
 
             <div className="rbt-main-navigation d-none d-xl-block">
-              <Nav />
+              <KITNav />
             </div>
 
             <HeaderRightTwo

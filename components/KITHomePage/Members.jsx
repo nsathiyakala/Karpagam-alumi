@@ -8,14 +8,19 @@ const Members = () => {
   return (
     <>
       <div className="container">
-        <div className="row mb--60">
-          <div className="col-lg-12">
-            <div className="section-title text-center">
-              <h5 className="title">Team (Carousel Style).</h5>
-              <p className="description mt--10">Awesome Carousel Style.</p>
+        
+       <div className="row mb--50">
+            <div className="col-lg-12">
+              <div className="section-title text-center">
+               
+                <h2 className="title w-600">
+                Latest Members
+              
+                </h2>
+                <p className="mt-4">Equal blame belongs to those who fail in their duty through weakness of will, which is the <br /> same as saying through shrinking from toil and pain.</p>
+              </div>
             </div>
           </div>
-        </div>
 
         <div className="row g-5">
           {TeamData &&
