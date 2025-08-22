@@ -1,0 +1,134 @@
+"use client";
+
+import { useEffect } from "react";
+
+import sal from "sal.js";
+import Banner from "./KITHomePage/Banner";
+import Connect from "./KITHomePage/Connect";
+import Link from "next/link";
+import SuccessStories from "./KITHomePage/SuccessStories";
+import JobList from "./KITHomePage/JobList";
+import EventData from "../data/events.json";
+import Members from "./KITHomePage/Members";
+import InstagramData from "../data/elements/instagram.json";
+import Image from "next/image";
+import Gallery from "./KITHomePage/Gallery";
+import CallToActionFour from "./Call-To-Action/CallToAction-Four";
+import EventList from "./KITHomePage/EventList";
+
+
+const HomeMain = ({ blogs }) => {
+  useEffect(() => {
+    sal({
+      threshold: 0.01,
+      once: true,
+    });
+  }, []);
+  return (
+    <>
+      {/* ----------banner start----------- */}
+
+      <div className="rbt-slider-main-wrapper position-relative">
+        <Banner />
+      </div>
+
+      {/* ----------banner end----------- */}
+
+      {/* ----------Connect start----------- */}
+
+      <div className="rbt-category-area bg-color-white rbt-section-gapTop home-connect">
+        <div className="container">
+          <div className="row g-5">
+            <Connect />
+          </div>
+        </div>
+      </div>
+
+      {/* ----------Connect end----------- */}
+
+      {/* ----------testimonial start----------- */}
+
+      <div className="rbt-testimonial-area bg-color-white rbt-section-gapBottom overflow-hidden">
+        <div className="container-fluid">
+          <div className="row g-5 align-items-center">
+            <div className="col-xl-3">
+              <div className="section-title pl--100 pl_md--30 pl_sm--0">
+                <span className="subtitle bg-pink-opacity">
+                  Success Stories
+                </span>
+                <h2 className="title">What Our Alumini's Say</h2>
+                <p className="description mt--20">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                </p>
+                <div className="veiw-more-btn mt--20">
+                  <Link
+                    className="rbt-btn btn-gradient rbt-marquee-btn marquee-text-y"
+                    href="#"
+                  >
+                    <span data-text="Marquee Y">Contact Us</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <SuccessStories />
+          </div>
+        </div>
+      </div>
+
+      {/* ----------testimonial end----------- */}
+
+      {/* ----------Event List start---------------- */}
+
+ 
+         
+          <EventList
+            isPagination={false}
+            top={false}
+            start={0}
+            end={3}
+           
+          />
+        
+
+      {/* ----------Event List end----------- */}
+
+      {/* ----------Job list start----------- */}
+      <div className="">
+        <div className="container">
+          <JobList
+            isPagination={true}
+            parentClass="card-list-2 event-list-card"
+            childClass="col-lg-6 col-md-6 col-12"
+            getEvents={EventData}
+          />
+        </div>
+      </div>
+
+      {/* ----------Job list end----------- */}
+
+      {/* ----------Team start----------- */}
+      <div className="rbt-team-area bg-color-white rbt-section-gap">
+        <Members />
+      </div>
+
+      {/* ----------Team end----------- */}
+
+
+      {/* ----------gallary---------- */}
+
+     <Gallery/>
+
+      {/*--------------------gallary------------------- */}
+
+      {/* -----------------CTA -------------------------*/}
+
+       <div className="rbt-callto-action-area rbt-section-gapTop">
+        <div className="rbt-callto-action rbt-cta-default style-4 bg-gradient-6 mt--75 ">
+          <CallToActionFour btnClass="rbt-btn btn-gradient hover-icon-reverse radius-round" />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default HomeMain;

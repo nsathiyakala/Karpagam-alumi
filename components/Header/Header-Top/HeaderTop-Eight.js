@@ -66,7 +66,7 @@ const HeaderTopEight = ({
                     </div>
                   </div>
                 </div>
-                <div className="rbt-header-sec-col rbt-header-center">
+                {/* <div className="rbt-header-sec-col rbt-header-center">
                   <div className="rbt-header-content justify-content-start justify-content-xl-center">
                     <div className="header-info">
                       <div className="rbt-header-top-news">
@@ -89,7 +89,7 @@ const HeaderTopEight = ({
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="rbt-header-sec-col rbt-header-right mt_md--10 mt_sm--10">
                   <div className="rbt-header-content justify-content-start justify-content-lg-end">
                     {router.pathname === "/10-online-course" ? (
@@ -120,13 +120,13 @@ const HeaderTopEight = ({
                         </ul>
                       </div>
                     )}
-                    {router.pathname === "/10-online-course" ? (
+                    {/* {router.pathname === "/10-online-course" ? (
                       ""
                     ) : (
                       <div className="rbt-separator d-none d-xl-block"></div>
-                    )}
+                    )} */}
 
-                    <div className="header-info">
+                    {/* <div className="header-info">
                       <ul className="rbt-dropdown-menu switcher-language">
                         {item.language.map((lng, innerIndex) => (
                           <li className="has-child-menu" key={innerIndex}>
@@ -165,9 +165,9 @@ const HeaderTopEight = ({
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </div> */}
 
-                    <div className="header-info">
+                    {/* <div className="header-info">
                       <ul className="rbt-dropdown-menu currency-menu">
                         {item.currency.map((curnc, innerIndex) => (
                           <li className="has-child-menu" key={innerIndex}>
@@ -191,7 +191,7 @@ const HeaderTopEight = ({
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
