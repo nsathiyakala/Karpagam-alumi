@@ -32,7 +32,7 @@ const KITNav = () => {
           <Link
             className={`${activeMenuItem === "home" ? "open" : ""}`}
             onClick={() => toggleMenuItem("home")}
-            href="#"
+            href="/home"
           >
             Home
            
@@ -43,7 +43,7 @@ const KITNav = () => {
         <li className="with-megamenu has-menu-child-item">
           <Link
             className={`${activeMenuItem === "courses" ? "open" : ""}`}
-            href="#"
+            href="/about"
             onClick={() => toggleMenuItem("courses")}
           >
             About

@@ -43,7 +43,7 @@ const JobList = ({
     date: "11 Jan 2025",
     location: "IAC",
     time: "8:00 am - 5:00 pm",
-    title: "International Education Fair 2025",
+    title: "Content Developer",
     buttonText: "Get Ticket",
     buttonLink: "/events/international-education-fair-2025"
   },
@@ -53,7 +53,7 @@ const JobList = ({
     date: "20 Feb 2025",
     location: "Chennai",
     time: "10:00 am - 6:00 pm",
-    title: "Global Tech Conference 2025",
+    title: "New Testing Job",
     buttonText: "Register Now",
     buttonLink: "/events/global-tech-conference-2025"
   },
@@ -63,7 +63,7 @@ const JobList = ({
     date: "5 Mar 2025",
     location: "Coimbatore",
     time: "9:00 am - 4:00 pm",
-    title: "Startup & Entrepreneurship Summit",
+    title: "new jobs",
     buttonText: "Book Seat",
     buttonLink: "/events/startup-entrepreneurship-summit"
   },
@@ -73,7 +73,7 @@ const JobList = ({
     date: "5 Mar 2025",
     location: "Coimbatore",
     time: "9:00 am - 4:00 pm",
-    title: "Startup & Entrepreneurship Summit",
+    title: "Content Developer",
     buttonText: "Book Seat",
     buttonLink: "/events/startup-entrepreneurship-summit"
   },
@@ -83,7 +83,7 @@ const JobList = ({
     date: "5 Mar 2025",
     location: "Coimbatore",
     time: "9:00 am - 4:00 pm",
-    title: "Startup & Entrepreneurship Summit",
+    title: "Software Developers",
     buttonText: "Book Seat",
     buttonLink: "/events/startup-entrepreneurship-summit"
   },
@@ -93,7 +93,7 @@ const JobList = ({
     date: "5 Mar 2025",
     location: "Coimbatore",
     time: "9:00 am - 4:00 pm",
-    title: "Startup & Entrepreneurship Summit",
+    title: "Software Developers",
     buttonText: "Book Seat",
     buttonLink: "/events/startup-entrepreneurship-summit"
   }

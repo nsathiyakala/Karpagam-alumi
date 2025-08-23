@@ -12,7 +12,9 @@ const Members = () => {
        <div className="row mb--50">
             <div className="col-lg-12">
               <div className="section-title text-center">
-               
+               <h6 className="b2 mb--15">
+                  <span className="theme-gradient">Lorem</span>
+                </h6>
                 <h2 className="title w-600">
                 Latest Members
               
