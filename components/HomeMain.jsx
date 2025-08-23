@@ -16,7 +16,6 @@ import Gallery from "./KITHomePage/Gallery";
 import CallToActionFour from "./Call-To-Action/CallToAction-Four";
 import EventList from "./KITHomePage/EventList";
 
-
 const HomeMain = ({ blogs }) => {
   useEffect(() => {
     sal({
@@ -53,19 +52,31 @@ const HomeMain = ({ blogs }) => {
           <div className="row g-5 align-items-center">
             <div className="col-xl-3">
               <div className="section-title pl--100 pl_md--30 pl_sm--0">
-                <span className="subtitle bg-pink-opacity">
+                {/* <span className="subtitle bg-pink-opacity">
                   Success Stories
-                </span>
+                </span> */}
+                <h6 className="b2 mb--15">
+                  <span className="theme-gradient">SUCCESS STORIES</span>
+                </h6>
                 <h2 className="title">What Our Alumini's Say</h2>
                 <p className="description mt--20">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
                 </p>
-                <div className="veiw-more-btn mt--20">
+                <div className="call-to-btn  mt-0">
                   <Link
-                    className="rbt-btn btn-gradient rbt-marquee-btn marquee-text-y"
+                    className="rbt-btn btn-gradient hover-icon-reverse radius-round"
                     href="#"
                   >
-                    <span data-text="Marquee Y">Contact Us</span>
+                    <span className="icon-reverse-wrapper">
+                      <span className="btn-text"> More About University</span>
+                      <span className="btn-icon">
+                        <i className="feather-arrow-right"></i>
+                      </span>
+                      <span className="btn-icon">
+                        <i className="feather-arrow-right"></i>
+                      </span>
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -79,34 +90,25 @@ const HomeMain = ({ blogs }) => {
 
       {/* ----------Event List start---------------- */}
 
- 
-         
-          <EventList
-            isPagination={false}
-            top={false}
-            start={0}
-            end={3}
-           
-          />
-        
+      <EventList isPagination={false} top={false} start={0} end={3} />
 
       {/* ----------Event List end----------- */}
 
       {/* ----------Job list start----------- */}
       <div className="section-pad">
-        
         <div className="container">
           <div className="row mb--50">
             <div className="col-lg-12">
               <div className="section-title text-center">
                 <h6 className="b2 mb--15">
-                  <span className="theme-gradient">Lorem</span>
+                  <span className="theme-gradient">LOREM</span>
                 </h6>
-                <h2 className="title w-600">
-                 Latest Jobs  
-              
-                </h2>
-                <p className="mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do  eiusmod tempor <br /> incididunt ut labore et dolore magna aliqua.</p>
+                <h2 className="title w-600">Latest Jobs</h2>
+                <p className="mt-4">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <br /> incididunt ut labore et dolore magna
+                  aliqua.
+                </p>
               </div>
             </div>
           </div>
@@ -129,17 +131,16 @@ const HomeMain = ({ blogs }) => {
 
       {/* ----------Team end----------- */}
 
-
       {/* ----------gallary---------- */}
 
-     <Gallery/>
+      <Gallery />
 
       {/*--------------------gallary------------------- */}
 
       {/* -----------------CTA -------------------------*/}
 
-       <div className="rbt-callto-action-area rbt-section-gapTop">
-        <div className="rbt-callto-action rbt-cta-default style-4 bg-gradient-6 mt--75 ">
+      <div className="rbt-callto-action-area rbt-section-gapTop">
+        <div className="rbt-callto-action rbt-cta-default style-4 bg-blue-opacity-1 mt--75 ">
           <CallToActionFour btnClass="rbt-btn btn-gradient hover-icon-reverse radius-round" />
         </div>
       </div>

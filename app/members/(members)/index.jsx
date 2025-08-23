@@ -8,22 +8,27 @@ import Store from "@/redux/store";
 import MobileMenu from "@/components/Header/MobileMenu";
 import Cart from "@/components/Header/Offcanvas/Cart";
 import Separator from "@/components/Common/Separator";
-import FooterThree from "@/components/Footer/Footer-Three";
 
-import MainDemo from "@/components/01-Main-Demo/01-Main-Demo";
 
 import KITHeader from "@/components/Header/KITHeader";
-import HomeMain from "@/components/HomeMain";
-import KITFooter from "@/components/Footer/KITFooter";
 
-const Home = ({ getBlog }) => {
+import KITFooter from "@/components/Footer/KITFooter";
+import BreadCrumb from "@/components/Common/BreadCrumb";
+import MembersMain from "@/components/MembersMain";
+
+
+const Members = () => {
   return (
     <Provider store={Store}>
       <Context>
         <MobileMenu />
         <KITHeader headerSticky="rbt-sticky" headerType="" />
 
-        <HomeMain />
+         <BreadCrumb title="Members" text="Members" />
+
+         <MembersMain/>
+
+       
 
         <Separator />
         <KITFooter />
@@ -32,4 +37,4 @@ const Home = ({ getBlog }) => {
   );
 };
 
-export default Home;
+export default Members;

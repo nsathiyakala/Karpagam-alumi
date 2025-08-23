@@ -1,16 +1,16 @@
-import About from "./(about)";
+import Members from "./(members)";
 
 export const metadata = {
   title: "Histudy - Online Courses & Education NEXTJS14 Template",
   description: "Online Courses & Education NEXTJS14 Template",
 };
 
-const AboutPage = async () => {
+const MembersPage = async () => {
   return (
     <>
-      <About />
+      <Members />
     </>
   );
 };
 
-export default AboutPage;
+export default MembersPage;

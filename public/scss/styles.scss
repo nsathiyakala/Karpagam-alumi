@@ -115,145 +115,166 @@
 
 ***************************************************************/
 
-
-
 /**************************************
     Default Styles
 ***************************************/
-@import 'default/variables';
-@import 'default/mixins';
-@import 'default/reset';
-@import 'default/typography';
-@import 'default/extend';
-@import 'default/animations';
-@import 'default/shortcode';
-@import 'default/spacing';
-@import 'default/edu-common';
-@import 'default/forms';
-@import 'default/text-animation';
-
-
+@import "default/variables";
+@import "default/mixins";
+@import "default/reset";
+@import "default/typography";
+@import "default/extend";
+@import "default/animations";
+@import "default/shortcode";
+@import "default/spacing";
+@import "default/edu-common";
+@import "default/forms";
+@import "default/text-animation";
 
 /**************************************
 	Header Styles
 ***************************************/
 
-@import 'header/common/header-common';
-@import 'header/common/headertop';
-@import 'header/topoffer/offertopbar';
-@import 'header/headermiddle/headermid';
-@import 'header/social-share';
-@import 'header/header';
-@import 'header/nav';
-@import 'header/mega-menu';
-@import 'header/mobilemenu';
-@import 'header/offcanvas';
-@import 'header/one-page-navigation';
-
-
+@import "header/common/header-common";
+@import "header/common/headertop";
+@import "header/topoffer/offertopbar";
+@import "header/headermiddle/headermid";
+@import "header/social-share";
+@import "header/header";
+@import "header/nav";
+@import "header/mega-menu";
+@import "header/mobilemenu";
+@import "header/offcanvas";
+@import "header/one-page-navigation";
 
 /**************************************
 	Elements Styles
 ***************************************/
-@import 'elements/button';
-@import 'elements/section-title';
-@import 'elements/breadcrumb';
-@import 'elements/card';
-@import 'elements/course-meta';
-@import 'elements/service';
-@import 'elements/swiper';
-@import 'elements/feature';
-@import 'elements/about';
-@import 'elements/callto-action';
-@import 'elements/accordion';
-@import 'elements/image-gallery';
-@import 'elements/counterup';
-@import 'elements/pricingtable';
-@import 'elements/badge';
-@import 'elements/team';
-@import 'elements/social';
-@import 'elements/pagination';
-@import 'elements/backtotop';
-@import 'elements/multistepform';
-@import 'elements/newsletterform';
-@import 'elements/brand';
-@import 'elements/portfolio';
-@import 'elements/contact';
-@import 'elements/testimonial';
-@import 'elements/advance-tab';
-@import 'elements/category';
-@import 'elements/instagram';
-@import 'elements/split';
-@import 'elements/countdown';
-@import 'elements/progressbar';
-@import 'elements/category-box';
-@import 'elements/course-filter';
-@import 'elements/modal';
-@import 'elements/list';
-@import 'elements/search';
-@import 'elements/video';
-@import 'elements/switcher';
-@import 'elements/404';
+@import "elements/button";
+@import "elements/section-title";
+@import "elements/breadcrumb";
+@import "elements/card";
+@import "elements/course-meta";
+@import "elements/service";
+@import "elements/swiper";
+@import "elements/feature";
+@import "elements/about";
+@import "elements/callto-action";
+@import "elements/accordion";
+@import "elements/image-gallery";
+@import "elements/counterup";
+@import "elements/pricingtable";
+@import "elements/badge";
+@import "elements/team";
+@import "elements/social";
+@import "elements/pagination";
+@import "elements/backtotop";
+@import "elements/multistepform";
+@import "elements/newsletterform";
+@import "elements/brand";
+@import "elements/portfolio";
+@import "elements/contact";
+@import "elements/testimonial";
+@import "elements/advance-tab";
+@import "elements/category";
+@import "elements/instagram";
+@import "elements/split";
+@import "elements/countdown";
+@import "elements/progressbar";
+@import "elements/category-box";
+@import "elements/course-filter";
+@import "elements/modal";
+@import "elements/list";
+@import "elements/search";
+@import "elements/video";
+@import "elements/switcher";
+@import "elements/404";
 
 /**************************************
 	Blog Styles
 ***************************************/
-@import 'blog/blog';
-@import 'blog/post-default';
-@import 'blog/sidebar';
-@import 'blog/blog-details';
-@import 'blog/unit-test';
-
+@import "blog/blog";
+@import "blog/post-default";
+@import "blog/sidebar";
+@import "blog/blog-details";
+@import "blog/unit-test";
 
 /**************************************
 	Shop Styles
 ***************************************/
 
-@import 'shop/shop';
-@import 'shop/product-details';
-@import 'shop/my-account';
-@import 'shop/cart';
-@import 'shop/checkout';
-@import 'shop/minicart';
-
+@import "shop/shop";
+@import "shop/product-details";
+@import "shop/my-account";
+@import "shop/cart";
+@import "shop/checkout";
+@import "shop/minicart";
 
 /**************************************
 	Template Styles
 ***************************************/
-@import 'template/banner';
-@import 'template/course-details';
-@import 'template/course-sidebar';
-@import 'template/contact';
-@import 'template/sidebar';
-@import 'template/course-action-bottom';
-@import 'template/instructor-dashboard';
-@import 'template/lesson';
-
+@import "template/banner";
+@import "template/course-details";
+@import "template/course-sidebar";
+@import "template/contact";
+@import "template/sidebar";
+@import "template/course-action-bottom";
+@import "template/instructor-dashboard";
+@import "template/lesson";
 
 /**************************************
 	Footer Styles
 ***************************************/
-@import 'footer/footer';
-@import 'footer/copyright';
-@import 'footer/back-to-top';
-@import 'footer/dark';
-@import 'template/preview';
-@import 'template/preview';
+@import "footer/footer";
+@import "footer/copyright";
+@import "footer/back-to-top";
+@import "footer/dark";
+@import "template/preview";
+@import "template/preview";
 
 /**************************************
 	Dark Mode
 ***************************************/
-@import 'dark-mode/dark-mode';
+@import "dark-mode/dark-mode";
 
-
-.home-connect{
-	padding-top: 50px !important;
+.home-connect {
+  padding-top: 50px !important;
 }
 
 .section-pad {
-	padding: 50px 0 !important;
+  padding: 50px 0 !important;
 }
 
-.bg-blue{
-	background-color: #005385;
+.bg-blue {
+  background-color: #005385;
+}
+.bg-blue-opacity-1 {
+  background-color: #00528556;
+}
+
+.text-orange{
+	color: #a54428;
+}
+
+.rounded {
+  border-radius: 5px !important;
+}
+
+.KITgallery {
+  padding: 50px 10px;
+}
+
+.gallery-dec {
+  font-size: 12px;
+}
+
+.newsroom-card {
+  display: flex;
+  flex-direction: row;
+//   align-items: center;
+  column-gap: 20px;
+}
+
+.scroll-connect{
+	font-size: 30px;
+	text-transform: uppercase;
 }

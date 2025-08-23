@@ -183,7 +183,8 @@
 }
 
 .rbt-gradient-border {
-    background: linear-gradient(-145deg, #CFA2E8, #637FEA) !important;
+    // background: linear-gradient(-145deg, #CFA2E8, #637FEA) !important;
+     background: linear-gradient(-145deg,  var(--color-primary), var(--color-secondary)) !important;
     z-index: 10;
 
     &::before {

@@ -42,12 +42,10 @@ const Banner = () => {
                           </span>
                         </div>
                         <h1 className="title w-700">
-                         Karpagam Institute Of Technology <br />
-                          <strong className="color-white">
-                            
-                          </strong>
+                          Karpagam Institute Of Technology <br />
+                          <strong className="color-white"></strong>
                         </h1>
-                        <div className="button-group mt--30">
+                        {/* <div className="button-group mt--30">
                           <Link
                             className="rbt-btn btn-gradient rbt-marquee-btn"
                             href="#"
@@ -56,7 +54,28 @@ const Banner = () => {
                               More About University
                             </span>
                           </Link>
+                        </div> */}
+
+                        <div className="call-to-btn  mt-0">
+                          <Link
+                            className="rbt-btn btn-gradient hover-icon-reverse radius-round"
+                            href="#"
+                          >
+                            <span className="icon-reverse-wrapper">
+                              <span className="btn-text">
+                                {" "}
+                                More About University
+                              </span>
+                              <span className="btn-icon">
+                                <i className="feather-arrow-right"></i>
+                              </span>
+                              <span className="btn-icon">
+                                <i className="feather-arrow-right"></i>
+                              </span>
+                            </span>
+                          </Link>
                         </div>
+
                         <div className="social-share-wrapper mt--40">
                           <ul className="social-icon social-default transparent-with-border">
                             <li>
@@ -236,8 +255,6 @@ const Banner = () => {
           </div>
         </div>
       </Swiper>
-
-      
     </>
   );
 };

@@ -56,7 +56,7 @@ const KITNav = () => {
         <li className="with-megamenu has-menu-child-item">
           <Link
             className={`${activeMenuItem === "courses" ? "open" : ""}`}
-            href="#"
+            href="/newsroom"
             onClick={() => toggleMenuItem("courses")}
           >
             Newsroom
@@ -69,7 +69,7 @@ const KITNav = () => {
         <li className="with-megamenu has-menu-child-item">
           <Link
             className={`${activeMenuItem === "courses" ? "open" : ""}`}
-            href="#"
+            href="/members"
             onClick={() => toggleMenuItem("courses")}
           >
             Members
@@ -81,7 +81,7 @@ const KITNav = () => {
        <li className="with-megamenu has-menu-child-item">
           <Link
             className={`${activeMenuItem === "courses" ? "open" : ""}`}
-            href="#"
+            href="/events"
             onClick={() => toggleMenuItem("courses")}
           >
             Events
@@ -94,7 +94,7 @@ const KITNav = () => {
         <li className="with-megamenu has-menu-child-item">
           <Link
             className={`${activeMenuItem === "courses" ? "open" : ""}`}
-            href="#"
+            href="/gallery"
             onClick={() => toggleMenuItem("courses")}
           >
             Gallery
@@ -107,7 +107,7 @@ const KITNav = () => {
          <li className="with-megamenu has-menu-child-item">
           <Link
             className={`${activeMenuItem === "courses" ? "open" : ""}`}
-            href="#"
+            href="/contact"
             onClick={() => toggleMenuItem("courses")}
           >
             Contact Us

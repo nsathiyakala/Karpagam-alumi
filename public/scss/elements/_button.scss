@@ -689,7 +689,8 @@ fieldset:disabled {
     }
 
     &.btn-border-gradient {
-        background: linear-gradient(90deg, #CFA2E8, #637FEA);
+        // background: linear-gradient(90deg, #CFA2E8, #637FEA);
+         background: linear-gradient(-145deg,  var(--color-primary), var(--color-secondary)) !important;
         border: none;
         outline: none;
         cursor: pointer;

@@ -12,7 +12,7 @@ const CopyRight = () => {
               <p className="rbt-link-hover text-center text-lg-start">
                 Copyright © 2025
                 <Link className="mx-2" href="https://rainbowthemes.net">
-                  Rainbow-Themes.
+                  Karpagam
                 </Link>
                 All Rights Reserved
               </p>
@@ -23,13 +23,13 @@ const CopyRight = () => {
                   <Link href="#">Terms of service</Link>
                 </li>
                 <li>
-                  <Link href="/privacy-policy">Privacy policy</Link>
+                  <Link href="#">Privacy policy</Link>
                 </li>
                 <li>
-                  <Link href="/subscription">Subscription</Link>
+                  <Link href="#">Subscription</Link>
                 </li>
                 <li>
-                  <Link href="/login">Login & Register</Link>
+                  <Link href="#">Login & Register</Link>
                 </li>
               </ul>
             </div>

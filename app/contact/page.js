@@ -1,16 +1,17 @@
-import ContactPage from "./(contact)";
+import Contact from "./(contact)";
+
 
 export const metadata = {
   title: "Contact - Online Courses & Education NEXTJS14 Template",
   description: "Online Courses & Education NEXTJS14 Template",
 };
 
-const ContactLayout = () => {
+const ContactPage = () => {
   return (
     <>
-      <ContactPage />
+      <Contact />
     </>
   );
 };
 
-export default ContactLayout;
+export default ContactPage;

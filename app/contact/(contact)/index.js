@@ -4,41 +4,47 @@ import { Provider } from "react-redux";
 import Store from "@/redux/store";
 import Context from "@/context/Context";
 
-import Contact from "@/components/Contacts/Contact";
-import ContactForm from "@/components/Contacts/Contact-Form";
-import HeaderStyleTen from "@/components/Header/HeaderStyle-Ten";
 import MobileMenu from "@/components/Header/MobileMenu";
 import Cart from "@/components/Header/Offcanvas/Cart";
 import FooterOne from "@/components/Footer/Footer-One";
+import KITHeader from "@/components/Header/KITHeader";
+import BreadCrumb from "@/components/Common/BreadCrumb";
+import KITContact from "@/components/KITContact/KITContact";
+import KITContactForm from "@/components/KITContact/KITContact-Form";
+import KITFooter from "@/components/Footer/KITFooter";
 
-const ContactPage = () => {
+const Contact = () => {
   return (
     <>
       <Provider store={Store}>
         <Context>
-          <HeaderStyleTen headerSticky="rbt-sticky" headerType="" />
           <MobileMenu />
-          <Cart />
+          <KITHeader headerSticky="rbt-sticky" headerType="" />
+
+          {/* <BreadCrumb title="Members" text="Members" /> */}
 
           <div className="rbt-conatct-area bg-gradient-11 rbt-section-gap">
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-title text-center mb--60">
-                    <span className="subtitle bg-secondary-opacity">
+                    {/* <span className="subtitle bg-secondary-opacity">
                       Contact Us
-                    </span>
-                    <h2 className="title">
-                      Histudy Course Contact <br /> can join with us.
+                    </span> */}
+                    <h6 className="b2 mb--15">
+                      <span className="text-white">Contact Us</span>
+                    </h6>
+                    <h2 className="title text-white">
+                     Lorem ipsum dolor sit  <br/>  adipiscing elit
                     </h2>
                   </div>
                 </div>
               </div>
-              <Contact />
+              <KITContact />
             </div>
           </div>
 
-          <ContactForm />
+          <KITContactForm />
 
           <div className="rbt-google-map bg-color-white rbt-section-gapTop">
             <iframe
@@ -49,11 +55,11 @@ const ContactPage = () => {
             ></iframe>
           </div>
 
-          <FooterOne />
+          <KITFooter />
         </Context>
       </Provider>
     </>
   );
 };
 
-export default ContactPage;
+export default Contact;

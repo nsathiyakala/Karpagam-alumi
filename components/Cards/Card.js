@@ -6,6 +6,8 @@ import CourseDetails from "../../data/course-details/courseData.json";
 const Card = ({ start, end, col, mt, isDesc, isUser }) => {
   return (
     <>
+
+    hhhh
       {CourseDetails &&
         CourseDetails.courseDetails.slice(start, end).map((data, index) => (
           <div

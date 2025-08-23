@@ -11,13 +11,13 @@ import Separator from "@/components/Common/Separator";
 
 
 import KITHeader from "@/components/Header/KITHeader";
-import HomeMain from "@/components/HomeMain";
+
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 import AboutMain from "@/components/AboutMain";
 
 
-const About = ({ getBlog }) => {
+const About = () => {
   return (
     <Provider store={Store}>
       <Context>
@@ -28,11 +28,6 @@ const About = ({ getBlog }) => {
 
          <AboutMain/>
 
-         
-
-        {/* <HomeMain/> */}
-        
-        {/* <MainDemo blogs={getBlog} /> */}
         <Cart />
 
         <Separator />
