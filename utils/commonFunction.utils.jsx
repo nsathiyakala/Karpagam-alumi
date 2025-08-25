@@ -163,3 +163,13 @@ export const modelError = (error, debug = false) => {
     };
   }
 };
+
+export const setDropdownData = (data, label) => {
+  const result = data?.map((item) => {
+    return {
+      value: item.id,
+      label: item[label],
+    };
+  });
+  return result;
+};

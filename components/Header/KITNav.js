@@ -68,7 +68,7 @@ const KITNav = () => {
     }
   }, [token, isAdmin, isAlumniManager, isAlumni, isFatulty, state.menuList]);
 
-  console.log("menu", state.menuList);
+  // console.log("menu", state.menuList);
 
   //   const getUserMenu = () => {
   //   if (token) {
@@ -89,7 +89,7 @@ const KITNav = () => {
   //   }
   // };
 
-  console.log("userMenu", state.userMenu);
+  // console.log("userMenu", state.userMenu);
 
   return (
     <nav className="mainmenu-nav">
