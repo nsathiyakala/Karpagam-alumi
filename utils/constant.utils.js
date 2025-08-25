@@ -2,7 +2,7 @@ export const menus = {
   guest: [
     { label: "About Us", href: "/about" },
     { label: "Newsroom", href: "/newsroom" },
-    { label: "Members", href: "/member" },
+    { label: "Members", href: "/members" },
     { label: "Events", href: "/events" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact Us", href: "/contact" },
@@ -12,7 +12,7 @@ export const menus = {
     { label: "Members", href: "/members" },
     { label: "Business Directory", href: "/business-directory" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Events", href: "/event" },
+    { label: "Events", href: "/events" },
     // { label: "Change Password", href: "/change-password" },
   ],
   alumni: [
@@ -22,7 +22,7 @@ export const menus = {
     { label: "Business Directory", href: "/business-directory" },
     { label: "Help Desk", href: "/help-desk" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Events", href: "/event" },
+    { label: "Events", href: "/events" },
     { label: "Profile", href: "/edit-basic-profile" },
     // { label: "Change Password", href: "/change-password" },
   ],
@@ -33,7 +33,7 @@ export const menus = {
     { label: "Business Directory", href: "/business-directory" },
     { label: "Help Desk", href: "/help-desk/all-support-tickets" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Events", href: "/event" },
+    { label: "Events", href: "/events" },
     // { label: "Change Password", href: "/change-password" },
   ],
   admin: [
@@ -44,7 +44,7 @@ export const menus = {
     { label: "Business Directory", href: "/business-directory" },
     { label: "Help Desk", href: "/help-desk/all-support-tickets" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Events", href: "/event" },
+    { label: "Events", href: "/events" },
     // { label: "Change Password", href: "/change-password" },
   ],
   alumniManager: [
@@ -55,7 +55,7 @@ export const menus = {
     { label: "Business Directory", href: "/business-directory" },
     { label: "Help Desk", href: "/help-desk/all-support-tickets" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Events", href: "/event" },
+    { label: "Events", href: "/events" },
     // { label: "Change Password", href: "/change-password" },
   ],
 };
@@ -305,3 +305,150 @@ export const ROLE = [
     value: "alumni",
   },
 ];
+
+export const TeamData = [
+    {
+      img: "/images/team/team-07.jpg",
+      isLarge: false,
+      isActive: false,
+      details: [
+        {
+          img: "/images/team/team-07.jpg",
+          name: "Irma J. Erwin",
+          type: "English Teacher",
+          location: "CO Miego, AD,USA",
+          desc: "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          descTwo:
+            "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          phone: "+1-202-555-0174",
+          email: "example@gmail.com",
+        },
+      ],
+    },
+    {
+      img: "/images/team/team-08.jpg",
+      isLarge: false,
+      isActive: false,
+      details: [
+        {
+          img: "/images/team/team-08.jpg",
+          name: "John Due",
+          type: "English Teacher",
+          location: "CO Miego, AD,USA",
+          desc: "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          descTwo:
+            "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          phone: "+1-202-555-0174",
+          email: "example@gmail.com",
+        },
+      ],
+    },
+    {
+      img: "/images/team/team-09.jpg",
+      isLarge: false,
+      isActive: false,
+      details: [
+        {
+          img: "/images/team/team-09.jpg",
+          name: "Joo Bieden",
+          type: "English Teacher",
+          location: "CO Miego, AD,USA",
+          desc: "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          descTwo:
+            "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          phone: "+1-202-555-0174",
+          email: "example@gmail.com",
+        },
+      ],
+    },
+    {
+      img: "/images/team/team-10.jpg",
+      isLarge: false,
+      isActive: false,
+      details: [
+        {
+          img: "/images/team/team-10.jpg",
+          name: "Alejandro",
+          type: "English Teacher",
+          location: "CO Miego, AD,USA",
+          desc: "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          descTwo:
+            "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          phone: "+1-202-555-0174",
+          email: "example@gmail.com",
+        },
+      ],
+    },
+    {
+      img: "/images/team/team-07.jpg",
+      isLarge: false,
+      isActive: false,
+      details: [
+        {
+          img: "/images/team/team-07.jpg",
+          name: "Irma J. Erwin",
+          type: "English Teacher",
+          location: "CO Miego, AD,USA",
+          desc: "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          descTwo:
+            "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          phone: "+1-202-555-0174",
+          email: "example@gmail.com",
+        },
+      ],
+    },
+    {
+      img: "/images/team/team-08.jpg",
+      isLarge: false,
+      isActive: false,
+      details: [
+        {
+          img: "/images/team/team-08.jpg",
+          name: "John Due",
+          type: "English Teacher",
+          location: "CO Miego, AD,USA",
+          desc: "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          descTwo:
+            "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          phone: "+1-202-555-0174",
+          email: "example@gmail.com",
+        },
+      ],
+    },
+    {
+      img: "/images/team/team-09.jpg",
+      isLarge: false,
+      isActive: false,
+      details: [
+        {
+          img: "/images/team/team-09.jpg",
+          name: "Joo Bieden",
+          type: "English Teacher",
+          location: "CO Miego, AD,USA",
+          desc: "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          descTwo:
+            "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          phone: "+1-202-555-0174",
+          email: "example@gmail.com",
+        },
+      ],
+    },
+    {
+      img: "/images/team/team-10.jpg",
+      isLarge: false,
+      isActive: false,
+      details: [
+        {
+          img: "/images/team/team-10.jpg",
+          name: "Alejandro",
+          type: "English Teacher",
+          location: "CO Miego, AD,USA",
+          desc: "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          descTwo:
+            "You can run Histudy easily. Any School, University, College can be use this histudy education template for their educational purpose. A university can be success you.",
+          phone: "+1-202-555-0174",
+          email: "example@gmail.com",
+        },
+      ],
+    },
+  ];

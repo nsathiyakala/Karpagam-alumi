@@ -6,13 +6,6 @@ import Image from "next/image";
 
 import { useEffect, useState } from "react";
 
-import MenuData from "../../data/MegaMenu.json";
-
-import CourseLayout from "./NavProps/CourseLayout";
-import PageLayout from "./NavProps/PageLayout";
-import ElementsLayout from "./NavProps/ElementsLayout";
-
-import addImage from "../../public/images/service/mobile-cat.jpg";
 import { menus } from "@/utils/constant.utils";
 import { useSetState } from "@/utils/commonFunction.utils";
 

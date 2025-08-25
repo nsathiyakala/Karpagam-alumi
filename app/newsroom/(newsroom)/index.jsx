@@ -11,10 +11,11 @@ import MobileMenu from "@/components/Header/MobileMenu";
 
 import BreadCrumb from "@/components/Common/BreadCrumb";
 import KITHeader from "@/components/Header/KITHeader";
-import SideBar from "@/components/Sidebar/SideBar";
+
 
 import NewsRoomMain from "@/components/NewsRoomMain";
 import KITFooter from "@/components/Footer/KITFooter";
+import SideBar from "@/components/KITSidebar/SideBar";
 
 const NewsRoom = () => {
   return (

@@ -1,28 +1,17 @@
-import React from "react";
+import React from 'react'
 import Image from "next/image";
 import Link from "next/link";
 import { TeamData } from "@/utils/constant.utils";
 
-
-const MembersMain = () => {
-
+const MembersLoginCard = () => {
   return (
-    <div className="rbt-video-area bg-color-white section-pad overflow-hidden">
+     <div className="rbt-video-area bg-color-white overflow-hidden">
       <div className="container">
-        <div className="row ">
-          <div className="col-lg-12">
-            <div className="section-title text-center">
-              <h2 className="title w-600">
-                Lorem ipsum dolor sit amet 
-              </h2>
-            </div>
-          </div>
-        </div>
-        <div className="row row--15 section-pad">
+        <div className="row row--15 gy-5">
           {TeamData &&
             TeamData.map((data, index) => (
               <div
-                className="col-lg-3 col-md-6 col-sm-6 col-12 mt--30"
+                className="col-lg-3 col-md-6 col-sm-6 col-12 "
                 key={index}
               >
                 {data.details.map((item, innerIndex) => (
@@ -180,7 +169,7 @@ const MembersMain = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MembersMain;
+export default MembersLoginCard

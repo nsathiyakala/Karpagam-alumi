@@ -251,8 +251,8 @@
   background-color: #00528556;
 }
 
-.text-orange{
-	color: #a54428;
+.text-orange {
+  color: #a54428;
 }
 
 .rounded {
@@ -270,16 +270,25 @@
 .newsroom-card {
   display: flex;
   flex-direction: row;
-//   align-items: center;
+  //   align-items: center;
   column-gap: 20px;
 }
 
-.scroll-connect{
-	font-size: 30px;
-	text-transform: uppercase;
+.scroll-connect {
+  font-size: 30px;
+  text-transform: uppercase;
 }
 
-
 .rbt-contact-form.contact-form-style-1 {
-	border-radius: 20px !important;
+  border-radius: 20px !important;
+}
+
+.sm-btn {
+  height: 40px;
+  width: auto;
+  padding: 0px 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }
