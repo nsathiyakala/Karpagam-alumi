@@ -4,6 +4,15 @@ import Link from "next/link";
 import UserData from "../../../data/user.json";
 
 const KITUser = () => {
+  const logOut = async () => {
+    try {
+      localStorage.clear();
+      window.location.href = "/";
+    } catch (error) {
+      console.log("✌️error --->", error);
+    }
+  };
+
   return (
     <>
       <div className="rbt-user-menu-list-wrapper">
@@ -50,7 +59,6 @@ const KITUser = () => {
               </ul>
               <hr className="mt--10 mb--10" /> */}
 
-
               <ul className="user-list-wrapper">
                 {/* <li>
                   <Link href="/instructor-settings">
@@ -59,10 +67,10 @@ const KITUser = () => {
                   </Link>
                 </li> */}
                 <li>
-                  <Link href="/">
+                  <div onClick={() => logOut()}>
                     <i className="feather-log-out"></i>
                     <span>Logout</span>
-                  </Link>
+                  </div>
                 </li>
               </ul>
             </div>

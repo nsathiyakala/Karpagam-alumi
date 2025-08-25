@@ -49,10 +49,8 @@ const LoginMain = () => {
         return;
       }
 
-      console.log("formData", formData);
 
-      const res = await Models.login.login(formData);
-      console.log("res", res);
+      const res = await Models.auth.login(formData);
 
       localStorage.setItem("token", res.access);
       localStorage.setItem("user_id", res.id);

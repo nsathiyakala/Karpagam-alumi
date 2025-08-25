@@ -7,7 +7,7 @@ import masters from "@/models/masters.model";
 import member from "@/models/member.model";
 import post from "@/models/post.model";
 import helpDesk from "@/models/helpDesk.model";
-import login from "@/models/login";
+import auth from "@/models/auth";
 
 
 
@@ -20,7 +20,7 @@ export const Models = {
     member,
     job,
     helpDesk,
-    login
+    auth
 };
 
 export default Models;

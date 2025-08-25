@@ -4,7 +4,7 @@ import BreadCrumb from "@/components/Common/BreadCrumb";
 import KITFooter from "@/components/Footer/KITFooter";
 import KITHeader from "@/components/Header/KITHeader";
 import MobileMenu from "@/components/Header/MobileMenu";
-import LoginMain from "@/components/LoginMain";
+import LoginMain from "@/components/(Alumni)/LoginMain";
 import NewsletterThree from "@/components/Newsletters/Newsletter-Three";
 import Context from "@/context/Context";
 import Store from "@/redux/store";

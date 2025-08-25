@@ -306,6 +306,21 @@ export const ROLE = [
   },
 ];
 
+export const GENDER = [
+  {
+    label: "Male",
+    value: "M",
+  },
+  {
+    label: "Female",
+    value: "F",
+  },
+  {
+    label: "Others",
+    value: "O",
+  },
+];
+
 export const TeamData = [
     {
       img: "/images/team/team-07.jpg",

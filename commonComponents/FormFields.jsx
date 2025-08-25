@@ -31,7 +31,7 @@ const FormField = ({
     <>
       <div className="relative">
         {label && (
-          <label style={{ paddingRight: "20px" }}>
+          <label style={{ paddingRight: "20px",marginBottom:"10px" }}>
             {label} {required && <span style={{ color: "red" }}>*</span>}
           </label>
         )}
@@ -57,13 +57,14 @@ const FormField = ({
           <CustomSelect
             name={name}
             value={value}
-            className={className}
+            // className="applicant-input"
             onChange={onChange}
             placeholder={`Select ${placeholder ? placeholder : label}`}
             options={options}
             loadMore={loadMore}
             menuPosition="fixed"
             isMulti={isMulti ? isMulti : false}
+            className={className}
           />
         ) : type === "selectbyname" ? (
           <select
@@ -89,7 +90,7 @@ const FormField = ({
             ref={ref}
             accept={accept}
             onChange={onChange}
-            className={className}
+            className={"inputfile"}
           />
         ) : type === "password" ? (
           <div className="flex items-center" style={{ position: "relative" }}>
@@ -171,32 +172,30 @@ const FormField = ({
             disabled={disabled}
           />
         ) : type === "radio" ? (
-          <div className="row">
-            {options?.map((option, index) => (
-              <div
-                key={index}
-                className="form-radio col-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <label
-                  htmlFor={`${name}-${option.value}`}
-                  style={{ marginRight: "5px", color: "black" }}
-                >
-                  {option.label}
-                </label>
+          <div className="row ">
+          {options?.map((option, index) => (
+            <div key={index} className="col-4">
+              <div className="form-check d-flex align-items-center">
                 <input
-                  style={{ width: "15%" }}
+                  className="form-check-input"
                   type="radio"
                   name={name}
                   value={option.value}
+                  id={`${name}-${option.value}`}
                   checked={value === option.value}
                   onChange={onChange}
-                  className={className}
-                  id={`${name}-${option.value}`}
                 />
+                <label
+                  className="form-check-label ms-2"
+                  htmlFor={`${name}-${option.value}`}
+                >
+                  {option.label}
+                </label>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+        
         ) : type === "checkbox" ? (
           <input
             type="checkbox"

@@ -31,7 +31,6 @@ export const Dropdown = (arr, label) => {
   return array;
 };
 
-
 export const MultiDropdown = (arr, label) => {
   const array = arr?.map((item) => ({
     value: item?.id,
@@ -40,7 +39,7 @@ export const MultiDropdown = (arr, label) => {
   return array;
 };
 
-export const UserDropdown = (arr, labelFn ) => {
+export const UserDropdown = (arr, labelFn) => {
   const array = arr?.map((item) => ({
     value: item?.id,
     label: labelFn(item),
@@ -101,12 +100,10 @@ export const validateForm = (formData, validationRules, setErrMsg) => {
 
     if (
       rules.required &&
-      (
-        value === undefined ||
+      (value === undefined ||
         value === null ||
         (typeof value === "string" && value.trim() === "") ||
-        (Array.isArray(value) && value.length === 0)
-      )
+        (Array.isArray(value) && value.length === 0))
     ) {
       errors[field] = "Enter This Field";
     } else if (rules.email && !validateEmail(value)) {
@@ -163,3 +160,29 @@ export const modelError = (error, debug = false) => {
     };
   }
 };
+
+export const objectToFormData = (obj) => {
+  const formData = new FormData();
+
+  Object.entries(obj).forEach(([key, value]) => {
+    if (value === undefined || value === null) return;
+    if (value instanceof File || value instanceof Blob) {
+      formData.append(key, value);
+    } else if (Array.isArray(value) || typeof value === "object") {
+      formData.append(key, JSON.stringify(value));
+    } else {
+      formData.append(key, String(value));
+    }
+  });
+
+  return formData;
+};
+
+
+export const viewFormData=(formData)=>{
+  const arr=[]
+  for (let [key, value] of formData.entries()) {
+    arr.push({key,value})
+  }
+  return arr
+}
