@@ -1,7 +1,7 @@
 import React from "react";
 
 import MembersLoginCard from "./MembersLoginCard";
-import SideBarLogin from "./KITSidebar/SideBarLogin";
+import SideBarLogin from "./KITSidebar/SideBarMembers";
 
 const MembersLoginMain = () => {
   return (

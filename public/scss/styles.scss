@@ -292,3 +292,66 @@
   align-items: center;
   font-size: 14px;
 }
+
+.applicant-input{
+	width: 100% !important;
+	border: none !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+}
+.member-dd{
+	width: 100% !important;
+}
+
+.member-dd .css-1xqkn6g-control{
+      height: 0;
+    border: 1px solid red;
+    text-align: left;
+    justify-content: start;
+    align-items: start;
+    padding: 0;
+}
+
+.member-dd .css-1xqkn6g-control .css-hlgwow{
+  padding: 0;
+}
+
+.member-dd .css-1xqkn6g-control .css-hlgwow .css-1oceoso-placeholder{
+  font-size: 14px;
+  padding: 1px;
+    color: gray;
+}
+
+.member-dd .css-1phtcoi-control  {
+ 
+  text-align: start;
+-webkit-align-items: start;
+    -webkit-box-align: start;
+    font-size: 14px;
+  padding: 1px;
+    color: gray;
+}
+.member-dd .css-5736gi-menu  {
+   text-align: start;
+-webkit-align-items: start;
+    -webkit-box-align: start;
+    font-size: 14px;
+  padding: 1px;
+    color: gray;
+}
+
+
+.member-dd  .css-1u9des2-indicatorSeparator {
+  display: none;
+}
+.member-dd .css-1xc3v61-indicatorContainer{
+  padding: 0;
+  width: 15px;
+ 
+}
+
+.member-dd .css-1xc3v61-indicatorContainer svg{
+ stroke: gray;
+  fill: gray;
+}
