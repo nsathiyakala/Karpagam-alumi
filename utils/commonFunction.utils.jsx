@@ -91,3 +91,75 @@ export const isToday = (date) => {
     date.getFullYear() === today.getFullYear()
   );
 };
+
+export const validateForm = (formData, validationRules, setErrMsg) => {
+  const errors = {};
+
+  Object.keys(validationRules).forEach((field) => {
+    const rules = validationRules[field];
+    const value = formData[field];
+
+    if (
+      rules.required &&
+      (
+        value === undefined ||
+        value === null ||
+        (typeof value === "string" && value.trim() === "") ||
+        (Array.isArray(value) && value.length === 0)
+      )
+    ) {
+      errors[field] = "Enter This Field";
+    } else if (rules.email && !validateEmail(value)) {
+      errors[field] = "Invalid Email";
+    } else if (rules.custom && !rules.custom(value)) {
+      errors[field] = rules.customMessage || "Invalid value";
+    } else if (rules.fileType && value && value instanceof File) {
+      if (!rules.fileType.includes(value.type)) {
+        errors[field] = "Invalid file type";
+      }
+      if (rules.fileSize && value.size > rules.fileSize) {
+        errors[field] = "File is too large";
+      }
+    } else if (rules.phoneNumber && !validatePhoneNumber(value)) {
+      errors[field] = "Invalid phone number. Must be exactly 10 digits.";
+    }
+  });
+
+  setErrMsg(errors);
+  return Object.keys(errors).length === 0;
+};
+
+export const modelError = (error, debug = false) => {
+  if (error.response) {
+    if (debug) {
+      console.log("🚨 Server Error:", error.response.data);
+      console.log("📌 Status Code:", error.response.status);
+      console.log("📝 Headers:", error.response.headers);
+    }
+
+    return {
+      type: "server",
+      data: error.response.data || null,
+      status: error.response.status || null,
+      headers: error.response.headers || null,
+    };
+  } else if (error.request) {
+    if (debug) {
+      console.log("⚠️ No Response from Server:", error.request);
+    }
+
+    return {
+      type: "no-response",
+      request: error.request,
+    };
+  } else {
+    if (debug) {
+      console.log("❌ Request Setup Error:", error.message);
+    }
+
+    return {
+      type: "setup",
+      message: error.message,
+    };
+  }
+};

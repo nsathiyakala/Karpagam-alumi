@@ -29,7 +29,7 @@ const CopyRight = () => {
                   <Link href="#">Subscription</Link>
                 </li>
                 <li>
-                  <Link href="#">Login & Register</Link>
+                  <Link href="/login">Login</Link>
                 </li>
               </ul>
             </div>

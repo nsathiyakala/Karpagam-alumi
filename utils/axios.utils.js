@@ -20,7 +20,7 @@ export const instance = () => {
   if (api) return api;
 
   api = axios.create({
-    baseURL: "http://alumnib.decodeschool.com/",
+    baseURL: "https://alumnib.decodeschool.com/",
   });
 
   // Request interceptor
@@ -72,7 +72,7 @@ export const instance = () => {
         return new Promise(async (resolve, reject) => {
           try {
             const response = await axios.post(
-             "http://alumnib.decodeschool.com/login/refresh/",
+             `https://alumnib.decodeschool.com/login/refresh/`,
               {
                 refresh: refreshToken,
               }

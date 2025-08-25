@@ -7,6 +7,7 @@ import masters from "@/models/masters.model";
 import member from "@/models/member.model";
 import post from "@/models/post.model";
 import helpDesk from "@/models/helpDesk.model";
+import login from "@/models/login";
 
 
 
@@ -18,7 +19,8 @@ export const Models = {
     event,
     member,
     job,
-    helpDesk
+    helpDesk,
+    login
 };
 
 export default Models;

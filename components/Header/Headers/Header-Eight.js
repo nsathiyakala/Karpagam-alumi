@@ -6,13 +6,12 @@ import Image from "next/image";
 
 import HeaderRightTwo from "../Header-Right/HeaderRight-Two";
 import Search from "../Offcanvas/Search";
-import Category from "../Category/Category";
-import Nav from "../Nav";
 
 import logo from "../../../public/images/logo/logo.png";
 import logoLight from "../../../public/images/dark/logo/logo-light.png";
 import { useAppContext } from "@/context/Context";
 import KITNav from "../KITNav";
+import { Modal } from "antd";
 
 const HeaderEight = ({
   headerType,
@@ -41,6 +40,41 @@ const HeaderEight = ({
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const [token, setToken] = useState("");
+  const { confirm } = Modal;
+  
+  useEffect(() => {
+    const Token = localStorage.getItem("token");
+    // if (!Token) {
+    //   window.location.href = "/login";
+    // }
+    setToken(Token);
+  }, []);
+
+
+   const showDeleteConfirm = () => {
+    confirm({
+      title: "Are you sure, You want to logout?",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "Cancel",
+      onOk() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("isAdmin");
+        localStorage.removeItem("isAlumniManager");
+        localStorage.removeItem("isAlumni");
+        localStorage.removeItem("isFatulty");
+        message.success("logout successfully");
+        window.location.href = "/";
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
+
   return (
     <>
       <div
@@ -86,7 +120,7 @@ const HeaderEight = ({
 
             <HeaderRightTwo
               userType="Admin"
-              btnText="Enroll Now"
+              btnText="Register Now"
               btnClass="rbt-marquee-btn marquee-auto btn-border-gradient radius-round btn-sm hover-transform-none"
             />
           </div>

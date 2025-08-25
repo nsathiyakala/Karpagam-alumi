@@ -1,3 +1,68 @@
+export const menus = {
+  guest: [
+    { label: "About Us", href: "/about" },
+    { label: "Newsroom", href: "/newsroom" },
+    { label: "Members", href: "/member" },
+    { label: "Events", href: "/events" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Contact Us", href: "/contact" },
+  ],
+  user: [
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Members", href: "/members" },
+    { label: "Business Directory", href: "/business-directory" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Events", href: "/event" },
+    // { label: "Change Password", href: "/change-password" },
+  ],
+  alumni: [
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Members", href: "/members" },
+    { label: "Job Board", href: "/job-board" },
+    { label: "Business Directory", href: "/business-directory" },
+    { label: "Help Desk", href: "/help-desk" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Events", href: "/event" },
+    { label: "Profile", href: "/edit-basic-profile" },
+    // { label: "Change Password", href: "/change-password" },
+  ],
+  faculty: [
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Members", href: "/members" },
+    { label: "Job Board", href: "/job-board" },
+    { label: "Business Directory", href: "/business-directory" },
+    { label: "Help Desk", href: "/help-desk/all-support-tickets" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Events", href: "/event" },
+    // { label: "Change Password", href: "/change-password" },
+  ],
+  admin: [
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Admin", href: "/users" },
+    { label: "Members", href: "/members" },
+    { label: "Job Board", href: "/job-board" },
+    { label: "Business Directory", href: "/business-directory" },
+    { label: "Help Desk", href: "/help-desk/all-support-tickets" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Events", href: "/event" },
+    // { label: "Change Password", href: "/change-password" },
+  ],
+  alumniManager: [
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Admin", href: "/users" }, // same as admin
+    { label: "Members", href: "/members" },
+    { label: "Job Board", href: "/job-board" },
+    { label: "Business Directory", href: "/business-directory" },
+    { label: "Help Desk", href: "/help-desk/all-support-tickets" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Events", href: "/event" },
+    // { label: "Change Password", href: "/change-password" },
+  ],
+};
+
+
+
+
 export const welness_data = [
   {
     id: 1,

@@ -12,11 +12,7 @@ const KITHeader = ({ headerSticky }) => {
     <>
       <DarkSwitch isLight={isLightTheme} switchTheme={toggleTheme} />
       <header className="rbt-header rbt-header-10">
-        {router.pathname === "/01-main-demo" &&
-        "/16-udemy-affiliate" &&
-        "/01-main-demo" ? (
-          <HeaderTopBar />
-        ) : (
+        
           <HeaderTopEight
             bgColor="bg-not-transparent bg-color-darker"
             gapSpaceBetween="header-space-betwween"
@@ -25,7 +21,7 @@ const KITHeader = ({ headerSticky }) => {
             btnClass="rbt-switch-btn btn-gradient btn-xs"
             btnText="Call us now"
           />
-        )}
+        
         <HeaderEight
           headerSticky={headerSticky}
           sticky="header-sticky"

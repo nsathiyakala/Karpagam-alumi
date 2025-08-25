@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { useSelector } from "react-redux";
 
-import User from "../Offcanvas/User";
 import { useAppContext } from "@/context/Context";
+import KITUser from "../Offcanvas/KITUsers";
 
 const HeaderRightTwo = ({ btnClass, btnText, userType }) => {
   const { mobile, setMobile, search, setSearch, cartToggle, setCart } =
@@ -44,14 +44,14 @@ const HeaderRightTwo = ({ btnClass, btnText, userType }) => {
             <i className="feather-user"></i>
             {userType}
           </Link>
-          <User />
+          <KITUser />
         </li>
 
         <li className="access-icon rbt-user-wrapper d-block d-xl-none">
           <Link className="rbt-round-btn" href="#">
             <i className="feather-user"></i>
           </Link>
-          <User />
+          <KITUser />
         </li>
       </ul>
 
