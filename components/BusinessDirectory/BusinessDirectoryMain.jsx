@@ -621,20 +621,13 @@ const BusinessDirectoryMain = () => {
                                   </div>
                                 </div>
                               ))}
+                            
+
+                         
+                        
+                              
                             </div>
-                            {/* {isPagination ? (
-                              <div className="row">
-                                <div className="col-lg-12 mt--60">
-                                  <Pagination
-                                    totalPages={totalPages}
-                                    pageNumber={page}
-                                    handleClick={handleClick}
-                                  />
-                                </div>
-                              </div>
-                            ) : (
-                              ""
-                            )} */}
+                            
                           </div>
                         </div>
                       </div>
