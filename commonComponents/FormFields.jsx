@@ -64,6 +64,7 @@ const FormField = ({
             loadMore={loadMore}
             menuPosition="fixed"
             isMulti={isMulti ? isMulti : false}
+             menuPortalTarget={document.body}
           />
         ) : type === "selectbyname" ? (
           <select
