@@ -40,7 +40,7 @@ const Members = () => {
 
         {token ? <MembersLoginMain /> : <MembersMain />}
 
-        <Form/>
+       
 
         <Separator />
         <KITFooter />
