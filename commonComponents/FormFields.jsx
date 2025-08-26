@@ -188,6 +188,7 @@ const FormField = ({
             name={name}
             onChange={onChange}
             value={value}
+             placeholder={placeholder ? placeholder : label}
             // className={className}
              className={`${className}  ${
               value && !placeholder ? "input-has-value" : ""
@@ -226,7 +227,8 @@ const FormField = ({
             name={name}
             onChange={onChange}
             checked={checked}
-            className="form-checkbox"
+            // className="form-checkbox"
+            className="form-check-input"
             id={name}
           />
         ) : (
