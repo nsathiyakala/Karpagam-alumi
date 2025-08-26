@@ -6,12 +6,14 @@ import SideBarLogin from "../KITSidebar/SideBarMembers";
 import JobBoardTable from "./JobBoardTable";
 import SideBarJob from "../KITSidebar/SideBarJob";
 import { useRouter } from "next/navigation";
-import { useSetState } from "@/utils/commonFunction.utils";
+import { setDropdownData, useSetState } from "@/utils/commonFunction.utils";
 import { message, Modal } from "antd";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
 import { BaseURL } from "@/utils/BaseUrl";
+import Models from "@/imports/models.import";
+import { jobTypeOption } from "@/utils/constant.utils";
 
 const JobBoardMain = () => {
   const { confirm } = Modal;
@@ -65,7 +67,7 @@ const JobBoardMain = () => {
     hasLocationLoadMore: null,
   });
 
-    const pathname = usePathname();
+  const pathname = usePathname();
 
   useEffect(() => {
     const Token = localStorage.getItem("token");
@@ -358,10 +360,10 @@ const JobBoardMain = () => {
     label: loc.location,
   }));
 
-  // const JobOption = jobTypeOption.map((job) => ({
-  //   value: job.value,
-  //   label: job.label,
-  // }));
+  const JobOption = jobTypeOption.map((job) => ({
+    value: job.value,
+    label: job.label,
+  }));
 
   const FilterIndutry = departmentList?.filter(
     (ind) => ind.id == allUserFilterFinalDataList.industry
@@ -601,14 +603,15 @@ const JobBoardMain = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="row g-5">
-                    <div className="col-lg-3">
+
+                    {/* --------------------sidebar start--------------------- */}
+
+                    <div className="col-lg-3 d-sidebar">
                       <div className="rbt-default-sidebar sticky-top rbt-shadow-box rbt-gradient-border">
                         <div className="inner">
                           <div className="content-item-content">
                             <div className="rbt-default-sidebar-wrapper">
-                              {/* <div className="section-title mb--20">
-                <h6 className="rbt-title-style-2">Welcome, user</h6>
-              </div> */}
+                              
                               <nav className="mainmenu-nav">
                                 <ul className="dashboard-mainmenu rbt-default-sidebar-list">
                                   <li className="nav-item" role="presentation">
@@ -618,7 +621,6 @@ const JobBoardMain = () => {
                                       }`}
                                       href="#"
                                     >
-                                      {/* <i className="feather-calendar" /> */}
                                       <FormField
                                         type="text"
                                         className="applicant-input"
@@ -629,14 +631,14 @@ const JobBoardMain = () => {
                                       />
                                     </a>
                                   </li>
+
                                   <li className="nav-item" role="presentation">
-                                    <a 
+                                    <a
                                       className={`w-100 ${
                                         pathname === "#" ? "active" : ""
                                       }`}
                                       href="#"
                                     >
-                                      {/* <i className="feather-calendar" /> */}
                                       <FormField
                                         type="loadMoreSelect"
                                         className="member-dd"
@@ -654,21 +656,121 @@ const JobBoardMain = () => {
                                       />
                                     </a>
                                   </li>
+
+                                  <li className="nav-item" role="presentation">
+                                    <a
+                                      className={`w-100 ${
+                                        pathname === "#" ? "active" : ""
+                                      }`}
+                                      href="#"
+                                    >
+                                      <FormField
+                                        type="loadMoreSelect"
+                                        className="member-dd"
+                                        style={{
+                                          color: "gray",
+                                          fontSize: "14px",
+                                          width: "100%",
+                                        }}
+                                        options={roleList}
+                                        name="role"
+                                        placeholder={"Role"}
+                                        value={formData.role}
+                                        onChange={(e) => {
+                                          setFormData({ ...formData, role: e });
+                                        }}
+                                        loadMore={() => roleListLoadMore()}
+                                      />
+                                    </a>
+                                  </li>
+
+                                  <li className="nav-item" role="presentation">
+                                    <a
+                                      className={`w-100 ${
+                                        pathname === "#" ? "active" : ""
+                                      }`}
+                                      href="#"
+                                    >
+                                      <FormField
+                                        type="loadMoreSelect"
+                                        className="member-dd"
+                                        style={{
+                                          color: "gray",
+                                          fontSize: "14px",
+                                          width: "100%",
+                                        }}
+                                        onChange={(e) => {
+                                          setFormData({
+                                            ...formData,
+                                            location: e,
+                                          });
+                                        }}
+                                        name="location"
+                                        placeholder={"Location"}
+                                        value={formData.location}
+                                        options={locationList}
+                                        loadMore={() => locationListLoadMore()}
+                                      />
+                                    </a>
+                                  </li>
+
+                                  <li className="nav-item" role="presentation">
+                                    <a
+                                      className={`w-100 ${
+                                        pathname === "#" ? "active" : ""
+                                      }`}
+                                      href="#"
+                                    >
+                                      <FormField
+                                        type="select"
+                                        
+                                        onChange={(e) => handleFilterChange(e)}
+                                        name="post_type"
+                                        placeholder={"Post Type"}
+                                        value={formData.post_type}
+                                        options={JobOption}
+                                      />
+                                    </a>
+                                  </li>
+
+                                   <li className="nav-item" role="presentation">
+                                    <a
+                                      className={`w-100 ${
+                                        pathname === "#" ? "active" : ""
+                                      }`}
+                                      href="#"
+                                    >
+                                      <FormField
+                                        type="select"
+                                       
+                                        onChange={(e) => handleFilterChange(e)}
+                                        name="post_type"
+                                        placeholder={"Post Type"}
+                                        value={formData.post_type}
+                                        options={JobOption}
+                                      />
+                                    </a>
+                                  </li>
                                 </ul>
                               </nav>
 
-                              <div className="col-lg-12 d-flex gap-5 mt-5">
+                              <div
+                                className=" d-flex flex-wrap mt-5"
+                                style={{ columnGap: "10px", rowGap: "8px" }}
+                              >
                                 <Link
                                   className="rbt-btn btn-gradient radius-round sm-btn"
                                   href="#"
+                                  onClick={handleFiltersSubmit}
                                 >
                                   Filter
                                 </Link>
                                 <Link
                                   className="rbt-btn btn-border-gradient radius-round sm-btn"
                                   href="#"
+                                  onClick={handleClearFilter}
                                 >
-                                  Cancel
+                                  Clear all
                                 </Link>
                               </div>
 
@@ -700,6 +802,11 @@ const JobBoardMain = () => {
                       </div>
                     </div>
 
+                     {/* --------------------sidebar end--------------------- */}
+
+
+                      {/* --------------------table start--------------------- */}
+
                     <div className="col-lg-9">
                       <div className="rbt-dashboard-content bg-color-white rbt-shadow-box">
                         <div className="content">
@@ -720,39 +827,40 @@ const JobBoardMain = () => {
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
+                                 {currentDataForAdmin.map((item) => (
+                                   <tr key={item.id}>
                                   <th>
                                     <span className="b3">
                                       <Link href="#">
-                                        Speaking Korean for Beginners
+                                        {item.job_title}
                                       </Link>
                                     </span>
                                   </th>
                                   <td>
                                     <span className="b3">
                                       <Link href="#">
-                                        Speaking Korean for Beginners
+                                        {item?.industry}
                                       </Link>
                                     </span>
                                   </td>
                                   <td>
                                     <span className="b3">
                                       <Link href="#">
-                                        Speaking Korean for Beginners
+                                        {item?.role}
                                       </Link>
                                     </span>
                                   </td>
                                   <td>
                                     <span className="b3">
                                       <Link href="#">
-                                        Speaking Korean for Beginners
+                                       {item.application_count}
                                       </Link>
                                     </span>
                                   </td>
                                   <td>
                                     <span className="b3">
                                       <Link href="#">
-                                        Speaking Korean for Beginners
+                                       {item?.posted_on}
                                       </Link>
                                     </span>
                                   </td>
@@ -775,12 +883,16 @@ const JobBoardMain = () => {
                                     </div>
                                   </td>
                                 </tr>
+                                 ))}
+
                               </tbody>
                             </table>
                           </div>
                         </div>
                       </div>
                     </div>
+
+                     {/* --------------------table end--------------------- */}
                   </div>
                 </div>
               </div>

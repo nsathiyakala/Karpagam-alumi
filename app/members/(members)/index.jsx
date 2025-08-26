@@ -15,6 +15,7 @@ import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 import MembersMain from "@/components/MembersMain";
 import MembersLoginMain from "@/components/MembersLoginMain";
+import Form from "@/commonComponents/Form"
 
 const Members = () => {
   const [token, setToken] = useState("");
@@ -38,6 +39,8 @@ const Members = () => {
         <BreadCrumb title="Members" text="Members" />
 
         {token ? <MembersLoginMain /> : <MembersMain />}
+
+        <Form/>
 
         <Separator />
         <KITFooter />
