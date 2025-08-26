@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { DeleteOutlined, FilePdfOutlined } from "@ant-design/icons";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Select } from "antd";
 import Link from "next/link";
 import { BaseURL } from "@/utils/BaseUrl";
@@ -20,6 +20,7 @@ import Models from "@/imports/models.import";
 const EditDirectoryForm = () => {
    const router = useRouter();
   const { Option } = Select;
+    const { id } = useSearchParams();
 
   const [formData, setFormData] = useState({
     business_name: "",
@@ -42,12 +43,12 @@ const EditDirectoryForm = () => {
   const [token, setToken] = useState("");
   const [industryType, setIndustryType] = useState([]);
 
-    const [state, setState] = useSetState({
-       currenIndustryTypePage: 1,
-      hasIndustryTypeLoadMore: null,
-      currenCountryPage: 1,
-      hasCountryLoadMore: null,
-    })
+   const [state, setState] = useSetState({
+         currenIndustryTypePage: 1,
+        hasIndustryTypeLoadMore: null,
+        currenCountryPage: 1,
+        hasCountryLoadMore: null,
+      })
 
   useEffect(() => {
     const Token = localStorage.getItem("token");
@@ -64,95 +65,83 @@ const EditDirectoryForm = () => {
   }, []);
 
   useEffect(() => {
+    if (id) {
+      GetDirectoryDetails();
+    }
+  }, [id]);
+
+  useEffect(() => {
     if (token) {
-      countryList();
+      GetDepartmentList();
       GetIndustryType();
     }
   }, [token]);
 
-  const countryList = async () => {
-    try {
-      const res = await Models.masters.GetCountryList(1);
+  const GetDirectoryDetails = () => {
+    axios
+      .get(`${BaseURL}/update_business_directory/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        setFormData({
+          business_name: response.data.business_name,
+          country_code: {value:response.data.country_detail.country_code, label:response.data.country_detail.country_name},
+          contact_email: response.data.contact_email,
+          contact_number: response.data.contact_number,
+          website: response.data.website,
+          location: response.data.location,
+          logo: response.data.logo,
+          description: response.data.description,
+          industry_type: {value:response.data.industry_type_detail.id, label:response.data.industry_type_detail.type_name},
+          are_you_part_of_management: response.data.are_you_part_of_management,
+        });
 
-      const countryOptions = res?.results?.map((cou) => ({
-        value: cou.id,
-        label: cou.country_name,
-      }));
-      setCountry(countryOptions);
-       setState({
-        hasCountryLoadMore: res?.next,
+        // Set the preview if logo exists
+        if (response.data.logo) {
+          setPreview(response.data.logo); // Assuming logo is a URL string
+        }
+      })
+      .catch((error) => {
+        console.log("❌error --->", error);
       });
-    } catch (error) {
-      console.log("✌️error --->", error);
-    }
   };
+  const GetDepartmentList = async() => {
+    try {
+        const res = await Models.masters.GetCountryList(1);
+  
+        const countryOptions = res?.results?.map((cou) => ({
+          value: cou.id,
+          label: cou.country_name,
+        }));
+        setCountry(countryOptions);
+         setState({
+          hasCountryLoadMore: res?.next,
+        });
+      } catch (error) {
+        console.log("✌️error --->", error);
+      }
+  };
+
+
 
   const GetIndustryType = async () => {
-    try {
-      const res = await Models.masters.bussinessTypeList(1);
-      const JobOption = res?.results?.map((job) => ({
-        value: job.id,
-        label: job.type_name,
-      }));
-
-      setIndustryType(JobOption);
-      setState({
-        hasIndustryTypeLoadMore: res?.next,
-      });
-    } catch (error) {
-      console.log("✌️error --->", error);
-    }
-  };
-
-  const industryTypeListLoadMore = async () => {
-    try {
-      if (state.hasIndustryTypeLoadMore) {
-        const res = await Models.masters.bussinessTypeList(
-          state.currenIndustryTypePage + 1
-        );
-
-        const IndustryTypeOption = res?.results?.map((job) => ({
-        value: job.id,
-        label: job.type_name,
-      }));
-
-        setIndustryType([...industryType, ...IndustryTypeOption]);
+      try {
+        const res = await Models.masters.bussinessTypeList(1);
+        const JobOption = res?.results?.map((job) => ({
+          value: job.id,
+          label: job.type_name,
+        }));
+  
+        setIndustryType(JobOption);
         setState({
-          currenIndustryTypePage: state.currenIndustryTypePage + 1,
-          hasIndustryTypeLoadMore: res.next,
+          hasIndustryTypeLoadMore: res?.next,
         });
-      } else {
-        setIndustryType(industryType);
+      } catch (error) {
+        console.log("✌️error --->", error);
       }
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-
-  const CountryListLoadMore = async () => {
-    try {
-      if (state.hasCountryLoadMore) {
-        const res = await Models.masters.GetCountryList(
-          state.currenCountryPage + 1
-        );
-
-         const countryOptions = res?.results?.map((cou) => ({
-        value: cou.id,
-        label: cou.country_name,
-      }));
-
-        setCountry([...country, ...countryOptions]);
-        setState({
-          currenCountryPage: state.currenCountryPage + 1,
-          hasCountryLoadMore: res.next,
-        });
-      } else {
-        setCountry(country);
-      }
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
+    };
 
   const handleChange = (e) => {
     const { name, type, value, files, checked } = e.target;
@@ -217,23 +206,23 @@ const EditDirectoryForm = () => {
       // Convert are_you_part_of_management to a boolean string if it's a checkbox
       if (key === "are_you_part_of_management") {
         formDataToSend.append(key, formData[key] ? "True" : "False"); // Ensure it's a string of 'true' or 'false'
-      }
-       else if( key === 'industry_type'){
-        formDataToSend.append("industry_type", formData.industry_type.value)
+      } 
+      else if( key === "country_code"){
+         formDataToSend.append("country_code", formData.country_code.value);
         
       }
-      else if( key === 'country_code'){
-        formDataToSend.append("country_code", formData.country_code.value)
-       
+      else if( key === "industry_type"){
+         formDataToSend.append("industry_type", formData.industry_type.value);
+        
       }
-       else {
+      else {
         formDataToSend.append(key, formData[key]);
       }
     }
 
     try {
       const response = await axios.post(
-        `${BaseURL}/create_business_directory/`,
+        `${BaseURL}/update_business_directory/${id}/`,
         formDataToSend,
         {
           headers: {
@@ -263,8 +252,65 @@ const EditDirectoryForm = () => {
     }
   };
 
-  console.log("formData", formData);
+  const countryOptions = country.map((cou) => ({
+    value: cou.id,
+    label: cou.country_name,
+  }));
 
+  const JobOption = industryType.map((job) => ({
+    value: job.id,
+    label: job.type_name,
+  }));
+
+  const industryTypeListLoadMore = async () => {
+      try {
+        if (state.hasIndustryTypeLoadMore) {
+          const res = await Models.masters.bussinessTypeList(
+            state.currenIndustryTypePage + 1
+          );
+  
+          const IndustryTypeOption = res?.results?.map((job) => ({
+          value: job.id,
+          label: job.type_name,
+        }));
+  
+          setIndustryType([...industryType, ...IndustryTypeOption]);
+          setState({
+            currenIndustryTypePage: state.currenIndustryTypePage + 1,
+            hasIndustryTypeLoadMore: res.next,
+          });
+        } else {
+          setIndustryType(industryType);
+        }
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    };
+
+    const CountryListLoadMore = async () => {
+        try {
+          if (state.hasCountryLoadMore) {
+            const res = await Models.masters.GetCountryList(
+              state.currenCountryPage + 1
+            );
+    
+             const countryOptions = res?.results?.map((cou) => ({
+            value: cou.id,
+            label: cou.country_name,
+          }));
+    
+            setCountry([...country, ...countryOptions]);
+            setState({
+              currenCountryPage: state.currenCountryPage + 1,
+              hasCountryLoadMore: res.next,
+            });
+          } else {
+            setCountry(country);
+          }
+        } catch (error) {
+          console.log("error: ", error);
+        }
+      };
 
   return (
     <div className={`rbt-contact-address `}>
