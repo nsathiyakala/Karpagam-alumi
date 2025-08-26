@@ -742,7 +742,7 @@ button {
     &.bg-primary-opacity {
         &:hover {
             background: var(--color-primary) !important;
-            color: var(--color-white) !important;
+            // color: var(--color-white) !important;
         }
     }
 
@@ -756,7 +756,7 @@ button {
     &.bg-coral-opacity {
         &:hover {
             background: var(--color-coral) !important;
-            color: var(--color-white) !important;
+            // color: var(--color-white) !important;
         }
     }
 

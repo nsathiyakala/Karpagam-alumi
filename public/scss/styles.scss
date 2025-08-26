@@ -364,6 +364,71 @@
 // 	overflow-x: hidden !important;
 // }
 
+
+.form-dd .css-1xqkn6g-control {
+	border: none;
+	border-bottom: 1px solid gray;
+  height: 50px;
+
+  padding: 0;
+}
+
+
+.form-dd .css-19bb58m{
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.form-dd  .css-5736gi-menu  {
+   text-align: start;
+-webkit-align-items: start;
+    -webkit-box-align: start;
+    // font-size: 14px;
+  padding: 1px;
+    // color: black;
+}
+
+.form-dd .css-1oceoso-placeholder {
+    grid-area: 1 / 1 / 2 / 3;
+    color: gray !important;
+     margin-left: 0 !important; 
+    margin-right: 2px;
+    box-sizing: border-box;
+	 font-size: 20px !important;
+    font-weight: 400;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; /* spacing between columns/rows */
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-submit-group {
+  margin-top: 20px;
+  grid-column: 1 / -1; /* make button span both columns */
+}
+
+.form-wrapper .file-input {
+	padding-top: 0 !important;
+    padding-bottom: 5px !important;
+    height: 40px;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr; /* stack fields in 1 column */
+  }
+}
+
+
+
 .custom-select {
   appearance: none; /* removes default arrow */
   -webkit-appearance: none;
@@ -402,6 +467,13 @@ select {
   height: 40px !important;
 }
 
+.form-wrapper select {
+	border-bottom: 1px solid gray !important;
+	border-radius: 0 !important;
+}
+
+
+
 // .member-dd .css-1xqkn6g-control{
 // 	z-index: -1 !important;
 // }
@@ -417,3 +489,34 @@ select {
 // .react-select{
 // 	z-index: -1 !important;
 // }
+
+.rbt-dashboard-table .bg-primary-opacity , .rbt-dashboard-table .bg-coral-opacity , .rbt-dashboard-table .bg-color-danger-opacity{
+	background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.rbt-dashboard-table .bg-gray{
+	color: gray !important;
+	background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.rbt-dashboard-table .bg-color-success-opacity{
+	background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+a.bg-primary-opacity:hover , button.bg-primary-opacity:hover, a.bg-coral-opacity:hover ,button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover{
+	background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.input-has-value{
+	height: 65px !important;
+	padding-bottom: 0px !important;
+	padding-top: 30px !important;
+}

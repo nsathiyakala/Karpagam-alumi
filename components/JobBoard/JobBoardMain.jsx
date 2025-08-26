@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import FormField from "@/commonComponents/FormFields";
 
-import MembersLoginCard from "../MembersLoginCard";
-import SideBarLogin from "../KITSidebar/SideBarMembers";
-import JobBoardTable from "./JobBoardTable";
-import SideBarJob from "../KITSidebar/SideBarJob";
 import { useRouter } from "next/navigation";
 import { setDropdownData, useSetState } from "@/utils/commonFunction.utils";
-import { message, Modal } from "antd";
+import { message, Modal, Tooltip } from "antd";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
 import { BaseURL } from "@/utils/BaseUrl";
 import Models from "@/imports/models.import";
 import { jobTypeOption } from "@/utils/constant.utils";
+
+
 
 const JobBoardMain = () => {
   const { confirm } = Modal;
@@ -602,8 +600,21 @@ const JobBoardMain = () => {
             <div className="container-fluid">
               <div className="row">
                 <div className="col-lg-12">
-                  <div className="row g-5">
+                  <div className="row mb-4">
+                    <div className="col-12">
+                      <div className="d-flex justify-content-between ">
+                        <h5>Filter</h5>
+                        <Link
+                          className="rbt-btn btn-gradient radius-round sm-btn"
+                          href="/post-a-job"
+                        >
+                          Post New Job
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
 
+                  <div className="row g-5">
                     {/* --------------------sidebar start--------------------- */}
 
                     <div className="col-lg-3 d-sidebar">
@@ -611,7 +622,6 @@ const JobBoardMain = () => {
                         <div className="inner">
                           <div className="content-item-content">
                             <div className="rbt-default-sidebar-wrapper">
-                              
                               <nav className="mainmenu-nav">
                                 <ul className="dashboard-mainmenu rbt-default-sidebar-list">
                                   <li className="nav-item" role="presentation">
@@ -624,9 +634,9 @@ const JobBoardMain = () => {
                                       <FormField
                                         type="text"
                                         className="applicant-input"
-                                        // onChange={(e) => handleFilterChange(e)}
+                                        onChange={(e) => handleFilterChange(e)}
                                         name="job_title"
-                                        // value={formData.job_title}
+                                        value={formData.job_title}
                                         placeholder="Job Title"
                                       />
                                     </a>
@@ -723,7 +733,6 @@ const JobBoardMain = () => {
                                     >
                                       <FormField
                                         type="select"
-                                        
                                         onChange={(e) => handleFilterChange(e)}
                                         name="post_type"
                                         placeholder={"Post Type"}
@@ -733,7 +742,7 @@ const JobBoardMain = () => {
                                     </a>
                                   </li>
 
-                                   <li className="nav-item" role="presentation">
+                                  <li className="nav-item" role="presentation">
                                     <a
                                       className={`w-100 ${
                                         pathname === "#" ? "active" : ""
@@ -742,7 +751,6 @@ const JobBoardMain = () => {
                                     >
                                       <FormField
                                         type="select"
-                                       
                                         onChange={(e) => handleFilterChange(e)}
                                         name="post_type"
                                         placeholder={"Post Type"}
@@ -802,12 +810,31 @@ const JobBoardMain = () => {
                       </div>
                     </div>
 
-                     {/* --------------------sidebar end--------------------- */}
+                    {/* --------------------sidebar end--------------------- */}
 
-
-                      {/* --------------------table start--------------------- */}
+                    {/* --------------------table start--------------------- */}
 
                     <div className="col-lg-9">
+                      <div className="rbt-elements-area bg-color-extra2 mb-5">
+                        <div className="container">
+                          <div className="row p-0">
+                            <div className="col-lg-12 p-0">
+                              <form action="#" className="rbt-search-style-1">
+                                <input
+                                  type="text"
+                                  placeholder="Search Job with Job title and Role"
+                                  name="search_filter"
+                                  onChange={handleSearchFilter}
+                                />
+                                <button className="search-btn">
+                                  <i className="feather-search"></i>
+                                </button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="rbt-dashboard-content bg-color-white rbt-shadow-box">
                         <div className="content">
                           <div className="section-title">
@@ -827,64 +854,121 @@ const JobBoardMain = () => {
                                 </tr>
                               </thead>
                               <tbody>
-                                 {currentDataForAdmin.map((item) => (
-                                   <tr key={item.id}>
-                                  <th>
-                                    <span className="b3">
-                                      <Link href="#">
-                                        {item.job_title}
-                                      </Link>
-                                    </span>
-                                  </th>
-                                  <td>
-                                    <span className="b3">
-                                      <Link href="#">
-                                        {item?.industry}
-                                      </Link>
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <span className="b3">
-                                      <Link href="#">
-                                        {item?.role}
-                                      </Link>
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <span className="b3">
-                                      <Link href="#">
-                                       {item.application_count}
-                                      </Link>
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <span className="b3">
-                                      <Link href="#">
-                                       {item?.posted_on}
-                                      </Link>
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <div className="rbt-button-group justify-content-end">
-                                      <Link
-                                        className="rbt-btn btn-xs bg-primary-opacity radius-round"
-                                        href="#"
-                                        title="Edit"
-                                      >
-                                        <i className="feather-edit pl--0"></i>
-                                      </Link>
-                                      <Link
-                                        className="rbt-btn btn-xs bg-color-danger-opacity radius-round color-danger"
-                                        href="#"
-                                        title="Delete"
-                                      >
-                                        <i className="feather-trash-2 pl--0"></i>
-                                      </Link>
-                                    </div>
-                                  </td>
-                                </tr>
-                                 ))}
+                                {currentDataForAdmin.map((item) => (
+                                  <tr key={item.id}>
+                                    <th>
+                                      <span className="b3">
+                                        <Link href="#">{item.job_title}</Link>
+                                      </span>
+                                    </th>
+                                    <td>
+                                      <span className="b3">
+                                        <Link href="#">{item?.industry}</Link>
+                                      </span>
+                                    </td>
+                                    <td>
+                                      <span className="b3">
+                                        <Link href="#">{item?.role}</Link>
+                                      </span>
+                                    </td>
+                                    <td>
+                                      <span className="b3">
+                                        <Link href="#">
+                                          {item.application_count}
+                                        </Link>
+                                      </span>
+                                    </td>
+                                    <td>
+                                      <span className="b3">
+                                        <Link href="#">{item?.posted_on}</Link>
+                                      </span>
+                                    </td>
 
+                                    <td>
+                                      <div className="rbt-button-group justify-content-end gap-2">
+                                        {item?.is_active && (
+                                          <>
+                                            <Link
+                                              className={`rbt-btn btn-xs radius-round ${
+                                                item.application_count === 0
+                                                  ? "bg-gray"
+                                                  : "bg-coral-opacity"
+                                              } `}
+                                              href={item.application_count > 0
+                                                  ? `/applicants/${item?.id}` : "#"}
+                                              title="View"
+                                              // onClick={
+                                              //   item.application_count > 0
+                                              //     ? () =>
+                                              //         router.push(
+                                              //           `/applicants/${item?.id}`
+                                              //         )
+                                              //     : null
+                                              // }
+
+                                              style={{
+                                                
+                                                opacity:
+                                                  item.application_count === 0
+                                                    ? 0.5
+                                                    : 1,
+                                                cursor:
+                                                  item.application_count === 0
+                                                    ? "not-allowed"
+                                                    : "pointer",
+                                              }}
+                                            >
+                                              <i className="feather-eye pl--0"></i>
+                                            </Link>
+
+                                            <div
+                                              className="rbt-btn btn-xs bg-primary-opacity radius-round color-info"
+                                              href={`/edit-a-job/${item?.id}/`}
+                                              title="Edit"
+                                              onClick={() =>
+                                                handleEditClick(item?.id)
+                                              }
+                                            >
+                                              <i className="feather-edit pl--0"></i>
+                                            </div>
+                                          </>
+                                        )}
+
+                                        <Tooltip
+                                          title={
+                                            item?.is_active
+                                              ? "Active"
+                                              : "InActive"
+                                          }
+                                        >
+                                          {item?.is_active ? (
+                                            <Link
+                                              className="rbt-btn btn-xs bg-color-success-opacity radius-round color-success"
+                                              href="#"
+                                              title="Active"
+                                              onClick={() =>
+                                            showDeleteConfirm(item)
+                                          }
+                                            >
+                                              <i className="feather-check-circle pl--0"></i>
+                                            </Link>
+                                          ) : (
+                                            <Link
+                                              className="rbt-btn btn-xs bg-color-danger-opacity radius-round color-danger"
+                                              href="#"
+                                              title="Inactive"
+                                              onClick={() =>
+                                            showDeleteConfirm(item)
+                                          }
+                                            >
+                                              <i className="feather-x-circle pl--0"></i>
+                                            </Link>
+                                          )}
+                                        </Tooltip>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                ))}
                               </tbody>
                             </table>
                           </div>
@@ -892,7 +976,7 @@ const JobBoardMain = () => {
                       </div>
                     </div>
 
-                     {/* --------------------table end--------------------- */}
+                    {/* --------------------table end--------------------- */}
                   </div>
                 </div>
               </div>

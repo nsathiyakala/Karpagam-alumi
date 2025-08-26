@@ -31,7 +31,7 @@ const FormField = ({
     <>
       <div className="relative">
         {label && (
-          <label style={{ paddingRight: "20px",marginBottom:"10px" }}>
+          <label style={{ paddingRight: "20px", marginBottom: "10px" }}>
             {label} {required && <span style={{ color: "red" }}>*</span>}
           </label>
         )}
@@ -65,6 +65,9 @@ const FormField = ({
             menuPosition="fixed"
             isMulti={isMulti ? isMulti : false}
             className={className}
+            // className={`${className} ${
+            //   value && !placeholder ? "input-has-value" : ""
+            // }`}
           />
         ) : type === "selectbyname" ? (
           <select
@@ -72,6 +75,9 @@ const FormField = ({
             onChange={onChange}
             value={value}
             className={className}
+            //  className={`${className} ${
+            //   value && !placeholder ? "input-has-value" : ""
+            // }`}
             style={style}
           >
             <option value="" disabled>
@@ -100,7 +106,10 @@ const FormField = ({
               name={name}
               onChange={onChange}
               value={value}
-              className={`${className} flex-grow`}
+              // className={`${className} flex-grow`}
+               className={`${className} flex-grow ${
+              value && !placeholder ? "input-has-value" : ""
+            }`}
             />
             <button
               type="button"
@@ -128,16 +137,23 @@ const FormField = ({
             name={name}
             onChange={onChange}
             value={value}
-            className={className}
+            placeholder={placeholder}
+            // className={className}
+            className={`${className}  ${
+              value && !placeholder ? "input-has-value" : ""
+            }`}
             disabled={disabled}
           />
         ) : type === "textarea" ? (
           <textarea
             name={name}
-            placeholder={label || placeholder}
+            placeholder={placeholder}
             onChange={onChange}
             value={value}
-            className={className}
+            // className={className}
+             className={`${className}  ${
+              value && !placeholder ? "input-has-value" : ""
+            }`}
             style={style}
           ></textarea>
         ) : type === "date" ? (
@@ -148,6 +164,9 @@ const FormField = ({
             placeholder={placeholder ? placeholder : label}
             value={value}
             className={className}
+            //  className={`${className}  ${
+            //   value && !placeholder ? "input-has-value" : ""
+            // }`}
             style={style}
           />
         ) : type === "datetime" ? (
@@ -157,7 +176,10 @@ const FormField = ({
             onChange={onChange}
             placeholder={placeholder ? placeholder : label}
             value={value}
-            className={className}
+            // className={className}
+             className={`${className}  ${
+              value && !placeholder ? "input-has-value" : ""
+            }`}
             style={style}
           />
         ) : type === "tel" ? (
@@ -166,36 +188,38 @@ const FormField = ({
             name={name}
             onChange={onChange}
             value={value}
-            className={className}
+            // className={className}
+             className={`${className}  ${
+              value && !placeholder ? "input-has-value" : ""
+            }`}
             pattern="\d{10}"
             maxLength="10"
             disabled={disabled}
           />
         ) : type === "radio" ? (
           <div className="row ">
-          {options?.map((option, index) => (
-            <div key={index} className="col-4">
-              <div className="form-check d-flex align-items-center">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name={name}
-                  value={option.value}
-                  id={`${name}-${option.value}`}
-                  checked={value === option.value}
-                  onChange={onChange}
-                />
-                <label
-                  className="form-check-label ms-2"
-                  htmlFor={`${name}-${option.value}`}
-                >
-                  {option.label}
-                </label>
+            {options?.map((option, index) => (
+              <div key={index} className="col-4">
+                <div className="form-check d-flex align-items-center">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name={name}
+                    value={option.value}
+                    id={`${name}-${option.value}`}
+                    checked={value === option.value}
+                    onChange={onChange}
+                  />
+                  <label
+                    className="form-check-label ms-2"
+                    htmlFor={`${name}-${option.value}`}
+                  >
+                    {option.label}
+                  </label>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        
+            ))}
+          </div>
         ) : type === "checkbox" ? (
           <input
             type="checkbox"
@@ -211,7 +235,10 @@ const FormField = ({
             name={name}
             onChange={onChange}
             value={value}
-            className={`${className} custom-input`}
+            // className={`${className} custom-input`}
+            className={`${className} custom-input ${
+              value && !placeholder ? "input-has-value" : ""
+            }`}
             placeholder={placeholder}
             style={style}
             disabled={disabled}
