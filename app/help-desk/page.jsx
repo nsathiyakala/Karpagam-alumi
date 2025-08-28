@@ -1,6 +1,7 @@
 import BackToTop from "@/app/backToTop";
+import Institution from "../institution/(institution)";
 
-import Institution from "./(industry)";
+
 
 
 export const metadata = {
