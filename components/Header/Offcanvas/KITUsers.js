@@ -2,8 +2,40 @@ import Image from "next/image";
 import Link from "next/link";
 
 import UserData from "../../../data/user.json";
+import { useEffect, useState } from "react";
+import { Modal } from "antd";
 
 const KITUser = () => {
+  const [token, setToken] = useState("");
+  const { confirm } = Modal;
+  useEffect(() => {
+    const Token = localStorage.getItem("token");
+    // if (!Token) {
+    //   window.location.href = "/login";
+    // }
+    setToken(Token);
+  }, []);
+
+  const showDeleteConfirm = () => {
+    confirm({
+      title: "Are you sure, You want to logout?",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "Cancel",
+      onOk() {
+        try {
+          localStorage.clear();
+          window.location.href = "/";
+        } catch (error) {
+          console.log("✌️error --->", error);
+        }
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
   const logOut = async () => {
     try {
       localStorage.clear();
@@ -19,7 +51,7 @@ const KITUser = () => {
         {UserData &&
           UserData.user.map((person, index) => (
             <div className="inner" key={index}>
-              <div className="rbt-admin-profile">
+              {/* <div className="rbt-admin-profile">
                 <div className="admin-thumbnail">
                   <Image
                     src={person.img}
@@ -37,41 +69,45 @@ const KITUser = () => {
                     View Profile
                   </Link>
                 </div>
-              </div>
-              {/* <ul className="user-list-wrapper">
-                {person.userList.map((list, innerIndex) => (
-                  <li key={innerIndex}>
-                    <Link href={list.link}>
-                      <i className={list.icon}></i>
-                      <span>{list.text}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul> */}
-              {/* <hr className="mt--10 mb--10" />
-              <ul className="user-list-wrapper">
-                <li>
+              </div> */}
+             
+
+              <ul className="user-list-wrapper cursor-pointer">
+                {token ? (
+                  <>
+                   <li
+                 onClick={() => showDeleteConfirm()}
+                
+                >
                   <Link href="#">
-                    <i className="feather-book-open"></i>
-                    <span>Getting Started</span>
+                    <i className="feather-lock"></i>
+                    <span>Change Password</span>
                   </Link>
                 </li>
-              </ul>
-              <hr className="mt--10 mb--10" /> */}
 
-              <ul className="user-list-wrapper">
-                {/* <li>
-                  <Link href="/instructor-settings">
-                    <i className="feather-settings"></i>
-                    <span>Settings</span>
-                  </Link>
-                </li> */}
-                <li>
-                  <div onClick={() => logOut()}>
+                <li
+                 onClick={() => showDeleteConfirm()}
+                
+                >
+                  <Link href="#">
                     <i className="feather-log-out"></i>
                     <span>Logout</span>
-                  </div>
+                  </Link>
+                </li></>
+                 
+                ) : (
+                  <li
+                 
+                
+                >
+                  <Link href="/login">
+                    <i className="feather-log-in"></i>
+                    <span>Login</span>
+                  </Link>
                 </li>
+                ) }
+                
+                 
               </ul>
             </div>
           ))}

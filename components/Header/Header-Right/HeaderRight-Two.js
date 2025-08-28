@@ -6,12 +6,23 @@ import { useSelector } from "react-redux";
 
 import { useAppContext } from "@/context/Context";
 import KITUser from "../Offcanvas/KITUsers";
+import { useEffect, useState } from "react";
 
 const HeaderRightTwo = ({ btnClass, btnText, userType }) => {
   const { mobile, setMobile, search, setSearch, cartToggle, setCart } =
     useAppContext();
 
   const { total_items } = useSelector((state) => state.CartReducer);
+
+   const [token, setToken] = useState("");
+    
+    useEffect(() => {
+      const Token = localStorage.getItem("token");
+      // if (!Token) {
+      //   window.location.href = "/login";
+      // }
+      setToken(Token);
+    }, []);
 
   return (
     <div className="header-right">
@@ -42,7 +53,7 @@ const HeaderRightTwo = ({ btnClass, btnText, userType }) => {
         <li className="account-access rbt-user-wrapper d-none d-xl-block">
           <Link href="#">
             <i className="feather-user"></i>
-            {userType}
+
           </Link>
           <KITUser />
         </li>
@@ -55,11 +66,15 @@ const HeaderRightTwo = ({ btnClass, btnText, userType }) => {
         </li>
       </ul>
 
+      {!token &&
       <div className="rbt-btn-wrapper d-none d-xl-block">
         <Link className={`rbt-btn ${btnClass}`} href="#">
           <span data-text={`${btnText}`}>{btnText}</span>
         </Link>
       </div>
+      }
+
+      
 
       <div className="mobile-menu-bar d-block d-xl-none">
         <div className="hamberger">
