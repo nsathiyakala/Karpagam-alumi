@@ -574,3 +574,63 @@ button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover {
   object-fit: cover;
   object-position: center;
 }
+
+
+.KITalbum.instagram-grid .gal-grid .user-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%) scale(1.5);
+    z-index: 1;
+    color: var(--color-white);
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+    height: 100%;
+    width: 100%;
+    
+}
+
+.KITalbum.instagram-grid .gal-grid .user-info .icon {
+    display: flex;
+    font-size: 18px;
+    justify-content: flex-end;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.KITalbum.instagram-grid:hover .gal-grid .user-info {
+    transform: translateY(-50%) scale(1) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+
+.KITalbum.instagram-grid .gal-grid .user-info .user-name {
+       display: flex;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    top: -10px;
+}
+
+.gal-delete-icon{
+  position: absolute;
+  top: 10px; /* Adjust position */
+  right: 10px; /* Adjust position */
+  z-index: 9999; /* Make sure it's above the link */
+  font-size: 15px !important;
+  color: #fff;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  position:absolute;
+  z-index: 1000,
+
+}
+
+
+                  

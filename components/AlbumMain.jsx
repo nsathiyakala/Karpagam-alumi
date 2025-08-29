@@ -7,14 +7,19 @@ import Link from "next/link";
 import "venobox/dist/venobox.min.css";
 
 import GalleryData from "../data/elements/gallery.json";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { message, Modal } from "antd";
 import { useSetState } from "@/utils/commonFunction.utils";
+import Models from "@/imports/models.import";
 
 const AlbumMain = () => {
 
 
-   const { id } = useSearchParams;
+  const params = useParams();
+  const id = params.id;
+
+  console.log("id", id);
+
   const { confirm } = Modal;
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -35,16 +40,10 @@ const AlbumMain = () => {
     uploadedImages: [],
   });
 
-    useEffect(() => {
-    import("venobox/dist/venobox.min.js").then((venobox) => {
-      new venobox.default({
-        selector: ".child-gallery-single",
-        numeration: true,
-        infinigall: true,
-        spinner: "rotating-plane",
-      });
-    });
-  }, []);
+  console.log("id", id);
+
+
+
 
   useEffect(() => {
     albumDetails();
@@ -199,6 +198,8 @@ const AlbumMain = () => {
     }
   };
 
+  console.log("state.photoList", state.photoList);
+
   const handlePageChange = (number) => {
     photoList(number);
     setState({ currentPage: number });
@@ -209,6 +210,8 @@ const AlbumMain = () => {
 
   const deletePhoto = async (item) => {
     console.log("✌️item --->", item);
+    console.log("hello");
+
     try {
       const res = await Models.gallery.deletePhoto(item?.id);
 
@@ -230,40 +233,90 @@ const AlbumMain = () => {
 
 
 
+
+
+
   return (
-    <div className="row g-3 parent-gallery-container KITgallery">
-      {GalleryData &&
-        GalleryData.gallery.map((data, index) => (
+    <div className="row g-3 parent-gallery-container KITgallery ">
+      {state.photoList &&
+        state.photoList.map((data, index) => (
           <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
-            <div className="instagram-grid">
-              <Link
-                className="child-gallery-single "
+            <div className="instagram-grid KITalbum">
+              <div
+                className="child-gallery-single gal-grid"
                 key={index}
-                href={`${data.img}`}
+                href={data.img || "#"} // ✅ Ensure href is valid
                 data-gall="gallery01"
+                onClick={(e) => {
+                  if (e.target.closest(".icon")) {
+                    // ✅ If the click came from the delete icon, prevent navigation
+                    e.preventDefault();
+                  }
+                }}
               >
                 <div className="rbt-gallery rounded">
-                  <Image
+                  <img
                     className="w-100 rounded"
-                    src={data.img}
+                    src={data.url}
                     width={253}
                     height={274}
                     alt="Gallery Images"
                   />
                 </div>
 
-                <span className="user-info">
-                  <span className="icon">
-                    <i className="icon-instagram"></i>
+
+
+                <div className="gal-delete-icon">
+                  {(data?.is_admin || data?.is_owner) && (
+                    <span
+                      className="icon pr-5"
+                      onClick={(e) => {
+                        e.preventDefault(); // ✅ Prevent Link navigation
+                        e.stopPropagation(); // ✅ Stop bubbling
+                        deletePhoto(data); // ✅ Call delete function
+                      }}
+                    >
+                      <i className="feather-trash"></i>
+                    </span>
+
+
+                  )}
+
+
+                  {data?.approved == true ? <span
+                    className="icon "
+                    onClick={() => approvel(data)}
+                  >
+                    <i className="feather-check-circle"></i>
                   </span>
-                  <span className="user-name">Batch 2</span>
-                  <div className="gallery-dec">2 Photos</div>
+                    :
+                    <span
+                      className="icon "
+                      onClick={() => approvel(data)}
+                    >
+                      <i className="feather-x-circle"></i>
+                    </span>
+                  }
+
+                </div>
+
+
+
+
+
+                <span className="user-info">
+
+                  <span className="user-name"
+                    onClick={() => approvel(url)}
+                  >{data?.approved == true ? "Approved" : "Pending"}</span>
+
                 </span>
-              </Link>
+              </div>
             </div>
           </div>
         ))}
     </div>
+
   );
 };
 
