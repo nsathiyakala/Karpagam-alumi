@@ -840,7 +840,7 @@ const AllTicketsMain = () => {
       <div className="rbt-dashboard-content bg-color-white rbt-shadow-box helpdesk">
         <div className="content">
           <div className="section-title">
-            <h4 className="rbt-title-style-3">My Tickets</h4>
+            <h4 className="rbt-title-style-3">All Tickets</h4>
           </div>
 
           <div className="rbt-dashboard-filter-wrapper">
@@ -1176,7 +1176,7 @@ const AllTicketsMain = () => {
                     </table>
 
                     {/* --- PAGINATION --- */}
-                    {departmentDatas?.length >10 && (
+                    {departmentDatas?.length > 0 && (
                       <div className="row">
                         <div className="col-lg-12 mt-0">
                           <Pagination
@@ -1387,23 +1387,4 @@ const AllTicketsMain = () => {
 
 export default AllTicketsMain;
 
-const ValueContainer = ({ children, ...props }) => {
-  const { getValue, hasValue } = props;
-  const nbValues = getValue().length;
-  if (!hasValue) {
-    return (
-      <components.ValueContainer {...props}>
-        {children}
-      </components.ValueContainer>
-    );
-  }
-  return (
-    <components.ValueContainer {...props}>
-      {`${nbValues} items selected`}
-    </components.ValueContainer>
-  );
-};
 
-const MultiValue = (props) => {
-  return "3 Selected";
-};
