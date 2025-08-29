@@ -509,7 +509,7 @@ const BusinessDirectoryMain = () => {
                                 <input
                                   type="text"
                                   placeholder="Search Job with Job title and Role"
-                                  name="search_filter"
+                                  // name="search_filter"
                                   onChange={handleSearchFilter}
                                 />
                                 <button className="search-btn">
@@ -534,7 +534,7 @@ const BusinessDirectoryMain = () => {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-4">
+                            <div className="col-lg-4 d-flex justify-content-start justify-content-lg-end">
                               <div className="call-to-btn text-start text-lg-end position-relative">
                                 <Link
                                   className="rbt-btn btn-gradient radius-round sm-btn"

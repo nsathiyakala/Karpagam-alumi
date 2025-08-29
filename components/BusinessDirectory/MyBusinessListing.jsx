@@ -12,6 +12,7 @@ import Models from "@/imports/models.import";
 import Image from "next/image";
 
 const MyBusinessListing = () => {
+  
   const { confirm } = Modal;
   const router = useRouter();
   const [openSubMenuId, setOpenSubMenuId] = useState(null);
@@ -35,17 +36,9 @@ const MyBusinessListing = () => {
   const [isAlumniManager, setIsAlumniManager] = useState(false);
   const [isAlumni, setIsAlumni] = useState(false);
   const [isFatulty, setIsFatulty] = useState(false);
-  const [myBusinessDirCount, setMyBusinessDirCount] = useState([]);
   const [allUserFilterFinalDataList, setAllUserFilterFinalDataList] = useState(
     []
   );
-
-  const pathname = usePathname();
-
-  const [state, setState] = useSetState({
-    currenIndustryPage: 1,
-    hasIndustryLoadMore: null,
-  });
 
   useEffect(() => {
     const Token = localStorage.getItem("token");
@@ -82,14 +75,29 @@ const MyBusinessListing = () => {
     if (token) {
       getJobsAdmin();
       GetDepartmentList();
-      MyBusinessDirectory();
     }
   }, [token]);
   console.log("token", token);
 
-  console.log("accessToken", token);
+  // const GetJobs = () => {
+  //   axios
+  //     .get(`${BaseURL}/retrieve_job_post/`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log("✌️response --->", response);
+  //       setListOfPosts(response.data);
+  //       setNormelUserFilter(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("❌error --->", error);
+  //     });
+  // };
 
-  const MyBusinessDirectory = () => {
+  console.log("accessToken", token);
+  const getJobsAdmin = () => {
     axios
       .get(`${BaseURL}/my_business_directory/`, {
         headers: {
@@ -97,54 +105,28 @@ const MyBusinessListing = () => {
         },
       })
       .then((response) => {
-        setMyBusinessDirCount(response.data.results);
+        setAdminDataLists(response.data.results);
+        setFilteredData(response.data.results);
+        console.log("✌️response --->", response);
       })
       .catch((error) => {
         console.log("❌error --->", error);
-        if (error?.response?.data?.code === "token_not_valid") {
-          localStorage.removeItem("token");
-          router.push("/login");
-        }
       });
   };
 
-  console.log("myBusinessDirCount", myBusinessDirCount);
-
-  const getJobsAdmin = () => {
+  const GetDepartmentList = () => {
     axios
-      .get(`${BaseURL}/retrieve_business_directory/`, {
+      .get(`${BaseURL}/retrieve_industry_type/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setAdminDataLists(response.data?.results);
-        setFilteredData(response.data?.results);
-        console.log("✌️response --->", response);
+        setDepartmentList(response.data.results);
       })
       .catch((error) => {
         console.log("❌error --->", error);
-        if (error?.response?.data?.code === "token_not_valid") {
-          localStorage.removeItem("token");
-          router.push("/login");
-        }
       });
-  };
-
-  const GetDepartmentList = async () => {
-    try {
-      const res = await Models.job.industryList();
-
-      const dropdown = setDropdownData(res?.results, "title");
-      console.log("industry dd", dropdown);
-
-      setDepartmentList(dropdown);
-      setState({
-        hasIndustryLoadMore: res?.next,
-      });
-    } catch (error) {
-      console.log("✌️error --->", error);
-    }
   };
 
   const handleEditClick = (id) => {
@@ -270,48 +252,27 @@ const MyBusinessListing = () => {
     value: ind.id,
     label: ind.type_name,
   }));
-
   const FilteredIndustryName = departmentList.filter(
     (ind) => ind.id == allUserFilterFinalDataList?.industry
   );
   console.log("✌️FilteredIndustryName --->", FilteredIndustryName);
 
-  const bodyData = () => {
-    const body = {};
-
-    if (formData.business_name) {
-      body.business_name = formData.business_name;
-    }
-    if (formData.industry) {
-      body.industry = formData.industry.value;
-    }
-    if (formData.location) {
-      body.location = formData.location;
-    }
-
-    return body;
-  };
-
   const handleFiltersSubmit = (e) => {
-    const body = bodyData();
-
-    console.log(body);
-
     e.preventDefault();
     console.log("handleFiltersSubmit", formData);
 
     axios
-      .post(`${BaseURL}/filter_business_directory/`, body, {
+      .post(`${BaseURL}/filter_business_directory/`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
         console.log("✌️response --->", response);
-        setAdminDataLists(response.data?.results);
-        setFilteredData(response.data?.results);
-        setListOfPosts(response.data?.results);
-        setNormelUserFilter(response.data?.results);
+        setAdminDataLists(response.data);
+        setFilteredData(response.data);
+        setListOfPosts(response.data);
+        setNormelUserFilter(response.data);
         setAllUserFilterFinalDataList(formData);
         // setFormData({
         //   business_name: "",
@@ -338,10 +299,10 @@ const MyBusinessListing = () => {
       })
       .then((response) => {
         console.log("✌️response --->", response);
-        setAdminDataLists(response.data?.results);
-        setFilteredData(response.data?.results);
-        setListOfPosts(response.data?.results);
-        setNormelUserFilter(response.data?.results);
+        setAdminDataLists(response.data);
+        setFilteredData(response.data);
+        setListOfPosts(response.data);
+        setNormelUserFilter(response.data);
         setAllUserFilterFinalDataList(Body);
         setFormData({
           business_name: "",
@@ -354,37 +315,24 @@ const MyBusinessListing = () => {
       });
   };
 
-  const industryListLoadMore = async () => {
-    try {
-      if (state.hasIndustryLoadMore) {
-        const res = await Models.job.industryList(state.currenIndustryPage + 1);
+  console.log("currentDataForUser", currentDataForUser);
 
-        const IndustryOption = setDropdownData(res?.results, "title");
+  console.log("isAdmin", isAdmin);
+  console.log("isAlumniManager", isAlumniManager);
+  console.log("isAlumni", isAlumni);
+  console.log("isFatulty", isFatulty);
 
-        setDepartmentList([...departmentList, ...IndustryOption]);
-        setState({
-          currenIndustryPage: state.currenIndustryPage + 1,
-          hasIndustryLoadMore: res.next,
-        });
-      } else {
-        setDepartmentList(departmentList);
-      }
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-
-  console.log("departmentList", departmentList);
+  console.log("listOfPosts", listOfPosts);
 
   return (
-    <div className="rbt-dashboard-area section-pad">
+    <div className="rbt-dashboard-area section-pad my-business">
       <div className="container-fluid">
         <div className="row justify-content-center">
           <div className="col-11 col-xl-10">
             <div className="container-fluid">
               <div className="row">
                 <div className="col-lg-12">
-                  <div className="row mb-4">
+                  {/* <div className="row mb-4">
                     <div className="col-12">
                       <div className="d-flex justify-content-between ">
                         <h5>Filter</h5>
@@ -396,7 +344,7 @@ const MyBusinessListing = () => {
                         </Link>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="row g-5">
                     {/* --------------------sidebar start--------------------- */}
@@ -408,7 +356,7 @@ const MyBusinessListing = () => {
                     {/* --------------------table start--------------------- */}
 
                     <div className="col-lg-12">
-                      <div className="rbt-elements-area bg-color-extra2 mb-5">
+                      {/* <div className="rbt-elements-area bg-color-extra2 mb-5">
                         <div className="container">
                           <div className="row p-0">
                             <div className="col-lg-12 p-0">
@@ -426,44 +374,56 @@ const MyBusinessListing = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
 
-                      <div className="rbt-callto-action rbt-cta-default style-2">
+                      <div className="rbt-callto-action rbt-cta-default style-2 px-4">
                         <div className="content-wrapper overflow-hidden pt--30 pb--30 bg-color-primary-opacity">
-                          <div className="row gy-5 align-items-end">
+                          <div className="row gy-5 align-items-end justify-content-between">
                             <div className="col-lg-8">
                               <div className="inner">
                                 <div className="content text-left">
                                   <h5 className="mb--5">
-                                    {AdminDataLists.length} Business Found
+                                    My Business Directory
                                   </h5>
                                   {/* <p className="b3">Create Announcement</p> */}
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-4">
-                              <div className="call-to-btn text-start text-lg-end position-relative">
+                            <div className="col-lg-4 d-flex justify-content-start justify-content-lg-end">
+                              <div className="call-to-btn  text-end position-relative ">
                                 <Link
                                   className="rbt-btn btn-gradient radius-round sm-btn"
                                   href="/my-business-directory"
                                 >
                                   <span data-text="Add New Announcement">
-                                    My Business Directory
+                                    Add Business Directory
                                   </span>
                                 </Link>
                               </div>
                             </div>
                           </div>
+
+                            <div className="row p-0 mt-5">
+                            <div className="col-lg-12 p-0">
+                              <form action="#" className="rbt-search-style-1">
+                                <input
+                                  type="text"
+                                  placeholder="Search Job with Job title and Role"
+                                  // name="search_filter"
+                                  onChange={handleSearchFilter}
+                                />
+                                <button className="search-btn">
+                                  <i className="feather-search"></i>
+                                </button>
+                              </form>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                      <div className="rbt-dashboard-content bg-color-white rbt-shadow-box mt-5">
+                      <div className="rbt-dashboard-content  mt-5 p-0">
                         <div className="content">
-                          <div className="section-title">
-                            <h4 className="rbt-title-style-3">
-                              Business Directory List
-                            </h4>
-                          </div>
+                          
 
                           <div className="rbt-dashboard-table table-responsive mobile-table-750">
                             <div className="row g-5 m-0">

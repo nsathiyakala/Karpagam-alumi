@@ -823,7 +823,7 @@ const JobBoardMain = () => {
                                 <input
                                   type="text"
                                   placeholder="Search Job with Job title and Role"
-                                  name="search_filter"
+                                  // name="search_filter"
                                   onChange={handleSearchFilter}
                                 />
                                 <button className="search-btn">

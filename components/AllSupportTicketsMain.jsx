@@ -14,35 +14,38 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import AdminMain from "@/components/KITMaster/AdminMain";
 import SideBarHelpDesk from "./KITSidebar/SideBarHelpDesk";
-import QuizAttempts from "./Instructor/QuizAttempts";
 import BreadCrumb from "./Common/BreadCrumb";
-
+import AllTicketsMain from "./KITHelpDesk/AllTicketsMain";
 
 const AllSupportTicketsMain = () => {
   return (
     <>
       <Provider store={Store}>
         <Context>
-        <MobileMenu />
-        <KITHeader headerSticky="rbt-sticky" headerType="" />
-        <BreadCrumb title="All Tickets" text="All Support Tickets" />
-          
+          <MobileMenu />
+          <KITHeader headerSticky="rbt-sticky" headerType="" />
+          <BreadCrumb title="All Tickets" text="All Support Tickets" />
 
-          
           <div className="rbt-dashboard-area  rbt-section-gapBottom section-pad">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-12">
-                  {/* <InstructorDashboardHeader /> */}
+            <div className="container-fluid">
+              <div className="row justify-content-center">
+                <div className="col-11 col-xl-10">
+                  <div className="container-fluid">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        {/* <InstructorDashboardHeader /> */}
 
-                  <div className="row g-5">
-                    <div className="col-lg-3">
-                      <SideBarHelpDesk />
-                    </div>
+                        <div className="row g-5">
+                          <div className="col-lg-3">
+                            <SideBarHelpDesk />
+                          </div>
 
-                    <div className="col-lg-9">
-                      {/* <AdminMain /> */}
-                      <QuizAttempts />
+                          <div className="col-lg-9">
+                            {/* <AdminMain /> */}
+                            <AllTicketsMain />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

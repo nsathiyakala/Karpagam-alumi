@@ -12,8 +12,22 @@ import FooterOne from "@/components/Footer/Footer-One";
 import KITHeader from "@/components/Header/KITHeader";
 import GalleryMain from "@/components/GalleryMain";
 import KITFooter from "@/components/Footer/KITFooter";
+import GalleryLoginMain from "@/components/GalleryLoginMain";
+import { useEffect, useState } from "react";
 
 const GalleryPage = () => {
+   const [token, setToken] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isAlumniManager, setIsAlumniManager] = useState(false);
+    const [isFatulty, setIsFatulty] = useState(false);
+    const [isAlumni, setIsAlumni] = useState(false);
+  
+    useEffect(() => {
+      const Token = localStorage.getItem("token");
+  
+      setToken(Token);
+    });
+
   return (
     <>
       <Provider store={Store}>
@@ -23,7 +37,9 @@ const GalleryPage = () => {
 
           <BreadCrumb title="Gallery" text="Gallery" />
 
-          <GalleryMain />
+          {token ? <GalleryLoginMain/> : <GalleryMain /> }
+
+          
 
           <KITFooter />
         </Context>

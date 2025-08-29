@@ -364,40 +364,36 @@
 // 	overflow-x: hidden !important;
 // }
 
-
 .form-dd .css-1xqkn6g-control {
-	border: none;
-	border-bottom: 1px solid gray;
+  border: none;
+  border-bottom: 1px solid gray;
   height: 50px;
 
   padding: 0;
 }
 
-
-.form-dd .css-19bb58m{
+.form-dd .css-19bb58m {
   margin: 0;
   padding: 0;
 }
 
-
-
-.form-dd  .css-5736gi-menu  {
-   text-align: start;
--webkit-align-items: start;
-    -webkit-box-align: start;
-    // font-size: 14px;
+.form-dd .css-5736gi-menu {
+  text-align: start;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  // font-size: 14px;
   padding: 1px;
-    // color: black;
+  // color: black;
 }
 
 .form-dd .css-1oceoso-placeholder {
-    grid-area: 1 / 1 / 2 / 3;
-    color: gray !important;
-     margin-left: 0 !important; 
-    margin-right: 2px;
-    box-sizing: border-box;
-	 font-size: 20px !important;
-    font-weight: 400;
+  grid-area: 1 / 1 / 2 / 3;
+  color: gray !important;
+  margin-left: 0 !important;
+  margin-right: 2px;
+  box-sizing: border-box;
+  font-size: 20px !important;
+  font-weight: 400;
 }
 
 .form-grid {
@@ -416,16 +412,16 @@
 }
 
 .form-wrapper .file-input {
-	padding-top: 0 !important;
-    padding-bottom: 5px !important;
-    height: 40px;
+  padding-top: 0 !important;
+  padding-bottom: 5px !important;
+  height: 40px;
 }
-.date-field{
-	border: none !important;
-	background: transparent !important;
-	box-shadow: none !important;
-	height: 35px !important;
-	padding: 0 !important;
+.date-field {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: 35px !important;
+  padding: 0 !important;
 }
 
 @media (max-width: 768px) {
@@ -433,8 +429,6 @@
     grid-template-columns: 1fr; /* stack fields in 1 column */
   }
 }
-
-
 
 .custom-select {
   appearance: none; /* removes default arrow */
@@ -475,11 +469,9 @@ select {
 }
 
 .form-wrapper select {
-	border-bottom: 1px solid gray !important;
-	border-radius: 0 !important;
+  border-bottom: 1px solid gray !important;
+  border-radius: 0 !important;
 }
-
-
 
 // .member-dd .css-1xqkn6g-control{
 // 	z-index: -1 !important;
@@ -497,42 +489,80 @@ select {
 // 	z-index: -1 !important;
 // }
 
-.rbt-dashboard-table .bg-primary-opacity , .rbt-dashboard-table .bg-coral-opacity , .rbt-dashboard-table .bg-color-danger-opacity{
-	background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
+.rbt-dashboard-table .bg-primary-opacity,
+.rbt-dashboard-table .bg-coral-opacity,
+.rbt-dashboard-table .bg-color-danger-opacity {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.rbt-dashboard-table .bg-gray{
-	color: gray !important;
-	background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
+.rbt-dashboard-table .bg-gray {
+  color: gray !important;
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.rbt-dashboard-table .bg-color-success-opacity{
-	background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
+.rbt-dashboard-table .bg-color-success-opacity {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-a.bg-primary-opacity:hover , button.bg-primary-opacity:hover, a.bg-coral-opacity:hover ,button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover{
-	background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
+a.bg-primary-opacity:hover,
+button.bg-primary-opacity:hover,
+a.bg-coral-opacity:hover,
+button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.input-has-value{
-	height: 65px !important;
-	padding-bottom: 0px !important;
-	padding-top: 30px !important;
+.input-has-value {
+  height: 65px !important;
+  padding-bottom: 0px !important;
+  padding-top: 30px !important;
 }
 
-.team .content .title{
-	font-size: 20px !important;
+.team .content .title {
+  font-size: 20px !important;
 }
 
-.team .content .designation{
-	font-size: 14px !important;
-	line-height: 20px !important;
+.team .content .designation {
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+.rbt-dashboard-area .call-to-btn {
+  width: fit-content;
+}
+.rbt-dashboard-area .call-to-btn .sm-btn {
+  width: fit-content;
+}
+
+.my-business input {
+  background: white !important;
+}
+
+.helpdesk .css-1xqkn6g-control {
+  // line-height: 0 ;
+  border-radius: 5px;
+  min-height: 15px;
+}
+
+.ant-modal-content .css-1xqkn6g-control {
+  border-radius: 5px;
+}
+
+.ant-modal-content textarea {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.ant-modal-content select {
+  border: 1px solid #ccc !important;
+  height: 55px !important;
+  padding: 0 15px !important;
+  background-position: right 2rem center;
 }
