@@ -566,3 +566,11 @@ button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover {
   padding: 0 15px !important;
   background-position: right 2rem center;
 }
+
+.child-gallery-single .rbt-gallery img{
+  min-height: 200px !important;
+  max-height: 200px !important;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
