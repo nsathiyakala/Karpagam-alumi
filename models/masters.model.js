@@ -62,6 +62,66 @@ const masters = {
     return promise;
   },
 
+  create_course: (body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `create_course/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.log("errorsss: ", error);
+          if (error.response) {
+            reject(error.response);
+          } else {
+            reject(error);
+          }
+        });
+    });
+    return promise;
+  },
+
+  update_course: (id, body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `update_course/${id}/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.log("errorsss: ", error);
+          if (error.response) {
+            reject(error.response);
+          } else {
+            reject(error);
+          }
+        });
+    });
+    return promise;
+  },
+
+  deactivate_course: (id, body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `decativate_course/${id}/`;
+      instance()
+        .put(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.log("errorsss: ", error);
+          if (error.response) {
+            reject(error.response);
+          } else {
+            reject(error);
+          }
+        });
+    });
+    return promise;
+  },
+
   batchList: (page) => {
     let promise = new Promise((resolve, reject) => {
       let url = `retrieve_batch/?page=${page}`;
