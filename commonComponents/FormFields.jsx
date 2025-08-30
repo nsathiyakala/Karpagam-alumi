@@ -96,7 +96,7 @@ const FormField = ({
             ref={ref}
             accept={accept}
             onChange={onChange}
-            className={"inputfile"}
+            className={`${className} inputfile`}
           />
         ) : type === "password" ? (
           <div className="flex items-center" style={{ position: "relative" }}>
@@ -150,10 +150,10 @@ const FormField = ({
             placeholder={placeholder}
             onChange={onChange}
             value={value}
-            // className={className}
-             className={`${className}  ${
-              value && !placeholder ? "input-has-value" : ""
-            }`}
+            className={className}
+            //  className={`${className}  ${
+            //   value && !placeholder ? "input-has-value" : ""
+            // }`}
             style={style}
           ></textarea>
         ) : type === "date" ? (
@@ -237,10 +237,10 @@ const FormField = ({
             name={name}
             onChange={onChange}
             value={value}
-            // className={`${className} custom-input`}
-            className={`${className} custom-input ${
-              value && !placeholder ? "input-has-value" : ""
-            }`}
+            className={`${className} custom-input`}
+            // className={`${className} custom-input ${
+            //   value && !placeholder ? "input-has-value" : ""
+            // }`}
             placeholder={placeholder}
             style={style}
             disabled={disabled}

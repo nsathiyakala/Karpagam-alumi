@@ -195,3 +195,39 @@ export const setDropdownData = (data, label) => {
   });
   return result;
 };
+
+
+export const ConvertFormData = (body) => {
+  const formData = new FormData();
+  for (const key in body) {
+    if (Object.prototype.hasOwnProperty.call(body, key)) {
+      const value = body[key];
+
+      if (
+        typeof value === "object" &&
+        !(value instanceof File) &&
+        !(value instanceof Blob)
+      ) {
+        formData.append(key, JSON.stringify(value));
+      } else {
+        formData.append(key, value);
+      }
+    }
+  }
+
+  return formData;
+};
+
+
+export const formattedDateTime = (data) => {
+  const date = new Date(data);
+  return date.toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit", // Hour in 2 digits
+    minute: "2-digit", // Minute in 2 digits
+    second: "2-digit", // Second in 2 digits
+    hour12: true, // 12-hour format (AM/PM)
+  });
+};
