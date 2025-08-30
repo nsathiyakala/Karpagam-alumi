@@ -6,7 +6,11 @@ import Link from "next/link";
 import "venobox/dist/venobox.min.css";
 import { useRouter, useParams } from "next/navigation";
 import { message, Modal } from "antd";
-import { useSetState } from "@/utils/commonFunction.utils";
+import {
+  ConvertFormData,
+  useSetState,
+  validateForm,
+} from "@/utils/commonFunction.utils";
 import Models from "@/imports/models.import";
 import FormField from "@/commonComponents/FormFields";
 
@@ -236,50 +240,50 @@ const AlbumMain = () => {
 
   return (
     <>
-      {state.photoList?.length > 0 ? (
-        <div className="container album">
-          <div className="row g-3 parent-gallery-container KITgallery ">
-            <div className="d-flex justify-content-between ">
-              <h3>{state.album_name}</h3>
+      <div className="container album">
+        <div className="row g-3 parent-gallery-container KITgallery ">
+          <div className="d-flex justify-content-between py-4 mb-4">
+            <h4 className="mb-0">{state.album_name}</h4>
 
-              <div className="rbt-button-group justify-content-end">
-                <a
-                  className="rbt-btn btn-xs bg-primary-opacity radius-round"
-                  href="#"
-                  title="Edit Album"
-                  onClick={() => setState({ isOpen: true })}
-                >
-                  <i className="feather-edit pl--0" />
-                </a>
-                <a
-                  className="rbt-btn btn-xs bg-color-danger-opacity radius-round color-danger"
-                  href="#"
-                  title="Delete Album"
-                  onClick={() => showDeleteConfirm()}
-                >
-                  <i className="feather-trash-2 pl--0" />
-                </a>
+            <div className="rbt-button-group justify-content-end">
+              <a
+                className="rbt-btn btn-xs bg-primary-opacity radius-round"
+                href="#"
+                title="Edit Album"
+                onClick={() => setState({ isOpen: true })}
+              >
+                <i className="feather-edit pl--0" />
+              </a>
+              <a
+                className="rbt-btn btn-xs bg-color-danger-opacity radius-round color-danger"
+                href="#"
+                title="Delete Album"
+                onClick={() => showDeleteConfirm()}
+              >
+                <i className="feather-trash-2 pl--0" />
+              </a>
 
-                <a
-                  className="rbt-btn btn-xs  radius-round"
-                  href="#"
-                  title="Create Album"
-                  onClick={() => setState({ isUploadPic: true })}
-                >
-                  <i className="feather-plus-circle pl--0" />
-                </a>
-              </div>
+              <a
+                className="rbt-btn btn-xs  radius-round"
+                href="#"
+                title="Create Album"
+                onClick={() => setState({ isUploadPic: true })}
+              >
+                <i className="feather-plus-circle pl--0" />
+              </a>
             </div>
+          </div>
 
+          {state.photoList?.length > 0 ? (
             <div className="row parent-gallery-container">
               {state.photoList &&
                 state.photoList.map((data, index) => (
                   <div className="col-lg-3 col-md-4 col-sm-6 col-6" key={index}>
                     <div className="instagram-grid KITalbum">
-                      <Link
+                      <div
                         className="child-gallery-single gal-grid"
                         key={index}
-                        href={`${data.url}`}
+                        
                         data-gall="gallery01"
                         onClick={(e) => {
                           if (e.target.closest(".icon")) {
@@ -307,6 +311,7 @@ const AlbumMain = () => {
                                 e.stopPropagation(); // ✅ Stop bubbling
                                 deletePhoto(data); // ✅ Call delete function
                               }}
+                              title="Delete image"
                             >
                               <i className="feather-trash"></i>
                             </span>
@@ -316,6 +321,7 @@ const AlbumMain = () => {
                             <span
                               className="icon "
                               onClick={() => approvel(data)}
+                              title="Approved"
                             >
                               <i className="feather-check-circle"></i>
                             </span>
@@ -323,6 +329,7 @@ const AlbumMain = () => {
                             <span
                               className="icon "
                               onClick={() => approvel(data)}
+                              title="Pending"
                             >
                               <i className="feather-x-circle"></i>
                             </span>
@@ -334,50 +341,54 @@ const AlbumMain = () => {
                             {data?.approved == true ? "Approved" : "Pending"}
                           </span>
                         </span>
-                      </Link>
+                      </div>
                     </div>
                   </div>
                 ))}
             </div>
-          </div>
+          ) : (
+            <>
+              <div className=" album-none">
+                <h5>Album is Empty !</h5>
+                <a
+                  className="rbt-btn btn-xs  radius-round"
+                  href="#"
+                  title="Create Album"
+                  onClick={() => setState({ isUploadPic: true })}
+                >
+                  Upload Images
+                  <i className="feather-plus-circle pl--2" />
+                </a>
+              </div>
+            </>
+          )}
         </div>
-      ) : (
-        <>
-          <div className=" album-none">
-            <h5>Album is Empty !</h5>
-            <a
-              className="rbt-btn btn-xs  radius-round"
-              href="#"
-              title="Create Album"
-              onClick={() => setState({ isUploadPic: true })}
-            >
-              Upload Images
-              <i className="feather-plus-circle pl--2" />
-            </a>
-          </div>
-        </>
-      )}
+      </div>
 
       {/* For Edit Album */}
       <Modal
-        title={<div className="custom-modal-header">{"Edit Album"}</div>}
+        title={<div className="custom-modal-header">Edit Album</div>}
         open={state.isOpen}
         onCancel={() => handleCancel()}
         footer={false}
         centered
       >
-        <div className="form-group mt_20">
-          <FormField
-            type="text"
-            name="Name"
-            label="Name"
-            // className={"applicant-input"}
-            onChange={(e) => setState({ album_name: e.target.value })}
-            value={state.album_name}
-            required
-            error={state.error?.album_name}
-          />
-          <div className="form-group mt_20">
+        {/* 4. Form Wrapper */}
+        <form className="applicants-form" onSubmit={updateAlbum}>
+          {/* 5. Status Select (Load More) */}
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="text"
+              name="Name"
+              label="Name"
+              onChange={(e) => setState({ album_name: e.target.value })}
+              value={state.album_name}
+              required
+              error={state.error?.album_name}
+            />
+          </div>
+
+          <div style={{ marginTop: "15px" }}>
             <FormField
               type="text"
               name="Description"
@@ -389,164 +400,125 @@ const AlbumMain = () => {
             />
           </div>
 
-          <div className="form-group mt_20">
+          <div style={{ marginTop: "15px" }}>
             <FormField
-              type="text"
-              name="Location"
-              label="Location"
-              // className={"applicant-input"}
-              onChange={(e) => setState({ album_location: e.target.value })}
-              value={state.album_location}
-              // error={errMsg?.end_year}
-            />
-          </div>
-
-          <div className="form-group mt_20">
-            <FormField
-              placeholder="Date"
+              label="Date"
               type="date"
               name="Date"
               value={state.album_date}
               onChange={(e) => setState({ album_date: e.target.value })}
-              // className="applicant-input"
               required
               error={state.error?.album_date}
             />
           </div>
 
-          <div className="form-group mt_20">
-            <FormField
-              type="select"
-              name="Who can view this Album?"
-              label=""
-              className={"applicant-input"}
-              onChange={(e) => setState({ public_view: e.target.value })}
-              value={state.public_view}
-              required
-              error={state.error?.whoCanView}
-              options={[
-                { value: "Public", label: "Public" },
-                { value: "Site Members", label: "Site Members" },
-              ]}
-            />
+          {/* 7. Submit Button */}
+          <div className="d-flex justify-content-end mt-3 gap-4">
+            <button
+              className="rbt-btn btn-gradient radius-round sm-btn"
+              type="button"
+              onClick={() => handleCancel()}
+            >
+              Cancel
+            </button>
+            <button
+              className="rbt-btn btn-gradient radius-round sm-btn"
+              type="submit"
+            >
+              {state.btnLoadng ? "loading" : "Submit"}
+            </button>
           </div>
-        </div>
-
-        <div className="form-group mt_10"></div>
-        <div className=" form-group message-btn mt-3 w-100">
-          <button
-            type="button"
-            style={{
-              border: "1px solid #006837",
-              padding: "9px 30px",
-              color: "#006837",
-              width: "49%",
-              marginRight: "1%",
-              cursor: "pointer",
-            }}
-            name="cancel-form"
-            onClick={() => handleCancel()}
-          >
-            <span>Cancel</span>
-          </button>
-          <button
-            onClick={updateAlbum}
-            type="button"
-            className="theme-btn btn-two"
-            name="submit-form"
-            style={{ width: "49%", marginLeft: "1%", cursor: "pointer" }}
-          >
-            <span>{state.btnLoadng ? <Loader /> : "Submit"}</span>
-          </button>
-        </div>
+        </form>
       </Modal>
 
       {/* Upload photos */}
       <Modal
-        title={<div className="custom-modal-header">{"Upload Photos"}</div>}
+        title={<div className="custom-modal-header">Upload Photos</div>}
         open={state.isUploadPic}
         onCancel={() => setState({ isUploadPic: false })}
         footer={false}
+        centered
       >
-        <div className="form-group mt_10">
-          <input
-            type="file"
-            name="Name"
-            accept="image/*"
-            multiple
-            onChange={handleFileChange}
-            required
-            ref={fileInputRef}
-          />
-        </div>
+        {/* 4. Form Wrapper */}
+        <form className="applicants-form" onSubmit={uploadPhoto}>
+          {/* 5. Status Select (Load More) */}
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="file"
+              name="Name"
+              label="Name"
+              accept="image/*"
+              multiple
+              onChange={handleFileChange}
+              className="p-0"
+              required
+              ref={fileInputRef}
+            />
 
-        <div
-          className="uploaded-images mt_10"
-          style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}
-        >
-          {state.uploadedImages.length > 0 &&
-            state.uploadedImages.map((image, index) => (
-              <div
-                key={index}
-                className="uploaded-image-item"
-                style={{
-                  width: "calc(33.333% - 10px)", // To make 3 images per row with spacing
-                  display: "flex",
-                  flexDirection: "column", // Stack the image and button vertically
-                  alignItems: "center", // Center the image and button horizontally
-                  justifyContent: "center", // Center align vertically
-                  marginBottom: "10px",
-                  border: "0.5px solid grey",
-                  padding: "10px",
-                  borderRadius: "20px",
-                }}
-              >
-                <img
-                  src={URL.createObjectURL(image)}
-                  alt={`Uploaded ${index + 1}`}
-                  style={{
-                    width: "100%", // Make image take full width of the container
-                    height: "100px", // Fixed height for the images
-                    objectFit: "cover",
-                    borderRadius: "5px",
-                  }}
-                />
+            <div
+              className="uploaded-images mt_10"
+              style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}
+            >
+              {state.uploadedImages.length > 0 &&
+                state.uploadedImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="uploaded-image-item"
+                    style={{
+                      width: "calc(33.333% - 10px)", // To make 3 images per row with spacing
+                      display: "flex",
+                      flexDirection: "column", // Stack the image and button vertically
+                      alignItems: "center", // Center the image and button horizontally
+                      justifyContent: "center", // Center align vertically
+                      marginBottom: "10px",
+                      border: "0.5px solid grey",
+                      padding: "10px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt={`Uploaded ${index + 1}`}
+                      style={{
+                        width: "100%", // Make image take full width of the container
+                        height: "100px", // Fixed height for the images
+                        objectFit: "cover",
+                        borderRadius: "5px",
+                      }}
+                    />
 
-                {/* Remove button below the image */}
-                <button
-                  type="button"
-                  onClick={() => handleRemoveImage(index)}
-                  style={{
-                    background: "rgba(255, 0, 0, 0.7)",
-                    color: "white",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "5px 10px",
-                    borderRadius: "50px",
-                    marginTop: "5px", // Space between image and button
-                    fontSize: "14px",
-                  }}
-                >
-                  X
-                </button>
-              </div>
-            ))}
-        </div>
+                    {/* Remove button below the image */}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      style={{
+                        background: "rgba(255, 0, 0, 0.7)",
+                        color: "white",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: "5px 10px",
+                        borderRadius: "50px",
+                        marginTop: "5px", // Space between image and button
+                        fontSize: "14px",
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+            </div>
+          </div>
 
-        <div
-          className="form-group message-btn mt-3 w-100"
-          style={{ display: "flex", justifyContent: "end" }}
-        >
-          <button
-            onClick={uploadPhoto}
-            type="button"
-            className="theme-btn btn-two"
-            name="submit-form"
-            style={{ width: "30%", marginLeft: "1%", cursor: "pointer" }}
-          >
-            <span>{state.uploadLoading ? <Loader /> : "Submit"}</span>
-          </button>
-        </div>
+          {/* 7. Submit Button */}
+          <div className="d-flex justify-content-end mt-3 gap-4">
+            <button
+              className="rbt-btn btn-gradient radius-round sm-btn"
+              type="submit"
+            >
+              {state.btnLoadng ? "loading" : "Submit"}
+            </button>
+          </div>
+        </form>
       </Modal>
     </>
   );

@@ -8,15 +8,19 @@ import GalleryData from "../../../../data/elements/gallery.json";
 import { useRouter } from "next/navigation";
 import {
   capitalizeFLetter,
+  ConvertFormData,
   useSetState,
   validateForm,
 } from "@/utils/commonFunction.utils";
 import Models from "@/imports/models.import";
+import { Modal } from "antd";
+import FormField from "@/commonComponents/FormFields";
 
 const GalleryLoginMain = () => {
   const [discountPercentage, setDiscountPercentage] = useState({});
   const [totalReviews, setTotalReviews] = useState({});
   const [rating, setRating] = useState({});
+  const [activeTab, setActiveTab] = useState("album");
 
   // Calculate discount, reviews, ratings for each course
   useEffect(() => {
@@ -137,7 +141,8 @@ const GalleryLoginMain = () => {
     });
   };
 
-  const createAlbum = async () => {
+  const createAlbum = async (e) => {
+    e.preventDefault();
     try {
       setState({ btnLoadng: true });
       const body = {
@@ -277,14 +282,14 @@ const GalleryLoginMain = () => {
 
   return (
     <>
-      <div className="rbt-dashboard-area rbt-section-gapBottom section-pad">
+      <div className="rbt-dashboard-area rbt-section-gapBottom section-pad gal-log">
         <div className="container-fluid">
           <div className="row justify-content-center">
             <div className="col-11 col-xl-10">
               <div className="rbt-dashboard-content ">
                 <div className="content">
                   {/* --- TAB BUTTONS --- */}
-                  <div className="advance-tab-button mb--30">
+                  <div className="advance-tab-button mb--30 d-flex justify-content-between align-items-center">
                     <ul
                       className="nav nav-tabs tab-button-style-2 justify-content-start"
                       id="myTab-4"
@@ -293,11 +298,14 @@ const GalleryLoginMain = () => {
                       <li role="presentation">
                         <Link
                           href="#"
-                          className="tab-button active"
+                          className={`tab-button ${
+                            activeTab === "album" ? "active" : ""
+                          }`}
                           id="home-tab-4"
                           data-bs-toggle="tab"
                           data-bs-target="#home-4"
                           role="tab"
+                          onClick={() => setActiveTab("album")}
                         >
                           <span className="title">Album</span>
                         </Link>
@@ -305,16 +313,39 @@ const GalleryLoginMain = () => {
                       <li role="presentation">
                         <Link
                           href="#"
-                          className="tab-button"
+                          className={`tab-button ${
+                            activeTab === "memories" ? "active" : ""
+                          }`}
                           id="profile-tab-4"
                           data-bs-toggle="tab"
                           data-bs-target="#profile-4"
                           role="tab"
+                          onClick={() => setActiveTab("Memories")}
                         >
                           <span className="title">Memories</span>
                         </Link>
                       </li>
                     </ul>
+
+                    <span>
+                      <button
+                        href="#"
+                        className="rbt-btn btn-gradient radius-round sm-btn"
+                        onClick={() => {
+                          if (activeTab === "album") {
+                            setState({ isOpen: true });
+                          } else {
+                            setState({ isMemoriesOpen: true });
+                          }
+                        }}
+                      >
+                        <span className="title">
+                          {activeTab === "album"
+                            ? "Create Album"
+                            : "Create Memories"}
+                        </span>
+                      </button>
+                    </span>
                   </div>
 
                   {/* --- TAB CONTENT --- */}
@@ -326,7 +357,7 @@ const GalleryLoginMain = () => {
                         id="home-4"
                         role="tabpanel"
                       >
-                        <div className="row g-3 parent-gallery-container KITgallery">
+                        <div className="row g-3 parent-gallery-container">
                           {state.albumList?.map((data, index) => (
                             <div
                               className="col-lg-3 col-md-4 col-sm-6 col-6"
@@ -375,7 +406,7 @@ const GalleryLoginMain = () => {
                         id="profile-4"
                         role="tabpanel"
                       >
-                        <div className="row g-3 parent-gallery-container KITgallery">
+                        <div className="row g-3 parent-gallery-container">
                           {state.memoriesList?.map((data, index) => (
                             <div
                               className="col-lg-3 col-md-4 col-sm-6 col-6"
@@ -470,6 +501,220 @@ const GalleryLoginMain = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        title={<div className="custom-modal-header">Create New Album</div>}
+        open={state.isOpen}
+        onCancel={() => handleCancel()}
+        footer={false}
+        centered
+      >
+        <form className="applicants-form" onSubmit={createAlbum}>
+        
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="text"
+              name="Name"
+              label="Name"
+              onChange={(e) => setState({ album_name: e.target.value })}
+              value={state.album_name}
+              required
+              error={state.error?.album_name}
+            />
+          </div>
+
+          {/* Message */}
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="text"
+              name="Description"
+              label="Description"
+              onChange={(e) => setState({ description: e.target.value })}
+              value={state.description}
+              // error={errMsg?.end_year}
+            />
+          </div>
+
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="text"
+              name="Location"
+              label="Location"
+              onChange={(e) => setState({ album_location: e.target.value })}
+              value={state.album_location}
+              // error={errMsg?.end_year}
+            />
+          </div>
+
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              label="Date"
+              type="date"
+              name="Date"
+              value={state.album_date}
+              onChange={(e) => setState({ album_date: e.target.value })}
+              error={state.error?.album_date}
+              required
+            />
+          </div>
+
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="select"
+              // name="Who can view this Album?"
+              placeholder={"Who can view this Album?"}
+              label="Who can view this Album?"
+              onChange={(e) => setState({ public_view: e.target.value })}
+              value={state.public_view}
+              required
+              error={state.error?.whoCanView}
+              options={[
+                { value: "Public", label: "Public" },
+                { value: "Site Members", label: "Site Members" },
+              ]}
+            />
+          </div>
+
+          {/* Action */}
+          <div className="d-flex justify-content-end mt-5">
+            <button
+              className="rbt-btn btn-gradient radius-round sm-btn"
+              type="submit"
+            >
+              {state.btnLoadng ? "Loading" : "Submit"}
+            </button>
+          </div>
+        </form>
+      </Modal>
+
+      <Modal
+        title={<div className="custom-modal-header">Upload Photos</div>}
+        open={state.isMemoriesOpen}
+        onCancel={() => handleCancel()}
+        footer={false}
+        centered
+      >
+        <form className="applicants-form" onSubmit={createMemories}>
+        
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="file"
+              name="Name"
+              label="Upload images"
+              accept="image/*"
+              className={"p-0 "}
+              multiple
+              onChange={handleFileChange}
+              required
+              ref={fileInputRef}
+            />
+
+            <div
+              className="uploaded-images mt_10"
+              style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}
+            >
+              {state.uploadedImages.length > 0 &&
+                state.uploadedImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="uploaded-image-item"
+                    style={{
+                      width: "calc(33.333% - 10px)", // To make 3 images per row with spacing
+                      display: "flex",
+                      flexDirection: "column", // Stack the image and button vertically
+                      alignItems: "center", // Center the image and button horizontally
+                      justifyContent: "center", // Center align vertically
+                      marginBottom: "10px",
+                      border: "0.5px solid grey",
+                      padding: "10px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt={`Uploaded ${index + 1}`}
+                      style={{
+                        width: "100%", // Make image take full width of the container
+                        height: "100px", // Fixed height for the images
+                        objectFit: "cover",
+                        borderRadius: "5px",
+                      }}
+                    />
+
+                    {/* Remove button below the image */}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      style={{
+                        background: "rgba(255, 0, 0, 0.7)",
+                        color: "white",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: "5px 10px",
+                        borderRadius: "50px",
+                        marginTop: "5px", // Space between image and button
+                        fontSize: "14px",
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+            </div>
+          </div>
+
+         
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="select"
+              name="When were the pictures taken?"
+              label="When were the pictures taken?"
+              placeholder={"Year"}
+              onChange={(e) => setState({ year: e.target.value })}
+              value={state.year}
+              error={state.error?.whoCanView}
+              options={years}
+            />
+          </div>
+
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="select"
+              name="Month"
+              label="Month"
+              placeholder={"Month"}
+              onChange={(e) => setState({ month: e.target.value })}
+              value={state.month}
+              // error={state.error?.whoCanView}
+              options={months}
+            />
+          </div>
+
+          <div style={{ marginTop: "15px" }}>
+            <FormField
+              type="text"
+              name="Add relevant Tags"
+              label="Add relevant Tags"
+             
+              onChange={(e) => setState({ tags: e.target.value })}
+              value={state.tags}
+              // error={errMsg?.end_year}
+            />
+          </div>
+
+        
+
+          
+          <div className="d-flex justify-content-end mt-5">
+            <button
+              className="rbt-btn btn-gradient radius-round sm-btn"
+              type="submit"
+            >
+              {state.btnLoadng ? "Loading" : "Submit"}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </>
   );
 };
