@@ -19,6 +19,7 @@ const GalleryMain = () => {
       });
     });
   }, []);
+  
   return (
     <div className="row g-3 parent-gallery-container KITgallery">
       {GalleryData &&

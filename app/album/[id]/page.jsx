@@ -38,11 +38,11 @@ const Page = () => {
 
           <BreadCrumb title="Album" text="Album" />
 
-          <AlbumMain />
+          < AlbumMain />
 
           
 
-          <KITFooter />
+          < KITFooter />
         </Context>
       </Provider>
     </>

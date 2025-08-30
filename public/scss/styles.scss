@@ -510,10 +510,11 @@ select {
   padding: 0 !important;
 }
 
-a.bg-primary-opacity:hover,
-button.bg-primary-opacity:hover,
-a.bg-coral-opacity:hover,
-button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover {
+.rbt-dashboard-table a.bg-primary-opacity:hover,
+.rbt-dashboard-table button.bg-primary-opacity:hover,
+.rbt-dashboard-table a.bg-coral-opacity:hover,
+.rbt-dashboard-table button.bg-coral-opacity:hover,
+.rbt-dashboard-table button.bg-color-danger-opacity:hover {
   background: transparent !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -567,7 +568,7 @@ button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover {
   background-position: right 2rem center;
 }
 
-.child-gallery-single .rbt-gallery img{
+.child-gallery-single .rbt-gallery img {
   min-height: 200px !important;
   max-height: 200px !important;
   width: 100%;
@@ -575,49 +576,46 @@ button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover {
   object-position: center;
 }
 
-
 .KITalbum.instagram-grid .gal-grid .user-info {
-    position: absolute;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%) scale(1.5);
-    z-index: 1;
-    color: var(--color-white);
-    visibility: hidden;
-    opacity: 0;
-    transition: var(--transition);
-    height: 100%;
-    width: 100%;
-    
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%) scale(1.5);
+  z-index: 1;
+  color: var(--color-white);
+  visibility: hidden;
+  opacity: 0;
+  transition: var(--transition);
+  height: 100%;
+  width: 100%;
 }
 
 .KITalbum.instagram-grid .gal-grid .user-info .icon {
-    display: flex;
-    font-size: 18px;
-    justify-content: flex-end;
-    padding-right: 10px;
-    padding-top: 10px;
+  display: flex;
+  font-size: 18px;
+  justify-content: flex-end;
+  padding-right: 10px;
+  padding-top: 10px;
 }
 
 .KITalbum.instagram-grid:hover .gal-grid .user-info {
-    transform: translateY(-50%) scale(1) !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+  transform: translateY(-50%) scale(1) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
-
 
 .KITalbum.instagram-grid .gal-grid .user-info .user-name {
-       display: flex;
-    font-size: 14px;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: flex-end;
-    position: relative;
-    top: -10px;
+  display: flex;
+  font-size: 14px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  top: -10px;
 }
 
-.gal-delete-icon{
+.gal-delete-icon {
   position: absolute;
   top: 10px; /* Adjust position */
   right: 10px; /* Adjust position */
@@ -627,10 +625,22 @@ button.bg-coral-opacity:hover button.bg-color-danger-opacity:hover {
   padding: 6px;
   border-radius: 50%;
   cursor: pointer;
-  position:absolute;
-  z-index: 1000,
-
+  position: absolute;
+  z-index: 1000;
 }
 
+.album a.bg-primary-opacity:hover {
+  background: #00538521 !important;
+}
+.album {
+  min-height: 70vh;
+}
 
-                  
+.album-none {
+  display: flex;
+  height: 400px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
