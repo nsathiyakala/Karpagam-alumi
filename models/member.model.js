@@ -33,11 +33,11 @@ const member = {
     return promise;
   },
 
-  updateMemberData: (memberId,body) => {
+  updateMemberData: (memberId, body) => {
     let promise = new Promise((resolve, reject) => {
       let url = `member_data/${memberId}/`;
       instance()
-        .post(url,body)
+        .post(url, body)
         .then((res) => {
           resolve(res.data);
         })
@@ -78,6 +78,67 @@ const member = {
     return promise;
   },
 
+  updateUserStatus: (id, body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `deactivate_user/${id}/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(modelError(error));
+        });
+    });
+    return promise;
+  },
+
+  updateUserRole: (body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `assign_group/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(modelError(error));
+        });
+    });
+    return promise;
+  },
+
+  create_user: (body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `create_user/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(modelError(error));
+        });
+    });
+    return promise;
+  },
+
+  create_single_member: (body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `single_import_users/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(modelError(error));
+        });
+    });
+    return promise;
+  },
+
+
   users: (page) => {
     let promise = new Promise((resolve, reject) => {
       let url = `users/?page=${page}`;
@@ -92,8 +153,6 @@ const member = {
     });
     return promise;
   },
-
-  
 
   filter: (page, body) => {
     let promise = new Promise((resolve, reject) => {
@@ -124,7 +183,6 @@ const member = {
     });
     return promise;
   },
-
 
   member_experience: (memberId) => {
     let promise = new Promise((resolve, reject) => {
@@ -170,8 +228,6 @@ const member = {
     });
     return promise;
   },
-
-  
 };
 
 export default member;

@@ -1,16 +1,20 @@
 "use client";
 
-import Link from "next/link";
-import { CheckCircleOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  UserSwitchOutlined,
+} from "@ant-design/icons";
 import { Modal, Tooltip, Spin } from "antd";
 import Pagination from "@/commonComponents/Pagination";
 
-const CommonTable = (props) => {
+const UserTable = (props) => {
   const {
     tableHead,
     tableData,
     heading,
     updateStatus,
+    updateUser,
     loading,
     total,
     currentPage,
@@ -18,6 +22,8 @@ const CommonTable = (props) => {
     subtitile_1,
     subtitile_2,
     subtitile_3,
+    subtitile_1_onPress,
+    subtitile_2_onPress,
   } = props;
 
   return (
@@ -40,9 +46,9 @@ const CommonTable = (props) => {
                   className="rbt-btn btn-xs bg-secondary-opacity radius-round"
                   href="#"
                   title="Edit Album"
-                  // onClick={() => setState({ isOpen: true })}
+                  onClick={() => subtitile_1_onPress()}
                 >
-                  <i className="feather-user pl--0" />
+                  <i className="feather-user pl--0" onClick={() => subtitile_1_onPress()}/>
                 </a>
               )}
               {subtitile_2 && (
@@ -50,9 +56,10 @@ const CommonTable = (props) => {
                   className="rbt-btn btn-xs bg-primary radius-round"
                   href="#"
                   title="Delete Album"
-                  // onClick={() => showDeleteConfirm()}
+                  onClick={() => subtitile_2_onPress()}
+
                 >
-                  <i className="feather-users pl--0" />
+                  <i className="feather-users pl--0"  onClick={() => subtitile_2_onPress()}  />
                 </a>
               )}
               {subtitile_3 && (
@@ -88,80 +95,47 @@ const CommonTable = (props) => {
               ) : (
                 <tbody>
                   {tableData?.map((item) => (
-                    <tr key={item.member_id}>
+                    <tr
+                      key={item.id}
+                      style={{
+                        opacity: item?.is_active ? 1 : 0.5,
+                      }}
+                    >
+                      <td>{item.username}</td>
                       <td>
-                        <img
-                          src={
-                            item.profile_picture ||
-                            "/assets/images/profile/dummy-profile.png"
-                          }
-                          alt="Profile"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            borderRadius: "50%",
-                          }}
-                        />
-                        <p
-                          style={{
-                            paddingTop: "10px",
-                            fontSize: "14px",
-                          }}
-                        >
-                          {" "}
-                          Reg No: {item.register_no}{" "}
-                        </p>
+                        {item.groups.map((group) => group.name).join(", ")}
                       </td>
-                      <td>
-                        <Link
-                          href={`tel:${item.mobile_no}`}
-                          style={{
-                            color: "#212529",
-                            textDecoration: "underline",
-                          }}
-                        >
-                          {item.mobile_no}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          href={`mailto:${item.email}`}
-                          style={{
-                            color: "#212529",
-                            textDecoration: "underline",
-                          }}
-                        >
-                          {item.email}
-                        </Link>
-                      </td>
-                      <td>{item.course}</td>
-                      <td>{item.batch}</td>
-                      <td>
-                        {item.file ? (
-                          <Link
-                            href={item.file}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              color: "#212529",
-                              textDecoration: "underline",
-                            }}
-                          >
-                            {item.file.substring(
-                              item.file.lastIndexOf("/") + 1
-                            )}
-                          </Link>
-                        ) : (
-                          <span>No file available</span>
+                      <td style={{ textAlign: "center" }}>
+                        {item?.is_active && (
+                          <Tooltip title="Assign Role">
+                            <UserSwitchOutlined
+                              className="me-3"
+                              onClick={() => updateUser(item)}
+                              style={{ fontSize: "22px" }}
+                            />
+                          </Tooltip>
                         )}
-                      </td>
-                      <td>
-                        <Tooltip title="Approve">
-                          <CheckCircleOutlined
-                            className="me-3"
-                            onClick={() => updateStatus(item)}
-                            style={{ fontSize: "22px" }}
-                          />
+
+                        <Tooltip
+                          title={item?.is_active ? "Active" : "InActive"}
+                        >
+                          {item?.is_active ? (
+                            <CheckCircleOutlined
+                              onClick={() => updateStatus(item)}
+                              style={{
+                                color: "green",
+                                fontSize: "22px",
+                              }}
+                            />
+                          ) : (
+                            <CloseCircleOutlined
+                              onClick={() => updateStatus(item)}
+                              style={{
+                                color: "red",
+                                fontSize: "22px",
+                              }}
+                            />
+                          )}
                         </Tooltip>
                       </td>
                     </tr>
@@ -194,4 +168,4 @@ const CommonTable = (props) => {
   );
 };
 
-export default CommonTable;
+export default UserTable;
