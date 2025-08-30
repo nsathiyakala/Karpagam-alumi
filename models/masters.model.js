@@ -347,7 +347,7 @@ const masters = {
     return promise;
   },
 
-    GetPostCategoryList: (page) => {
+  GetPostCategoryList: (page) => {
     let promise = new Promise((resolve, reject) => {
       let url = `postcategory/?page=${page}`;
       instance()
@@ -490,6 +490,46 @@ const masters = {
     return promise;
   },
 
+  create_salutation: (body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `create_salutation/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.log("errorsss: ", error);
+          if (error.response) {
+            reject(error.response.data.error);
+          } else {
+            reject(error);
+          }
+        });
+    });
+    return promise;
+  },
+
+  update_salutation: (id, body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `update_salutation/${id}/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.log("errorsss: ", error);
+          if (error.response) {
+            reject(error.response.data.error);
+          } else {
+            reject(error);
+          }
+        });
+    });
+    return promise;
+  },
+
   batch: (page = 1) => {
     let promise = new Promise((resolve, reject) => {
       let url = `retrieve_batch/?page=${page}`;
@@ -609,7 +649,7 @@ const masters = {
     return promise;
   },
 
-   facultyList: (page = 1) => {
+  facultyList: (page = 1) => {
     let promise = new Promise((resolve, reject) => {
       let url = `faculty_users/?page=${page}`;
       instance()

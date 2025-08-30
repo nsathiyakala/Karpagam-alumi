@@ -1,19 +1,19 @@
 import BackToTop from "@/app/backToTop";
-import Salutation from "./(salutation)";
-
+import NewsRoom from "./(salutation)";
 
 export const metadata = {
-  title: "Instructor Dashboard - Online Courses & Education NEXTJS14 Template",
+  title: "Course With Sidebar - Online Courses & Education NEXTJS14 Template",
   description: "Online Courses & Education NEXTJS14 Template",
 };
 
-const SalutationPage = () => {
+const NewsRoomPage = () => {
   return (
     <>
-      <Salutation />
+      <NewsRoom />
+
       <BackToTop />
     </>
   );
 };
 
-export default SalutationPage;
+export default NewsRoomPage;
