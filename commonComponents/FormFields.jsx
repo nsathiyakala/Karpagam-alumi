@@ -107,9 +107,9 @@ const FormField = ({
               onChange={onChange}
               value={value}
               // className={`${className} flex-grow`}
-               className={`${className} flex-grow ${
-              value && !placeholder ? "input-has-value" : ""
-            }`}
+              className={`${className} flex-grow ${
+                value && !placeholder ? "input-has-value" : ""
+              }`}
             />
             <button
               type="button"
@@ -161,7 +161,7 @@ const FormField = ({
             type="date"
             name={name}
             onChange={onChange}
-            placeholder={placeholder ? placeholder : label}
+            placeholder={ "label"}
             value={value}
             className={className}
             //  className={`${className}  ${
@@ -177,7 +177,7 @@ const FormField = ({
             placeholder={placeholder ? placeholder : label}
             value={value}
             // className={className}
-             className={`${className}  ${
+            className={`${className}  ${
               value && !placeholder ? "input-has-value" : ""
             }`}
             style={style}
@@ -188,9 +188,9 @@ const FormField = ({
             name={name}
             onChange={onChange}
             value={value}
-             placeholder={placeholder ? placeholder : label}
+            placeholder={placeholder ? placeholder : label}
             // className={className}
-             className={`${className}  ${
+            className={`${className}  ${
               value && !placeholder ? "input-has-value" : ""
             }`}
             pattern="\d{10}"
@@ -247,7 +247,10 @@ const FormField = ({
           />
         )}
         {error && (
-          <p className="error" style={{ color: "red", paddingTop: "3px" }}>
+          <p
+            className="sub"
+            style={{ color: "red", paddingTop: "3px", fontSize: "15px" }}
+          >
             {error}
           </p>
         )}

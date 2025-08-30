@@ -130,21 +130,6 @@ const PostJobForm = () => {
     }
   };
 
-  // const GetSkills = () => {
-  //   axios
-  //     .get(`${BaseURL}/retrieve_skills/`, {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setSkills(res.data?.results);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   const GetSkills = async () => {
     try {
       const res = await Models.job.skillList();
@@ -236,8 +221,6 @@ const PostJobForm = () => {
       return;
     }
 
-    console.log("formDataToSend formData", formData);
-
     const formDataToSend = new FormData();
     for (const key in formData) {
       if (key === "skills") {
@@ -249,17 +232,10 @@ const PostJobForm = () => {
       } else if (key === "role") {
         formDataToSend.append("role", formData.role.value);
       }
-      //  else if (key === "location") {
-      //   formDataToSend.append("location", formData.location.value);
-      // }
       else {
         formDataToSend.append(key, formData[key]);
       }
     }
-
-    console.log("formDataToSend", formDataToSend);
-
-    // formDataToSend.append("posted_by", userId);
 
     axios
       .post(`${BaseURL}/create_job_post/`, formDataToSend, {
@@ -325,15 +301,7 @@ const PostJobForm = () => {
     try {
       if (state.hasRoleLoadMore) {
         const res = await Models.job.roleList(state.currenRolePage + 1);
-        // const IndustryOption = res?.results?.map((item) => ({
-        //   value: item.skill_id,
-        //   label: item.skill,
-        // }));
         const RoleOption = setDropdownData(res?.results, "role");
-
-        console.log("roleList", roleList);
-
-        console.log("RoleOption", RoleOption);
 
         setRoleList([...roleList, ...RoleOption]);
         setState({
@@ -356,8 +324,6 @@ const PostJobForm = () => {
           value: item.skill_id,
           label: item.skill,
         }));
-        // const SkillOption = setDropdownData(res?.results, "skill");
-
         setSkills([...skills, ...SkillOption]);
         setState({
           currenSkillPage: state.currenSkillPage + 1,
@@ -371,32 +337,7 @@ const PostJobForm = () => {
     }
   };
 
-  console.log("skillLiost", skills);
 
-  const locationListLoadMore = async () => {
-    try {
-      if (state.hasLocationLoadMore) {
-        const res = await Models.job.locationList(state.currenLocationPage + 1);
-        // const IndustryOption = res?.results?.map((item) => ({
-        //   value: item.skill_id,
-        //   label: item.skill,
-        // }));
-        const LocationOption = setDropdownData(res?.results, "location");
-
-        setLocation([...location, ...LocationOption]);
-        setState({
-          currenLocationPage: state.currenLocationPage + 1,
-          hasLocationLoadMore: res.next,
-        });
-      } else {
-        setLocation(location);
-      }
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-
-  console.log("preview", preview);
   return (
     <div className={`rbt-contact-address `}>
       <div className="container section-pad">
