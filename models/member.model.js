@@ -138,6 +138,24 @@ const member = {
     return promise;
   },
 
+  create_multiple_member: (body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `bulk_import_users/`;
+      instance()
+        .post(url, body, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(modelError(error));
+        });
+    });
+    return promise;
+  },
 
   users: (page) => {
     let promise = new Promise((resolve, reject) => {

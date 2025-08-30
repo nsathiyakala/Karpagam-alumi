@@ -17,6 +17,10 @@ import Models from "@/imports/models.import";
 const CreateMemberForm = () => {
   const router = useRouter();
 
+  const [fileInputKey, setFileInputKey] = useState(Date.now());
+
+  const fileInputRef = useRef(null);
+
   const [formData, setFormData] = useState({
     batch: "",
     mobile_no: "",
@@ -30,6 +34,7 @@ const CreateMemberForm = () => {
     register: "",
     salutation: "",
     member_type: "alumni",
+    file: "",
   });
   const [errMsg, setErrMsg] = useState({});
 
@@ -57,6 +62,7 @@ const CreateMemberForm = () => {
     salutationList: [],
     departmentList: [],
     batchList: [],
+    step: false,
   });
 
   useEffect(() => {
@@ -165,11 +171,14 @@ const CreateMemberForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (formData?.member_type == "faculty") {
-      createFaculty();
+    if (!state.step) {
+      if (formData?.member_type == "faculty") {
+        createFaculty();
+      } else {
+        createMember();
+      }
     } else {
-      createMember();
+      createMultipleMember();
     }
   };
 
@@ -218,7 +227,6 @@ const CreateMemberForm = () => {
         blood_group: { required: true },
         mobile_no: { required: true },
         email: { required: true },
-        // department_id: { required: true },
         course: { required: true },
         batch: { required: true },
         register: { required: true },
@@ -245,6 +253,33 @@ const CreateMemberForm = () => {
       message.success(res?.message);
     } catch (error) {
       console.log("error: ", error);
+    }
+  };
+
+  const createMultipleMember = async () => {
+    try {
+      const validationRules = {
+        file: { required: true },
+        member_type: { required: true },
+      };
+
+      const isValid = validateForm(formData, validationRules, setErrMsg);
+      if (!isValid) {
+        return;
+      }
+      const formDatas = new FormData();
+      formDatas.append("file", formData.file);
+      formDatas.append("group_name", formData.member_type);
+
+      const res = await Models.member.create_multiple_member(formDatas);
+      if (res?.errors?.length > 0) {
+        message.error(res?.errors[0]?.error);
+      } else {
+        router.push("/users");
+        message.success(res?.message);
+      }
+    } catch (error) {
+      console.log("✌️error --->", error);
     }
   };
 
@@ -293,17 +328,17 @@ const CreateMemberForm = () => {
         <div className="row mb-4 justify-content-center">
           <div className="col-lg-10">
             <div className="d-flex justify-content-between ">
-              <h5>Create Single Member</h5>
+              <h5>Create {!state.step ? "Single" : "Multiple"} Member</h5>
               <div className="d-flex gap-4">
-                <Link
+                <button
                   className="rbt-btn btn-gradient radius-round sm-btn"
-                  href="/job-board"
+                  onClick={() => setState({ step: !state.step })}
                 >
-                  Create Multiple Member
-                </Link>
+                  Create {state.step ? "Single" : "Multiple"} Member
+                </button>
                 <Link
                   className="rbt-btn btn-gradient radius-round sm-btn"
-                  href="/job-board"
+                  href="/users"
                 >
                   Back
                 </Link>
@@ -322,198 +357,244 @@ const CreateMemberForm = () => {
                   className="rainbow-dynamic-form max-width-auto"
                   onSubmit={handleSubmit}
                 >
-                  <div className="form-grid">
-                    <div className="form-group">
-                      <FormField
-                        placeholder="Member Type"
-                        type="select"
-                        name="member_type"
-                        value={formData.member_type}
-                        onChange={(e) => handleChange(e)}
-                        options={[
-                          {
-                            label: "Faculty",
-                            value: "faculty",
-                          },
-                          {
-                            label: "Alumni",
-                            value: "alumni",
-                          },
-                        ]}
-                        error={errMsg.member_type}
-                        required={true}
-                      />
-                      <span className="focus-border"></span>
-                    </div>
-
-                    <div className="form-group">
-                      <FormField
-                        placeholder="Salutation"
-                        type="select"
-                        name="salutation"
-                        value={formData.salutation}
-                        onChange={(e) => handleChange(e)}
-                        options={state.salutationList}
-                        error={errMsg.salutation}
-                        required={true}
-                      />
-                      <span className="focus-border"></span>
-                    </div>
-                    {formData?.member_type == "alumni" ? (
+                  {!state.step ? (
+                    <div className="form-grid">
                       <div className="form-group">
                         <FormField
-                          placeholder="Register Number"
-                          type="text"
-                          name="register"
-                          value={formData.register}
+                          placeholder="Member Type"
+                          type="select"
+                          name="member_type"
+                          value={formData.member_type}
                           onChange={(e) => handleChange(e)}
-                          error={errMsg.register}
+                          options={[
+                            {
+                              label: "Faculty",
+                              value: "faculty",
+                            },
+                            {
+                              label: "Alumni",
+                              value: "alumni",
+                            },
+                          ]}
+                          error={errMsg.member_type}
                           required={true}
                         />
                         <span className="focus-border"></span>
                       </div>
-                    ) : (
+
                       <div className="form-group">
                         <FormField
-                          placeholder="Name"
-                          type="text"
-                          name="name"
-                          value={formData.name}
+                          placeholder="Salutation"
+                          type="select"
+                          name="salutation"
+                          value={formData.salutation}
                           onChange={(e) => handleChange(e)}
-                          error={errMsg.name}
+                          options={state.salutationList}
+                          error={errMsg.salutation}
                           required={true}
                         />
                         <span className="focus-border"></span>
                       </div>
-                    )}
-                    <div className="form-group">
-                      <FormField
-                        placeholder="Email"
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={(e) => handleChange(e)}
-                        error={errMsg.email}
-                        required={true}
-                      />
-                      <span className="focus-border"></span>
-                    </div>
-                    <div className="form-group">
-                      <FormField
-                        placeholder="DOB"
-                        type="date"
-                        name="dob"
-                        className="file-input"
-                        value={formData.dob}
-                        onChange={(e) => handleChange(e)}
-                        error={errMsg.dob}
-                        required={true}
-                      />
-                      <span className="focus-border"></span>
-                    </div>
-
-                    <div className="form-group">
-                      <FormField
-                        placeholder="Gender"
-                        type="select"
-                        name="gender"
-                        value={formData.gender}
-                        onChange={(e) => handleChange(e)}
-                        options={[
-                          { value: "M", label: "Male" },
-                          { value: "F", label: "Female" },
-                          { value: "O", label: "Others" },
-                        ]}
-                        error={errMsg.gender}
-                        required={true}
-                      />
-                      <span className="focus-border"></span>
-                    </div>
-
-                    <div className="form-group">
-                      <FormField
-                        placeholder="Blood Group"
-                        type="select"
-                        name="blood_group"
-                        value={formData.blood_group}
-                        onChange={(e) => handleChange(e)}
-                        options={Dropdown(BloodGroupChooice, "name")}
-                        error={errMsg.blood_group}
-                        required={true}
-                      />
-                      <span className="focus-border"></span>
-                    </div>
-                    {formData?.member_type == "alumni" ? (
+                      {formData?.member_type == "alumni" ? (
+                        <div className="form-group">
+                          <FormField
+                            placeholder="Register Number"
+                            type="text"
+                            name="register"
+                            value={formData.register}
+                            onChange={(e) => handleChange(e)}
+                            error={errMsg.register}
+                            required={true}
+                          />
+                          <span className="focus-border"></span>
+                        </div>
+                      ) : (
+                        <div className="form-group">
+                          <FormField
+                            placeholder="Name"
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={(e) => handleChange(e)}
+                            error={errMsg.name}
+                            required={true}
+                          />
+                          <span className="focus-border"></span>
+                        </div>
+                      )}
                       <div className="form-group">
                         <FormField
-                          placeholder="Course"
-                          type="loadMoreSelect"
-                          className="form-dd"
-                          name="course"
-                          value={formData.course}
-                          onChange={(e) =>
-                            setFormData({ ...formData, course: e })
-                          }
-                          error={errMsg.course}
-                          options={roleList}
+                          placeholder="Email"
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={(e) => handleChange(e)}
+                          error={errMsg.email}
                           required={true}
-                          loadMore={() => roleListLoadMore()}
                         />
                         <span className="focus-border"></span>
                       </div>
-                    ) : (
                       <div className="form-group">
                         <FormField
-                          placeholder="Department"
-                          type="loadMoreSelect"
-                          className="form-dd"
-                          name="department"
-                          value={formData.department}
-                          onChange={(e) =>
-                            setFormData({ ...formData, department: e })
-                          }
-                          error={errMsg.department}
-                          options={state.departmentList}
+                          placeholder="DOB"
+                          type="date"
+                          name="dob"
+                          className="file-input"
+                          value={formData.dob}
+                          onChange={(e) => handleChange(e)}
+                          error={errMsg.dob}
                           required={true}
-                          loadMore={() => departmentListLoadMore()}
                         />
-
                         <span className="focus-border"></span>
                       </div>
-                    )}
-                    <div className="form-group">
-                      <FormField
-                        placeholder="Mobile Number"
-                        type="number"
-                        name="mobile_no"
-                        value={formData.mobile_no}
-                        onChange={(e) => handleChange(e)}
-                        error={errMsg.mobile_no}
-                        required={true}
-                      />
-                      <span className="focus-border"></span>
+
+                      <div className="form-group">
+                        <FormField
+                          placeholder="Gender"
+                          type="select"
+                          name="gender"
+                          value={formData.gender}
+                          onChange={(e) => handleChange(e)}
+                          options={[
+                            { value: "M", label: "Male" },
+                            { value: "F", label: "Female" },
+                            { value: "O", label: "Others" },
+                          ]}
+                          error={errMsg.gender}
+                          required={true}
+                        />
+                        <span className="focus-border"></span>
+                      </div>
+
+                      <div className="form-group">
+                        <FormField
+                          placeholder="Blood Group"
+                          type="select"
+                          name="blood_group"
+                          value={formData.blood_group}
+                          onChange={(e) => handleChange(e)}
+                          options={Dropdown(BloodGroupChooice, "name")}
+                          error={errMsg.blood_group}
+                          required={true}
+                        />
+                        <span className="focus-border"></span>
+                      </div>
+                      {formData?.member_type == "alumni" ? (
+                        <div className="form-group">
+                          <FormField
+                            placeholder="Course"
+                            type="loadMoreSelect"
+                            className="form-dd"
+                            name="course"
+                            value={formData.course}
+                            onChange={(e) =>
+                              setFormData({ ...formData, course: e })
+                            }
+                            error={errMsg.course}
+                            options={roleList}
+                            required={true}
+                            loadMore={() => roleListLoadMore()}
+                          />
+                          <span className="focus-border"></span>
+                        </div>
+                      ) : (
+                        <div className="form-group">
+                          <FormField
+                            placeholder="Department"
+                            type="loadMoreSelect"
+                            className="form-dd"
+                            name="department"
+                            value={formData.department}
+                            onChange={(e) =>
+                              setFormData({ ...formData, department: e })
+                            }
+                            error={errMsg.department}
+                            options={state.departmentList}
+                            required={true}
+                            loadMore={() => departmentListLoadMore()}
+                          />
+
+                          <span className="focus-border"></span>
+                        </div>
+                      )}
+                      <div className="form-group">
+                        <FormField
+                          placeholder="Mobile Number"
+                          type="number"
+                          name="mobile_no"
+                          value={formData.mobile_no}
+                          onChange={(e) => handleChange(e)}
+                          error={errMsg.mobile_no}
+                          required={true}
+                        />
+                        <span className="focus-border"></span>
+                      </div>
+                      {formData?.member_type == "alumni" && (
+                        <div className="form-group">
+                          <FormField
+                            placeholder="Batch"
+                            type="loadMoreSelect"
+                            className="form-dd"
+                            name="batch"
+                            value={formData.batch}
+                            onChange={(e) =>
+                              setFormData({ ...formData, batch: e })
+                            }
+                            error={errMsg.batch}
+                            options={state.batchList}
+                            required={true}
+                            loadMore={() => batchListLoadMore()}
+                          />
+                          <span className="focus-border"></span>
+                        </div>
+                      )}
                     </div>
-                    {formData?.member_type == "alumni" && (
+                  ) : (
+                    <div className="form-grid">
                       <div className="form-group">
                         <FormField
-                          placeholder="Batch"
-                          type="loadMoreSelect"
-                          className="form-dd"
-                          name="batch"
-                          value={formData.batch}
-                          onChange={(e) =>
-                            setFormData({ ...formData, batch: e })
-                          }
-                          error={errMsg.batch}
-                          options={state.batchList}
+                          placeholder="Member Type"
+                          type="select"
+                          name="member_type"
+                          value={formData.member_type}
+                          onChange={(e) => handleChange(e)}
+                          options={[
+                            {
+                              label: "Faculty",
+                              value: "faculty",
+                            },
+                            {
+                              label: "Alumni",
+                              value: "alumni",
+                            },
+                          ]}
+                          error={errMsg.member_type}
                           required={true}
-                          loadMore={() => batchListLoadMore()}
                         />
                         <span className="focus-border"></span>
                       </div>
-                    )}
-                  </div>
-
+                      <div className="form-group">
+                        <FormField
+                          // placeholder="Attach File"
+                          type="file"
+                          name="file"
+                          ref={fileInputRef}
+                          key={fileInputKey}
+                          error={errMsg.file}
+                          className="file-input"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              file: e.target.files[0],
+                            })
+                          }
+                          accept=".xls,.xlsx, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                          required={true}
+                        />
+                        <span className="focus-border"></span>
+                      </div>
+                    </div>
+                  )}
                   <div className="form-submit-group d-flex justify-content-end">
                     <button
                       name="submit"
