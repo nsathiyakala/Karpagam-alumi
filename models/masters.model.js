@@ -142,6 +142,46 @@ const masters = {
     return promise;
   },
 
+  create_batch: (body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `create_batch/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.log("errorsss: ", error);
+          if (error.response) {
+            reject(error.response);
+          } else {
+            reject(error);
+          }
+        });
+    });
+    return promise;
+  },
+
+  update_batch: (id, body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `update_batch/${id}/`;
+      instance()
+        .post(url, body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.log("errorsss: ", error);
+          if (error.response) {
+            reject(error.response);
+          } else {
+            reject(error);
+          }
+        });
+    });
+    return promise;
+  },
+
   departmentList: (page) => {
     let promise = new Promise((resolve, reject) => {
       let url = `retrieve_department/?page=${page}`;

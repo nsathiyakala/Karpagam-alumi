@@ -256,9 +256,8 @@ const Course = () => {
                         updateUser={(item) => update(item)}
                         handlePageChange={(number) => {
                           setState({ currentPage: number });
-                          getData(number);
+                          GetCourse(number);
                         }}
-                        updateStatus={(item) => updateStatus(item)}
                         subtitile_1_onPress={() => setState({ isOpen: true })}
                       />
                     </div>
