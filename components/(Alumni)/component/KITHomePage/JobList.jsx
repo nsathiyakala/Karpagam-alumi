@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import Pagination from "../Common/Pagination";
+import Pagination from "../../../Common/Pagination";
 
 const JobList = ({
   getEvents,

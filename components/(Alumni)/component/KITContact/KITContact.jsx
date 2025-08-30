@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ContactData from "../../data/pages/contact.json";
+import ContactData from "../../../../data/pages/contact.json";
 import { Mail, MapPin, Phone, PhoneCall, Printer, Smartphone } from "react-feather";
 
 const KITContact = () => {

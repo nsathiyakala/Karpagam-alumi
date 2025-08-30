@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 
-import videoImage from "../public/images/others/health-b-01.png";
-import videoImage2 from "../public/images/others/faq-01.png";
-import videoImage1 from "../public/images/others/kids-video-01.jpg";
+import videoImage from "../../../../public/images/others/health-b-01.png";
+import videoImage2 from "../../../../public/images/others/faq-01.png";
+import videoImage1 from "../../../../public/images/others/kids-video-01.jpg";
 
 const AboutMain = () => {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import SidebarData from "../../data/dashboard/student/siderbar.json";
+// import SidebarData from "../../data/dashboard/student/siderbar.json";
 import { Calendar } from "react-feather";
 import Link from "next/link";
 import FormField from "@/commonComponents/FormFields";

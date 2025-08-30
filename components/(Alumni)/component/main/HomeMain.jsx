@@ -3,18 +3,16 @@
 import { useEffect } from "react";
 
 import sal from "sal.js";
-import Banner from "./KITHomePage/Banner";
-import Connect from "./KITHomePage/Connect";
+import Banner from "../KITHomePage/Banner";
+import Connect from "../KITHomePage/Connect";
 import Link from "next/link";
-import SuccessStories from "./KITHomePage/SuccessStories";
-import JobList from "./KITHomePage/JobList";
-import EventData from "../data/events.json";
-import Members from "./KITHomePage/Members";
-import InstagramData from "../data/elements/instagram.json";
-import Image from "next/image";
-import Gallery from "./KITHomePage/Gallery";
-import CallToActionFour from "./Call-To-Action/CallToAction-Four";
-import EventList from "./KITHomePage/EventList";
+import SuccessStories from "../KITHomePage/SuccessStories";
+import JobList from "../KITHomePage/JobList";
+import EventData from "../../../../data/events.json";
+import Members from "../KITHomePage/Members";
+import Gallery from "../KITHomePage/Gallery";
+import CallToActionFour from "../../../Call-To-Action/CallToAction-Four";
+import EventList from "../KITHomePage/EventList";
 
 const HomeMain = ({ blogs }) => {
   useEffect(() => {

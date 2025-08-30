@@ -12,8 +12,8 @@ import { Provider } from "react-redux";
 
 import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
-import MasterDataSidebar from "@/components/KITMaster/MasterDataSidebar";
-import AdminMain from "@/components/KITMaster/AdminMain";
+import MasterDataSidebar from "@/components/(Alumni)/component/KITMaster/MasterDataSidebar";
+import AdminMain from "@/components/(Alumni)/component/KITMaster/AdminMain";
 import QuizAttempts from "@/components/Student/QuizAttempts";
 
 

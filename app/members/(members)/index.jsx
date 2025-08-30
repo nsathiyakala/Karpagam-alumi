@@ -13,8 +13,8 @@ import KITHeader from "@/components/Header/KITHeader";
 
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
-import MembersMain from "@/components/MembersMain";
-import MembersLoginMain from "@/components/MembersLoginMain";
+import MembersMain from "@/components/(Alumni)/component/main/MembersMain";
+import MembersLoginMain from "@/components/(Alumni)/component/main/MembersLoginMain";
 import Form from "@/commonComponents/Form"
 
 const Members = () => {

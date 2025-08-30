@@ -8,7 +8,7 @@ const QuizAttempts = () => {
       <div className="rbt-dashboard-content bg-color-white rbt-shadow-box">
         <div className="content">
           <div className="section-title">
-            <h4 className="rbt-title-style-3">My Quiz Attempts</h4>
+            <h4 className="rbt-title-style-3">Waiting For Approval</h4>
           </div>
 
           <div className="rbt-dashboard-table table-responsive mobile-table-750 mt--30">

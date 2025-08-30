@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import AccountInfo from "../../data/myAccount.json"
-import MyAccount from "../My-Account/MyAccount";
+import AccountInfo from "../../../../data/myAccount.json"
+import MyAccount from "../../../My-Account/MyAccount";
 
 const MyAccountMain = () => {
 

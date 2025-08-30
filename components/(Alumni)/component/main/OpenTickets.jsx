@@ -10,10 +10,10 @@ import { Provider } from "react-redux";
 
 import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
-import SideBarHelpDesk from "./KITSidebar/SideBarHelpDesk";
-import BreadCrumb from "./Common/BreadCrumb";
+import SideBarHelpDesk from "../KITSidebar/SideBarHelpDesk";
+import BreadCrumb from "../../../Common/BreadCrumb";
 
-import OpenTicketsMain from "./KITHelpDesk/OpenTicketsMain";
+import OpenTicketsMain from "../KITHelpDesk/OpenTicketsMain";
 
 const OpenTickets = () => {
   return (

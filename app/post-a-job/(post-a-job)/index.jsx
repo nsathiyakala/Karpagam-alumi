@@ -13,7 +13,7 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 import Form from "@/commonComponents/Form";
-import PostJobForm from "@/components/JobBoard/PostJobForm";
+import PostJobForm from "@/components/(Alumni)/component/JobBoard/PostJobForm";
 
 
 const PostJob = () => {

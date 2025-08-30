@@ -3,7 +3,6 @@ import Image from "next/image";
 
 import useCategoryCount from "@/context/useCategoryCount";
 
-import CourseDetails from "../../data/course-details/courseData.json";
 import AlumniConnect from "./AlumniConnect";
 
 const Connect = () => {

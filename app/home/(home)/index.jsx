@@ -13,7 +13,7 @@ import FooterThree from "@/components/Footer/Footer-Three";
 import MainDemo from "@/components/01-Main-Demo/01-Main-Demo";
 
 import KITHeader from "@/components/Header/KITHeader";
-import HomeMain from "@/components/HomeMain";
+import HomeMain from "@/components/(Alumni)/component/main/HomeMain";
 import KITFooter from "@/components/Footer/KITFooter";
 
 const Home = ({ getBlog }) => {

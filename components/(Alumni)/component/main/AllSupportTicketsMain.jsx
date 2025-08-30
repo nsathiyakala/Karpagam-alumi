@@ -6,15 +6,15 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import Context from "@/context/Context";
 import Store from "@/redux/store";
-import SideBarHelpDesk from "./KITSidebar/SideBarHelpDesk";
-import BreadCrumb from "./Common/BreadCrumb";
-import AllTicketsMain from "./KITHelpDesk/AllTicketsMain";
-import OpenTicketsMain from "./KITHelpDesk/OpenTicketsMain";
+import SideBarHelpDesk from "../KITSidebar/SideBarHelpDesk";
+import BreadCrumb from "../../../Common/BreadCrumb";
+import AllTicketsMain from "../KITHelpDesk/AllTicketsMain";
+import OpenTicketsMain from "../KITHelpDesk/OpenTicketsMain";
 
 import React from "react";
 import { Provider } from "react-redux";
 import { usePathname } from "next/navigation";
-import AllMessagesMain from "./KITHelpDesk/AllMessagesMain";
+import AllMessagesMain from "../KITHelpDesk/AllMessagesMain";
 
 const AllSupportTicketsMain = () => {
   const pathname = usePathname();

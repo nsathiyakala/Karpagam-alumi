@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import TeamData from "../../data/elements/team.json";
+import TeamData from "../../../../data/elements/team.json";
 
 
 const Members = () => {

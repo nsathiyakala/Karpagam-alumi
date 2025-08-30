@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import "venobox/dist/venobox.min.css";
 
-import GalleryData from "../data/elements/gallery.json";
+import GalleryData from "../../../../data/elements/gallery.json";
 
 const GalleryMain = () => {
   useEffect(() => {

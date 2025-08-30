@@ -19,14 +19,14 @@ const MobileMenu = () => {
           <div className="inner-top">
             <div className="content">
               <div className="logo">
-                <Link href="/">
+                {/* <Link href="/"> */}
                   <Image
                     src={logo}
                     width={137}
                     height={45}
                     alt="Education Logo Images"
                   />
-                </Link>
+                {/* </Link> */}
               </div>
               <div className="rbt-btn-close">
                 <button

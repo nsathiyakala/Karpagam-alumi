@@ -63,6 +63,21 @@ const member = {
     return promise;
   },
 
+  approveMember: (id) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `approve_member/${id}/`;
+      instance()
+        .post(url)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(modelError(error));
+        });
+    });
+    return promise;
+  },
+
   users: (page) => {
     let promise = new Promise((resolve, reject) => {
       let url = `users/?page=${page}`;
