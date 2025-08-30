@@ -1,11 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import SidebarData from "../../data/dashboard/student/siderbar.json";
+// import SidebarData from "../../data/dashboard/student/siderbar.json";
 import { Calendar } from "react-feather";
-import Link from "next/link";
 
-const SideBarLogin = () => {
+const SideBar = () => {
   const pathname = usePathname();
 
   const year =[
@@ -45,15 +44,6 @@ const SideBarLogin = () => {
                 </ul>
               </nav>
 
-              <div className="col-lg-12 d-flex gap-5 mt-5"> 
-                <Link className="rbt-btn btn-gradient radius-round sm-btn" href="#">
-                  Filter
-                </Link>
-                <Link className="rbt-btn btn-border-gradient radius-round sm-btn" href="#">
-                  Cancel
-                </Link>
-              </div>
-
               {/* <div className="section-title mt--40 mb--20">
                 <h6 className="rbt-title-style-2">User</h6>
               </div>
@@ -84,4 +74,4 @@ const SideBarLogin = () => {
   );
 };
 
-export default SideBarLogin;
+export default SideBar;

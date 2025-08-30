@@ -12,7 +12,7 @@ import KITHeader from "@/components/Header/KITHeader";
 
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
-import EditJobForm from "@/components/JobBoard/EditJobForm";
+import EditJobForm from "@/components/(Alumni)/component/JobBoard/EditJobForm";
 
 
 const EditJob = () => {

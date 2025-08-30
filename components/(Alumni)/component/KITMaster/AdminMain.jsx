@@ -1,8 +1,8 @@
 import React from "react";
 
 
-import CounterWidget from "../Instructor/Dashboard-Section/widgets/CounterWidget";
-import MyCourses from "../Instructor/MyCourses";
+import CounterWidget from "../../../Instructor/Dashboard-Section/widgets/CounterWidget";
+import MyCourses from "../../../Instructor/MyCourses";
 
 const AdminMain = () => {
   return (

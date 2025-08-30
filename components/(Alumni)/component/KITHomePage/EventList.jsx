@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import EventDetails from "../../data/KitEvents.json";
+import EventDetails from "../../../../data/KitEvents.json";
 
 
 const EventList = ({ isPagination, top, start, end }) => {

@@ -9,8 +9,8 @@ import Cart from "@/components/Header/Offcanvas/Cart";
 import FooterOne from "@/components/Footer/Footer-One";
 import KITHeader from "@/components/Header/KITHeader";
 import BreadCrumb from "@/components/Common/BreadCrumb";
-import KITContact from "@/components/KITContact/KITContact";
-import KITContactForm from "@/components/KITContact/KITContact-Form";
+import KITContact from "@/components/(Alumni)/component/KITContact/KITContact";
+import KITContactForm from "@/components/(Alumni)/component/KITContact/KITContact-Form";
 import KITFooter from "@/components/Footer/KITFooter";
 
 const Contact = () => {

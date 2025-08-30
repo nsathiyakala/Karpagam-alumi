@@ -14,10 +14,11 @@ import KITHeader from "@/components/Header/KITHeader";
 
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
-import AboutMain from "@/components/AboutMain";
+import AboutMain from "@/components/(Alumni)/component/main/AboutMain";
 
 
 const About = () => {
+console.log('✌️About --->', );
   return (
     <Provider store={Store}>
       <Context>

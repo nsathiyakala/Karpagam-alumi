@@ -3,10 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import "venobox/dist/venobox.min.css";
-
-import GalleryData from "../data/elements/gallery.json";
 import { useRouter, useParams } from "next/navigation";
 import { message, Modal } from "antd";
 import { useSetState } from "@/utils/commonFunction.utils";

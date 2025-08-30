@@ -13,7 +13,7 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 
-import JobBoardMain from "@/components/JobBoard/JobBoardMain";
+import JobBoardMain from "@/components/(Alumni)/component/JobBoard/JobBoardMain";
 
 const JobBoard = () => {
   const [token, setToken] = useState("");

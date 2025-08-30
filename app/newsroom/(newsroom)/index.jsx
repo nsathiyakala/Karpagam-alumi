@@ -13,9 +13,9 @@ import BreadCrumb from "@/components/Common/BreadCrumb";
 import KITHeader from "@/components/Header/KITHeader";
 
 
-import NewsRoomMain from "@/components/NewsRoomMain";
+import NewsRoomMain from "@/components/(Alumni)/component/main/NewsRoomMain";
 import KITFooter from "@/components/Footer/KITFooter";
-import SideBar from "@/components/KITSidebar/SideBar";
+import SideBar from "@/components/(Alumni)/component/KITSidebar/SideBar";
 
 const NewsRoom = () => {
   return (

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import "venobox/dist/venobox.min.css";
 
-import GalleryData from "../data/elements/gallery.json";
+import GalleryData from "../../../../data/elements/gallery.json";
 
 const GalleryMain = () => {
   useEffect(() => {
@@ -19,11 +19,10 @@ const GalleryMain = () => {
       });
     });
   }, []);
-  
   return (
     <div className="row g-3 parent-gallery-container KITgallery">
       {GalleryData &&
-        GalleryData.gallery.map((data, index) => (
+        GalleryData.gallery.slice(1, 7).map((data, index) => (
           <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
             <div className="instagram-grid">
               <Link
@@ -42,13 +41,13 @@ const GalleryMain = () => {
                   />
                 </div>
 
-                <span className="user-info">
+                {/* <span className="user-info">
                   <span className="icon">
                     <i className="icon-instagram"></i>
                   </span>
                   <span className="user-name">Batch 2</span>
                   <div className="gallery-dec">2 Photos</div>
-                </span>
+                </span> */}
               </Link>
             </div>
           </div>

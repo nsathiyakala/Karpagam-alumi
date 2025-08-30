@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Courses from "../data/dashboard/instructor/instructor.json";
-import CourseWidgets from "../components/Instructor/Dashboard-Section/widgets/CourseWidget";
+import Courses from "../../../../data/dashboard/instructor/instructor.json";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import GalleryData from "../data/elements/gallery.json";
+import GalleryData from "../../../../data/elements/gallery.json";
 import { useRouter } from "next/navigation";
 import {
   capitalizeFLetter,

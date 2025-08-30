@@ -1,30 +1,44 @@
 import React from "react";
 import Card from "@/components/Cards/Card";
-import EventDetails from "../data/KitEvents.json";
+import EventDetails from "../../../../data/KitEvents.json";
 import Image from "next/image";
 import Link from "next/link";
 
-const NewsRoomMain = () => {
+const EventsMain = () => {
   let getAllCourse = EventDetails;
   return (
-    <div className="rbt-rbt-card-area  bg-color-white ">
+    <div className="rbt-rbt-card-area  bg-color-white section-pad">
       <div className="container">
-    
+        {/* <div className="row ">
+          <div className="col-lg-12">
+            <div className="section-title text-center">
+              <h2 className="title w-600">
+                Objective of the Alumini Association
+              </h2>
+            </div>
+          </div>
+        </div> */}
 
         <div className="row g-5 ">
           {getAllCourse?.map((data, index) => (
-            <div className={`col-12`} key={index}>
-              <div className="rbt-card variation-04 rbt-hover newsroom-card">
+            <div className={`col-lg-4 col-md-6 col-12`} key={index}>
+              <div className="rbt-card variation-04 rbt-hover">
                 <div className="rbt-card-img">
-                  <Link className="h-100" href={`/course-details/${data.id}`}>
+                  <Link href={`/course-details/${data.id}`}>
                     <Image
                       src={data.courseImg}
                       width={355}
                       height={244}
-                      alt="Card image "
-                      className="h-100"
+                      alt="Card image"
                     />
-                    
+                    {/* {data.offPrice > 0 ? (
+                        <div className="rbt-badge-3 bg-white">
+                          <span>-{data.offPrice}%</span>
+                          <span>Off</span>
+                        </div>
+                      ) : (
+                        ""
+                      )} */}
                   </Link>
                 </div>
                 <div className="rbt-card-body">
@@ -74,4 +88,4 @@ const NewsRoomMain = () => {
   );
 };
 
-export default NewsRoomMain;
+export default EventsMain;
