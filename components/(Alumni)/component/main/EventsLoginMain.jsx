@@ -286,7 +286,7 @@ const EventsLoginMain = () => {
                         <h5>Filter</h5>
                         <Link
                           className="rbt-btn btn-gradient radius-round sm-btn"
-                          href="/post-a-directory"
+                          href="/create-event"
                         >
                           Create Event
                         </Link>

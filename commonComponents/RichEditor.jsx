@@ -27,6 +27,7 @@ const RichTextEditor = (props) => {
         height: height ? height : "250px",
         width: width ? width : "100%",
         color: "black",
+        
       }}
       modules={RichTextEditor.modules}
     />

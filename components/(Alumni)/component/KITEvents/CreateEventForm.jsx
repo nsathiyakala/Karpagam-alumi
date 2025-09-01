@@ -1,49 +1,47 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-
+import React, { useEffect, useState, useRef } from "react";
+import { DeleteOutlined, FilePdfOutlined } from "@ant-design/icons";
 import { useRouter, useParams } from "next/navigation";
-import { Select } from "antd";
+import { message, Select } from "antd";
 import Link from "next/link";
-
+import { BaseURL } from "@/utils/BaseUrl";
 import {
   ConvertFormData,
   getFormattedDateTime,
+  setDropdownData,
   useSetState,
+  validateForm,
 } from "@/utils/commonFunction.utils";
 import FormField from "@/commonComponents/FormFields";
 import {
   eventPublicOptions,
   eventRegistrationOptions,
+  jobTypeOption,
+  YearOfExperience,
 } from "@/utils/constant.utils";
-
+import axios from "axios";
 import Models from "@/imports/models.import";
 import dynamic from "next/dynamic";
 import EventQuestion from "@/components/(Alumni)/component/KITEvents/EventQuestion";
-import * as validation from "@/utils/validation.utils";
+ import * as validation from "@/utils/validation.utils"
 
 const RichTextEditor = dynamic(() => import("@/commonComponents/RichEditor"), {
   ssr: false, // Disable server-side rendering for this component
 });
 
-const EditEventForm = () => {
-  const { Option } = Select;
-  const { id } = useParams();
-
-  console.log("id", id);
+const CreateEventForm = () => {
+  
 
   const [state, setState] = useSetState({
     activeTab: 1,
     question: [],
-    // isEndDate: false,
     imageFile: null,
     attachmentFile: null,
-    // visibility: "yes",
     is_public: "",
     name: "",
     category: "",
     start_date: null,
-    // endDate: null,
     venue: "",
     address: "",
     link: "",
@@ -52,16 +50,17 @@ const EditEventForm = () => {
     description: null,
     event_wallpaper: null,
     instructions: "",
-    // contentInstructions: "",
-    // embedCode: "",
     address: "",
     eventCatOptions: [],
     defaultQuestions: [],
     error: {},
+    btnLoading: false,
   });
 
   const fileInputRef = useRef(null);
   const imgInputRef = useRef(null);
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const router = useRouter();
 
@@ -69,70 +68,6 @@ const EditEventForm = () => {
     GetEventCategory();
     GetRecomentedQuestion();
   }, []);
-
-  useEffect(() => {
-    if (id) {
-      getEditEventsData(id);
-    }
-  }, []);
-
-  const urlToFile = async (url, filename) => {
-    console.log("✌️filename --->", filename);
-    console.log("✌️url --->", url);
-    try {
-      const res = await fetch(url); // Fetch the image data from the URL
-      console.log("✌️res --->", res);
-
-      if (!res.ok) {
-        throw new Error(`Failed to fetch image. Status: ${res.status}`);
-      }
-
-      const blob = await res.blob(); // Convert the response into a Blob
-
-      if (!blob) {
-        throw new Error("Failed to create a Blob from the response.");
-      }
-
-      const file = new File([blob], filename, { type: blob.type }); // Create a File object
-      console.log("File created:", file);
-      return file;
-    } catch (error) {
-      console.error("Error fetching or converting image:", error);
-      return null; // Return null if an error occurs
-    }
-  };
-
-  const getEditEventsData = async (id) => {
-    try {
-      const res = await Models.event.GetEditEventsDatas(id);
-      let File = null;
-
-      setState({
-        title: res?.title,
-        category: res?.category == "Reunion" ? 2 : 1,
-        start_date: getFormattedDateTime(res?.start_date, res?.start_time),
-        venue: res?.venue,
-        address: res?.address,
-        link: res?.link,
-        is_public: res?.is_public,
-        need_registration: res?.need_registration,
-        registration_close_date: res?.registration_close_date,
-        description: res?.description,
-        imageFile: File,
-        instructions: res?.instructions,
-        question: res?.event_question,
-      });
-      if (res.event_wallpaper) {
-        setState({ event_wallpaper: res.event_wallpaper });
-      }
-    } catch (error) {
-      console.log("error: ", error);
-      if (error?.code === "token_not_valid") {
-        localStorage.removeItem("token");
-        router.push("/login");
-      }
-    }
-  };
 
   const GetEventCategory = async () => {
     try {
@@ -144,7 +79,7 @@ const EditEventForm = () => {
       setState({ eventCatOptions: EventOptions });
     } catch (error) {
       console.log("error: ", error);
-      if (error?.response?.data?.code === "token_not_valid") {
+      if (error?.code === "token_not_valid") {
         localStorage.removeItem("token");
         router.push("/login");
       }
@@ -157,6 +92,10 @@ const EditEventForm = () => {
       setState({ defaultQuestions: res });
     } catch (error) {
       console.log("error: ", error);
+      if (error?.code === "token_not_valid") {
+        localStorage.removeItem("token");
+        router.push("/login");
+      }
     }
   };
 
@@ -165,7 +104,7 @@ const EditEventForm = () => {
     if (type === "image") {
       setState({ imageFile: file });
     } else if (type === "event_wallpaper") {
-      setState({ event_wallpaper: null });
+      setState({ event_wallpaper: file });
       setState({ imageFile: file });
     }
     e.target.value = null;
@@ -173,7 +112,7 @@ const EditEventForm = () => {
 
   const removeFile = (type) => {
     if (type === "image") {
-      setState({ imageFile: null, event_wallpaper: null });
+      setState({ imageFile: null });
     } else if (type === "event_wallpaper") {
       setState({ event_wallpaper: null });
       setState({ imageFile: null });
@@ -191,58 +130,45 @@ const EditEventForm = () => {
 
   const createEvent = async (e) => {
     try {
-      e.preventDefault();
-
+        e.preventDefault();
+      setState({ btnLoading: true });
       const body = {
         title: state.title,
         category: state.category,
         start_date: state.start_date
           ? new Date(state.start_date).toISOString().split("T")[0]
-          : "", // Extract only the date
+          : "",
         start_time: new Date(state.start_date)
           .toISOString()
           .split("T")[1]
-          .split(".")[0], // Extract only the time
+          .split(".")[0],
         venue: state.venue,
         address: state.address,
         link: state.link,
         is_public: state.is_public,
         need_registration: state.need_registration,
         registration_close_date: state.registration_close_date,
-        description: state.description.replace(/<[^>]+>/g, ""),
-        // event_wallpaper: state.event_wallpaper, // This will hold a file
+        description: state.description,
+        event_wallpaper: state.event_wallpaper,
         instructions: state.instructions,
-        // Convert event_question to a valid JSON string
+        event_question: state.question,
       };
 
-      if (state.question?.length > 0) {
-        const updatedData = state.question.map(({ options, ...rest }) => ({
-          ...rest,
-          option: options,
-        }));
-        body.event_question = updatedData;
-      }
-
-      if (state.imageFile) {
-        body.event_wallpaper = state.imageFile;
-      }
+      await validation.createEvent.validate(body, { abortEarly: false });
 
       const formData = ConvertFormData(body);
 
-      console.log("FormData:", formData);
-
-      // Send the formData to the server using Axios
-      await validation.updateEvent.validate(body, { abortEarly: false });
-
-      const res = await Models.event.UpdateEditEventsDatas(id, formData);
-
+      const res = await Models.event.CreateEvent(formData);
       console.log("Response from server:", res);
-      router?.back();
+      router?.push(`/events`);
+      success(res?.message);
+
+      setState({ verificationError: null, btnLoading: false });
     } catch (error) {
       const formattedErrors = {};
       const questionErrors = [];
 
-      error?.inner?.forEach((err) => {
+      error.inner.forEach((err) => {
         if (err.path?.startsWith("event_question[")) {
           const match = err.path.match(/event_question\[(\d+)\]\.question/);
           if (match) {
@@ -257,8 +183,17 @@ const EditEventForm = () => {
       if (questionErrors.length > 0) {
         formattedErrors.questionErrors = questionErrors;
       }
+      console.log("✌️formattedErrors --->", formattedErrors);
+
       setState({ verificationError: formattedErrors, btnLoading: false });
     }
+  };
+
+  const success = (success) => {
+    messageApi.open({
+      type: "success",
+      content: success || "Event Created",
+    });
   };
 
   return (
@@ -267,7 +202,7 @@ const EditEventForm = () => {
         <div className="row mb-4 justify-content-center">
           <div className="col-lg-10">
             <div className="d-flex justify-content-between ">
-              <h5>Update Event</h5>
+              <h5>Create Event</h5>
               <Link
                 className="rbt-btn btn-gradient radius-round sm-btn"
                 href="/events"
@@ -283,6 +218,7 @@ const EditEventForm = () => {
               <div className="rbt-contact-form contact-form-style-1 max-width-auto">
                 <form
                   id="contact-form"
+                
                   className="rainbow-dynamic-form max-width-auto"
                   onSubmit={(e) => createEvent(e)}
                 >
@@ -492,10 +428,10 @@ const EditEventForm = () => {
 
                   <div className="mt-4 w-100">
                     <label
-
-                    // className="form-label"
+                      className="mb-3"
+                    
                     >
-                      Description
+                      Description <span className="text-danger">*</span>
                     </label>
 
                     <RichTextEditor
@@ -519,7 +455,7 @@ const EditEventForm = () => {
                       Custom Questions <span style={{ color: "red" }}>*</span>
                     </label>
 
-                    <div className="form-input">
+                    <div className="form-input mt-3">
                       <p>
                         You can add up to 5 custom questions to the event
                         registration form to collect additional
@@ -593,4 +529,4 @@ const EditEventForm = () => {
   );
 };
 
-export default EditEventForm;
+export default CreateEventForm;
