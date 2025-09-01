@@ -12,11 +12,10 @@ import KITHeader from "@/components/Header/KITHeader";
 
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
+import EditEventForm from "@/components/(Alumni)/component/KITEvents/EditEventForm";
 
 
-import MyBusinessListing from "@/components/(Alumni)/component/BusinessDirectory/MyBusinessListing";
-
-const MyBusinessDirectory = () => {
+const EditEvents = () => {
   const [token, setToken] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAlumniManager, setIsAlumniManager] = useState(false);
@@ -35,9 +34,10 @@ const MyBusinessDirectory = () => {
         <MobileMenu />
         <KITHeader headerSticky="rbt-sticky" headerType="" />
 
-        <BreadCrumb title="My Business Directory" text="My Business Directory" />
+        <BreadCrumb title="Edit Event" text="Edit Event" />
 
-        <MyBusinessListing />
+        <EditEventForm/>
+
 
         <Separator />
         <KITFooter />
@@ -46,4 +46,4 @@ const MyBusinessDirectory = () => {
   );
 };
 
-export default MyBusinessDirectory;
+export default EditEvents;

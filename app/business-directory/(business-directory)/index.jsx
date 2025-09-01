@@ -13,7 +13,7 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 
-import BusinessDirectoryMain from "@/components/BusinessDirectory/BusinessDirectoryMain";
+import BusinessDirectoryMain from "@/components/(Alumni)/component/BusinessDirectory/BusinessDirectoryMain";
 
 const BusinessDirectory = () => {
   const [token, setToken] = useState("");

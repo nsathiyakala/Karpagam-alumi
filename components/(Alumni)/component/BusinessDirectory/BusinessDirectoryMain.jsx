@@ -395,7 +395,7 @@ const BusinessDirectoryMain = () => {
                           Add a Business Listing
                         </Link>
                       </div>
-                    </div>
+                    </div> 
                   </div>
 
                   <div className="row g-5">

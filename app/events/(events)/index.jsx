@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Context from "@/context/Context";
 import { Provider } from "react-redux";
@@ -14,8 +14,21 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 import EventsMain from "@/components/(Alumni)/component/main/EventsMain";
+import EventsLoginMain from "@/components/(Alumni)/component/main/EventsLoginMain";
 
 const Events = () => {
+   const [token, setToken] = useState("");
+      const [isAdmin, setIsAdmin] = useState(false);
+      const [isAlumniManager, setIsAlumniManager] = useState(false);
+      const [isFatulty, setIsFatulty] = useState(false);
+      const [isAlumni, setIsAlumni] = useState(false);
+    
+      useEffect(() => {
+        const Token = localStorage.getItem("token");
+    
+        setToken(Token);
+      });
+  
   return (
     <Provider store={Store}>
       <Context>
@@ -24,7 +37,7 @@ const Events = () => {
 
         <BreadCrumb title="Events" text="Events" />
 
-        <EventsMain />
+       {token ? <EventsLoginMain /> :  <EventsMain /> }
 
         
 

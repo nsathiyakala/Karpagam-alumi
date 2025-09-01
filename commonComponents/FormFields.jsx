@@ -176,10 +176,10 @@ const FormField = ({
             onChange={onChange}
             placeholder={placeholder ? placeholder : label}
             value={value}
-            // className={className}
-            className={`${className}  ${
-              value && !placeholder ? "input-has-value" : ""
-            }`}
+            className={className}
+            // className={`${className}  ${
+            //   value && !placeholder ? "input-has-value" : ""
+            // }`}
             style={style}
           />
         ) : type === "tel" ? (

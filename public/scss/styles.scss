@@ -236,6 +236,9 @@
 ***************************************/
 @import "dark-mode/dark-mode";
 
+
+
+
 .home-connect {
   padding-top: 50px !important;
 }
@@ -727,4 +730,34 @@ select {
     // width: 100%;
     text-align: center;
   }
+}
+
+.events-log .btn-xs.eve-edit{
+    padding:2px 10px 4px 10px !important;
+    height: auto;
+    line-height: normal;
+    border-radius: 15px !important;
+    margin: 10px 2px !important;
+}
+
+.events-log .btn-xs{
+    padding:2px 10px 4px 10px !important;
+    height: auto;
+    line-height: normal;
+    border-radius: 15px !important;
+}
+
+.event-form select {
+      width: 100%;
+    border: 1px solid #ccc !important;
+    height: 48px !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+    background-position: right 1rem center;
+}
+
+.event-form .formdate {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+   height: 48px !important;
 }

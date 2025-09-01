@@ -13,7 +13,7 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 
-import PostDirectoryForm from "@/components/PostDirectory/PostDirectoryForm";
+import PostDirectoryForm from "@/components/(Alumni)/component/PostDirectory/PostDirectoryForm";
 
 
 const PostDirectory = () => {

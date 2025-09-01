@@ -231,3 +231,23 @@ export const formattedDateTime = (data) => {
     hour12: true, // 12-hour format (AM/PM)
   });
 };
+
+export const formattedDate = (data) =>
+  new Date(data).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+
+export const getFormattedDateTime = (start_date, start_time) => {
+  if (start_date && start_time) {
+    // Combine the date and time into the format YYYY-MM-DDTHH:mm
+    const formattedDateTime = `${start_date}T${start_time.substring(0, 5)}`;
+
+    console.log("Formatted DateTime:", formattedDateTime);
+
+    return formattedDateTime; // Returns the formatted datetime string
+  }
+  return null; // Return null if date or time is missing
+};

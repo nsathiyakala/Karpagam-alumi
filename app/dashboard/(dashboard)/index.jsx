@@ -13,7 +13,7 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 
-import DashboardMain from "@/components/Dashboard/DashboardMain";
+import DashboardMain from "@/components/(Alumni)/component/Dashboard/DashboardMain";
 
 const Dashboard = () => {
   const [token, setToken] = useState("");
