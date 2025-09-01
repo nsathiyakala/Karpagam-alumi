@@ -96,7 +96,7 @@ const UpCommingEvents = (props) => {
                   {event?.category}
                 </li>
               </ul>
-              <h5 className="rbt-card-title">
+              <h5 className="mb-3">
                 <Link href={`/event-details/${event.id}`}>{event?.title}</Link>
               </h5>
               <ul className="rbt-meta">

@@ -251,3 +251,15 @@ export const getFormattedDateTime = (start_date, start_time) => {
   }
   return null; // Return null if date or time is missing
 };
+
+export const ObjIsEmpty = (object) => {
+  if (object) {
+    if (Object.keys(object)?.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+};
