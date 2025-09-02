@@ -862,3 +862,28 @@ select {
   margin-top: 5px ;
 }
 
+
+// ---------------------------------
+
+
+
+.kit-profile .profile-card {
+  background: #fff;
+}
+
+.kit-profile .profile-header {
+  background: linear-gradient(135deg, #198754, #0d6efd);
+}
+
+.kit-profile .profile-header .avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
