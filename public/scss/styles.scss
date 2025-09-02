@@ -845,3 +845,20 @@ select {
     object-fit: cover;
 }
 
+.event-preview {
+  border: 1px solid #ccc;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.event-preview p{
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+
+.event-preview  hr{
+  margin-top: 5px ;
+}
+

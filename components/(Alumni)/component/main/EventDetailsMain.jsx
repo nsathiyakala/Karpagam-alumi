@@ -389,7 +389,7 @@ const EventDetailsMain = ({ getMatchEvent, id }) => {
                     </div>
                   </div>
 
-                  {state.group == "alumni" && state.group == "student" && (
+                 {(state.group === "alumni" || state.group === "student") && (
                     <div className="add-to-card-button mb--15">
                       <div
                         className="rbt-btn btn-border  icon-hover w-100 d-block text-center"
@@ -544,7 +544,7 @@ const EventDetailsMain = ({ getMatchEvent, id }) => {
                   </div>
                   <hr className="mt--20" />
                   <div className="contact-with-us text-center">
-                    <p>For details about the course</p>
+                    <p>Amet consectetur adipisicing elit</p>
                     {/* <p className="rbt-badge-2 mt--10 justify-content-center w-100">
                 <i className="feather-phone mr--5"></i> Call Us:
                 <Link href="#">

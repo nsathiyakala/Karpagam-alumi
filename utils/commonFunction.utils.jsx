@@ -91,6 +91,11 @@ export const isToday = (date) => {
   );
 };
 
+export const validateEmail = (email) => {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+};
+
 export const validateForm = (formData, validationRules, setErrMsg) => {
   const errors = {};
 
