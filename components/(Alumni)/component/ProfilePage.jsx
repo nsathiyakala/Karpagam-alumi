@@ -1,212 +1,174 @@
-import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
-export default function ProfilePage({
-  CourseData,
-  tag,
-  title
-}) {
-  // Example profile data — replace with your actual state/props
-  const profile = {
-    registerNo: "8765432",
-    gender: "Other",
-    professional: "-",
-    education: "-",
-    phone: "9876543210",
-    email: "repute.sathiyak...@gmail.com",
-    milestones: [],
-    program: "Herbal Medicine & Pharmacognosy",
-    batch: "Batch 2017–2021",
-    completion: 10
-  };
-
-   const { id } = useParams;
-  console.log("✌️id --->", id);
-  const router = useRouter()
-
-  const [SingleData, setSingleData] = useState({});
-  const [token, setToken] = useState("");
-  const [profilePercentage, setProfilePercentage] = useState(0);
-  const [isAdmin, setIsAdmin] = useState(null);
-  const [milestone, setMilestone] = useState([])
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setToken(token);
-    if (!token) {
-      router?.push("/login")
-    }
-    const Admin = localStorage.getItem("isAdmin");
-    setIsAdmin(Admin);
-  }, []);
-
-  useEffect(() => {
-    if (token) {
-      SingleDatas(id);
-      GetProfileStatus(id);
-      GerMilestone(id)
-    }
-  }, [id, token]);
-
-  const SingleDatas = (id) => {
-    axios
-      .get(`${BaseURL}/detail_view/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log("✌️response --->", response);
-        setSingleData(response.data);
-      })
-      .catch((error) => {
-        console.log("❌error --->", error);
-        if (error?.response?.data?.code === "token_not_valid") {
-          localStorage.removeItem("token");
-          router.push("/login");
-        }
-      });
-  };
-
-  const GerMilestone = (id) => {
-    axios
-      .get(`${BaseURL}/milestones/`, {
-        params: {
-          member: id
-        },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        console.log("resp:", response.data?.results);
-        // setFormData(response.data);
-        setMilestone(response.data?.results);
-      })
-      .catch((error) => {
-        console.log("error:", error);
-      });
-  };
-
-  const GetProfileStatus = (id) => {
-    axios
-      .get(`${BaseURL}/profile_status/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log("✌️response --->", response);
-        setProfilePercentage(response.data?.completion_percentage);
-      })
-      .catch((error) => {
-        console.log("❌error --->", error);
-      });
-  };
-
-
-  const handleLinkedInShare = () => {
-    const postUrl = encodeURIComponent("http://alumni.decodeschool.com/"); // URL to share
-    const postTitle = encodeURIComponent("Milestone"); // Optional title
-    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}&title=${postTitle}`;
-console.log("linkedInUrl", linkedInUrl)
-    window.open(linkedInUrl, "_blank", "width=600,height=500");
-  };
-
-  const item = SingleData
-
-
-
+const ProfilePage = () => {
   return (
-    <div className="rbt-accordion-area accordion-style-1 bg-color-white rbt-section-gap kit-profile">
-       <div className="container" key={index}>
-                 <div className="row mb--50">
-                   <div className="col-lg-12">
-                     <div className="section-title text-center">
-                       {tag ? (
-                         <span className="subtitle bg-pink-opacity">{tag}</span>
-                       ) : (
-                         ""
-                       )}
-                       <h2 className="title">{title}</h2>
-                     </div>
-                   </div>
-                 </div>
-                 <div className="row g-5 align-items-start">
-                   <div className="col-lg-7 order-2 order-lg-1">
-                     <div className="rbt-accordion-style rbt-accordion-01 rbt-accordion-06 accordion">
-                       <div className="accordion" id="tutionaccordionExamplea1">
-                         {/* {data.courseBody.map((item, innerIndex) => ( */}
-                           <div className="accordion-item card" key={index}>
-                             <h2
-                               className="accordion-header card-header"
-                               id={item.id}
-                             >
-                               <button
-                                 className={`accordion-button ${
-                                   !item.collapsed ? "collapsed" : ""
-                                 }`}
-                                 type="button"
-                                 data-bs-toggle="collapse"
-                                 data-bs-target={`#${item.collapse}`}
-                                 aria-expanded={item.expanded}
-                                 aria-controls={item.collapse}
-                               >
-                                 {item.subTitle}
-                               </button>
-                             </h2>
-                             <div
-                               id={item.collapse}
-                               className={`accordion-collapse collapse ${
-                                 item.show ? "show" : ""
-                               }`}
-                               aria-labelledby={item.heading}
-                               data-bs-parent="#tutionaccordionExamplea1"
-                             >
-                               <div className="accordion-body card-body">
-                                 <h6 className="title">{item.text}</h6>
-                                 <div className="table-responsive mobile-table-750">
-                                   <table className="rbt-table table table-borderless">
-                                     <thead>
-                                       <tr>
-                                         <th>Program Term</th>
-                                         <th>Tuition Cost</th>
-                                       </tr>
-                                     </thead>
-                                     <tbody>
-                                       <tr>
-                                         <th>Term 1-6</th>
-                                         <td>${item.cost}</td>
-                                       </tr>
-                                     </tbody>
-                                     <tfoot>
-                                       <tr>
-                                         <th>Total</th>
-                                         <th>${item.cost}</th>
-                                       </tr>
-                                     </tfoot>
-                                   </table>
-                                 </div>
-                               </div>
-                             </div>
-                           </div>
-                         {/* ))} */}
-                       </div>
-                     </div>
-                   </div>
-                   <div className="col-lg-5 order-1 order-lg-2">
-                     <div className="thumbnail">
-                       <Image
-                         className="radius-6"
-                         src={data.img}
-                         width={526}
-                         height={644}
-                         alt="histudy image"
-                       />
-                     </div>
-                   </div>
-                 </div>
-               </div>
+    <div className="container">
+      <div className="row mb--50">
+        <div className="col-lg-12">
+          <div className="section-title text-center">
+            <span className="subtitle bg-pink-opacity">Our Courses</span>
+            <h2 className="title">Tuition & Program Details</h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="row g-5 align-items-start justify-content-center">
+        {/* Accordion Section */}
+
+        <div className="col-lg-4 ">
+          {/* <div className="thumbnail">
+            <Image
+              className="radius-6"
+              src="/images/course-thumbnail.jpg"
+              width={526}
+              height={644}
+              alt="Course Thumbnail"
+            />
+          </div> */}
+
+          <div className="custom-profile-card">
+            <div className="custom-profile-header">
+              <img
+                src="/images/profile-photo.jpg"
+                alt="Profile"
+                className="custom-profile-image"
+              />
+              <div className="custom-profile-info">
+                <h3 className="custom-profile-name">David Adams</h3>
+                <p className="custom-profile-role">Senior Product Designer</p>
+                {/* <p className="custom-trial-expiry">Trial Expires in 02 Days.</p> */}
+              </div>
+            </div>
+
+            <div className="custom-progress-section">
+              <h4>Your Profile Progress</h4>
+              <p>Complete your profile to impress recruiters</p>
+              <div className="custom-progress-bar">
+                <div className="custom-progress-fill" style={{ width: "85%" }}></div>
+              </div>
+              <span className="custom-progress-percent">85%</span>
+            </div>
+            <div className="d-flex gap-2">
+              <button className="rbt-btn btn-gradient radius-round sm-btn">Edit Profile</button> <button className="rbt-btn btn-gradient radius-round sm-btn">Share Profile</button>
+            </div>
+
+
+          </div>
+        </div>
+
+        <div className="col-lg-7 ">
+          <div className="rbt-accordion-style rbt-accordion-01 rbt-accordion-06 accordion">
+            <div className="accordion" id="tutionaccordionExamplea1">
+              {/* Accordion Item 1 */}
+              <div className="accordion-item card">
+                <h2 className="accordion-header card-header" id="headingOne">
+                  <button
+                    className="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Personal Information
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  className="accordion-collapse collapse show"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#tutionaccordionExamplea1"
+                >
+                  <div className="accordion-body card-body">
+                    {/* <h6 className="title">Full-time Undergraduate Program</h6> */}
+                    <div className="table-responsive mobile-table-750">
+                      <div className="custom-info-card">
+
+                        <div className="custom-info-table">
+                          <div className="custom-info-row">
+                            <span className="custom-info-label">Register No :</span>
+                            <span className="custom-info-value">123456</span>
+                          </div>
+                          <div className="custom-info-row">
+                            <span className="custom-info-label">About me :</span>
+                            <span className="custom-info-value">Creative Designer & Developer</span>
+                          </div>
+                          <div className="custom-info-row">
+                            <span className="custom-info-label">Born on :</span>
+                            <span className="custom-info-value">2025-08-28</span>
+                          </div>
+                          <div className="custom-info-row">
+                            <span className="custom-info-label">Gender :</span>
+                            <span className="custom-info-value">Male</span>
+                          </div>
+                          <div className="custom-info-row">
+                            <span className="custom-info-label">Blood Group :</span>
+                            <span className="custom-info-value">A_NEGATIVE</span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Accordion Item 2 */}
+              <div className="accordion-item card">
+                <h2 className="accordion-header card-header" id="headingTwo">
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    Master of Business Administration
+                  </button>
+                </h2>
+                <div
+                  id="collapseTwo"
+                  className="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#tutionaccordionExamplea1"
+                >
+                  <div className="accordion-body card-body">
+                    <h6 className="title">Postgraduate Program</h6>
+                    <div className="table-responsive mobile-table-750">
+                      <table className="rbt-table table table-borderless">
+                        <thead>
+                          <tr>
+                            <th>Program Term</th>
+                            <th>Tuition Cost</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th>Term 1-4</th>
+                            <td>$8,000</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>Total</th>
+                            <th>$32,000</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Image Section */}
+
+      </div>
     </div>
   );
-}
+};
+
+export default ProfilePage;

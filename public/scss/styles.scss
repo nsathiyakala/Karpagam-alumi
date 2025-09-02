@@ -865,25 +865,141 @@ select {
 
 // ---------------------------------
 
-
-
-.kit-profile .profile-card {
+.custom-profile-card {
   background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 360px;
+  margin: 20px auto;
+  font-family: "Arial", sans-serif;
+  text-align: center;
 }
 
-.kit-profile .profile-header {
-  background: linear-gradient(135deg, #198754, #0d6efd);
-}
-
-.kit-profile .profile-header .avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+.custom-profile-header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.custom-profile-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0e0e0;
+}
+
+.custom-profile-info {
+  text-align: left;
+}
+
+.custom-profile-name {
+  margin: 0;
+  font-size: 18px;
   font-weight: bold;
-  color: white;
+}
+
+.custom-profile-role {
+  font-size: 14px;
+  color: #666;
+  margin: 2px 0;
+}
+
+.custom-trial-expiry {
+  font-size: 13px;
+  color: #e63946;
+  font-weight: bold;
+}
+
+.custom-progress-section {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.custom-progress-section h4 {
+  font-size: 16px;
+  margin: 0 0 5px;
+}
+
+.custom-progress-section p {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.custom-progress-bar {
+  background: #e5e5e5;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.custom-progress-fill {
+  background: #4cafef;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.custom-progress-percent {
+  font-size: 14px;
+  font-weight: bold;
+  color: #444;
+}
+
+.custom-edit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #5b2be0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.custom-edit-btn:hover {
+  background: #4a22b3;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 480px) {
+  .custom-profile-card {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .custom-profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .custom-profile-info {
+    text-align: center;
+  }
+
+  .custom-progress-section {
+    text-align: center;
+  }
+}
+
+.custom-info-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+  font-family: "Arial", sans-serif;
+}
+
+.custom-info-title {
+  font-size: 18px;
+  font-weight:
 }
