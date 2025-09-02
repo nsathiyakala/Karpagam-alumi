@@ -263,3 +263,31 @@ export const ObjIsEmpty = (object) => {
     return false;
   }
 };
+
+export const formatForGoogleCalendar = (date, time) => {
+  // Combine start date and time into one string
+  const startDateTime = new Date(`${date}T${time}`);
+
+  // Convert to the format required by Google Calendar: YYYYMMDDTHHmmSSZ
+  const googleCalendarTime = startDateTime
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .split(".")[0];
+
+  return googleCalendarTime;
+};
+
+export const convertTo12HourFormat = (time) => {
+  if (!time) return ""; // If time is not available, return an empty string
+
+  // Parse the time into hours and minutes
+  const [hours, minutes] = time.split(":");
+
+  let hoursIn12HourFormat = parseInt(hours, 10); // Convert hours to a number
+  const suffix = hoursIn12HourFormat >= 12 ? "PM" : "AM"; // Determine AM/PM
+  hoursIn12HourFormat = hoursIn12HourFormat % 12; // Convert 24-hour to 12-hour format
+  if (hoursIn12HourFormat === 0) hoursIn12HourFormat = 12; // Handle midnight case
+
+  // Format the time as a string
+  return `${hoursIn12HourFormat}:${minutes} ${suffix}`;
+};
