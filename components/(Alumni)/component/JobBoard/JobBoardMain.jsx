@@ -11,8 +11,6 @@ import { BaseURL } from "@/utils/BaseUrl";
 import Models from "@/imports/models.import";
 import { jobTypeOption } from "@/utils/constant.utils";
 
-
-
 const JobBoardMain = () => {
   const { confirm } = Modal;
   const router = useRouter();
@@ -840,138 +838,151 @@ const JobBoardMain = () => {
                           <div className="section-title">
                             <h4 className="rbt-title-style-3">My Job List</h4>
                           </div>
-
-                          <div className="rbt-dashboard-table table-responsive mobile-table-750">
-                            <table className="rbt-table table table-borderless">
-                              <thead>
-                                <tr>
-                                  <th>Job Title</th>
-                                  <th>Industry</th>
-                                  <th>Role</th>
-                                  <th>N.Of Applicants</th>
-                                  <th>Posted Date</th>
-                                  <th></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {currentDataForAdmin.map((item) => (
-                                  <tr key={item.id}>
-                                    <th>
-                                      <span className="b3">
-                                        <Link href="#">{item.job_title}</Link>
-                                      </span>
-                                    </th>
-                                    <td>
-                                      <span className="b3">
-                                        <Link href="#">{item?.industry}</Link>
-                                      </span>
-                                    </td>
-                                    <td>
-                                      <span className="b3">
-                                        <Link href="#">{item?.role}</Link>
-                                      </span>
-                                    </td>
-                                    <td>
-                                      <span className="b3">
-                                        <Link href="#">
-                                          {item.application_count}
-                                        </Link>
-                                      </span>
-                                    </td>
-                                    <td>
-                                      <span className="b3">
-                                        <Link href="#">{item?.posted_on}</Link>
-                                      </span>
-                                    </td>
-
-                                    <td>
-                                      <div className="rbt-button-group justify-content-end gap-2">
-                                        {item?.is_active && (
-                                          <>
-                                            <Link
-                                              className={`rbt-btn btn-xs radius-round ${
-                                                item.application_count === 0
-                                                  ? "bg-gray"
-                                                  : "bg-coral-opacity"
-                                              } `}
-                                              href={item.application_count > 0
-                                                  ? `/applicants/${item?.id}` : "#"}
-                                              title="View"
-                                              // onClick={
-                                              //   item.application_count > 0
-                                              //     ? () =>
-                                              //         router.push(
-                                              //           `/applicants/${item?.id}`
-                                              //         )
-                                              //     : null
-                                              // }
-
-                                              style={{
-                                                
-                                                opacity:
-                                                  item.application_count === 0
-                                                    ? 0.5
-                                                    : 1,
-                                                cursor:
-                                                  item.application_count === 0
-                                                    ? "not-allowed"
-                                                    : "pointer",
-                                              }}
-                                            >
-                                              <i className="feather-eye pl--0"></i>
-                                            </Link>
-
-                                            <div
-                                              className="rbt-btn btn-xs bg-primary-opacity radius-round color-info"
-                                              href={`/edit-a-job/${item?.id}/`}
-                                              title="Edit"
-                                              onClick={() =>
-                                                handleEditClick(item?.id)
-                                              }
-                                            >
-                                              <i className="feather-edit pl--0"></i>
-                                            </div>
-                                          </>
-                                        )}
-
-                                        <Tooltip
-                                          title={
-                                            item?.is_active
-                                              ? "Active"
-                                              : "InActive"
-                                          }
-                                        >
-                                          {item?.is_active ? (
-                                            <Link
-                                              className="rbt-btn btn-xs bg-color-success-opacity radius-round color-success"
-                                              href="#"
-                                              title="Active"
-                                              onClick={() =>
-                                            showDeleteConfirm(item)
-                                          }
-                                            >
-                                              <i className="feather-check-circle pl--0"></i>
-                                            </Link>
-                                          ) : (
-                                            <Link
-                                              className="rbt-btn btn-xs bg-color-danger-opacity radius-round color-danger"
-                                              href="#"
-                                              title="Inactive"
-                                              onClick={() =>
-                                            showDeleteConfirm(item)
-                                          }
-                                            >
-                                              <i className="feather-x-circle pl--0"></i>
-                                            </Link>
-                                          )}
-                                        </Tooltip>
-                                      </div>
-                                    </td>
+                          {(isAdmin == "true" || isAlumniManager == "true") && (
+                            <div className="rbt-dashboard-table table-responsive mobile-table-750">
+                              <table className="rbt-table table table-borderless">
+                                <thead>
+                                  <tr>
+                                    <th>Job Title</th>
+                                    <th>Industry</th>
+                                    <th>Role</th>
+                                    <th>N.Of Applicants</th>
+                                    <th>Posted Date</th>
+                                    <th></th>
                                   </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
+                                </thead>
+                                <tbody>
+                                  {currentDataForAdmin.map((item) => (
+                                    <tr key={item.id}>
+                                      <th>
+                                        <span className="b3">
+                                          <Link href="#">{item.job_title}</Link>
+                                        </span>
+                                      </th>
+                                      <td>
+                                        <span className="b3">
+                                          <Link href="#">{item?.industry}</Link>
+                                        </span>
+                                      </td>
+                                      <td>
+                                        <span className="b3">
+                                          <Link href="#">{item?.role}</Link>
+                                        </span>
+                                      </td>
+                                      <td>
+                                        <span className="b3">
+                                          <Link href="#">
+                                            {item.application_count}
+                                          </Link>
+                                        </span>
+                                      </td>
+                                      <td>
+                                        <span className="b3">
+                                          <Link href="#">
+                                            {item?.posted_on}
+                                          </Link>
+                                        </span>
+                                      </td>
+
+                                      <td>
+                                        <div className="rbt-button-group justify-content-end gap-2">
+                                          {item?.is_active && (
+                                            <>
+                                              <Link
+                                                className={`rbt-btn btn-xs radius-round ${
+                                                  item.application_count === 0
+                                                    ? "bg-gray"
+                                                    : "bg-coral-opacity"
+                                                } `}
+                                                href={
+                                                  item.application_count > 0
+                                                    ? `/applicants/${item?.id}`
+                                                    : "#"
+                                                }
+                                                title="View"
+                                                // onClick={
+                                                //   item.application_count > 0
+                                                //     ? () =>
+                                                //         router.push(
+                                                //           `/applicants/${item?.id}`
+                                                //         )
+                                                //     : null
+                                                // }
+
+                                                style={{
+                                                  opacity:
+                                                    item.application_count === 0
+                                                      ? 0.5
+                                                      : 1,
+                                                  cursor:
+                                                    item.application_count === 0
+                                                      ? "not-allowed"
+                                                      : "pointer",
+                                                }}
+                                              >
+                                                <i className="feather-eye pl--0"></i>
+                                              </Link>
+
+                                              <div
+                                                className="rbt-btn btn-xs bg-primary-opacity radius-round color-info"
+                                                href={`/edit-a-job/${item?.id}/`}
+                                                title="Edit"
+                                                onClick={() =>
+                                                  handleEditClick(item?.id)
+                                                }
+                                              >
+                                                <i className="feather-edit pl--0"></i>
+                                              </div>
+                                            </>
+                                          )}
+
+                                          <Tooltip
+                                            title={
+                                              item?.is_active
+                                                ? "Active"
+                                                : "InActive"
+                                            }
+                                          >
+                                            {item?.is_active ? (
+                                              <Link
+                                                className="rbt-btn btn-xs bg-color-success-opacity radius-round color-success"
+                                                href="#"
+                                                title="Active"
+                                                onClick={() =>
+                                                  showDeleteConfirm(item)
+                                                }
+                                              >
+                                                <i className="feather-check-circle pl--0"></i>
+                                              </Link>
+                                            ) : (
+                                              <Link
+                                                className="rbt-btn btn-xs bg-color-danger-opacity radius-round color-danger"
+                                                href="#"
+                                                title="Inactive"
+                                                onClick={() =>
+                                                  showDeleteConfirm(item)
+                                                }
+                                              >
+                                                <i className="feather-x-circle pl--0"></i>
+                                              </Link>
+                                            )}
+                                          </Tooltip>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          )}
+
+                          {(isAlumni == "true" || isFatulty == "true") && (
+
+                          
+                            <div className="rbt-dashboard-table table-responsive mobile-table-750">
+                              No Job List
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>

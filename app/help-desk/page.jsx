@@ -1,5 +1,6 @@
 import BackToTop from "@/app/backToTop";
 import Institution from "../institution/(institution)";
+import HelpDeskForm from "./(help-desk)";
 
 
 
@@ -9,13 +10,13 @@ export const metadata = {
   description: "Online Courses & Education NEXTJS14 Template",
 };
 
-const InstitutionPage = () => {
+const HelpDeskFormPage = () => {
   return (
     <>
-      <Institution />
+      <HelpDeskForm />
       <BackToTop />
     </>
   );
 };
 
-export default InstitutionPage;
+export default HelpDeskFormPage;
