@@ -4,9 +4,11 @@ import Models from "@/imports/models.import";
 import React, { useState, useEffect } from "react";
 import OtpInput from "react-otp-input";
 import { message, Modal } from "antd";
+import { useRouter } from "next/navigation";
 
 const Otp = (props) => {
-  const { updateStep, memberEmail } = props;
+  const router = useRouter();
+  const { updateStep, memberEmail, memberId } = props;
   const [otp, setOtp] = useState("");
   const [timer, setTimer] = useState(30);
 
@@ -23,19 +25,28 @@ const Otp = (props) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await Models.auth.verifyOtp(otp);
-      updateStep();
+      const body = {
+        otp,
+        member_id: memberId,
+      };
+      const res = await Models.auth.verifyOtp(body);
+      message.success(res?.message);
+      localStorage.setItem("memberId",memberId)
+      router.push("/memberData");
     } catch (error) {
-      message.error(error?.message);
+      message.error(error?.error);
       console.log("✌️error --->", error);
     }
   };
 
-  const resendOtp = async (e) => {
+  const resendOtp = async () => {
     try {
-      e.preventDefault();
+      // e.preventDefault();
       const res = await Models.auth.register({ email: memberEmail });
-      updateStep();
+      message.success(res?.message)
+      console.log("✌️res --->", res);
+      setOtp("");
+      setTimer(30);
     } catch (error) {
       message.error(error?.message);
       console.log("✌️error --->", error);
@@ -43,8 +54,7 @@ const Otp = (props) => {
   };
 
   const handleResend = () => {
-    setOtp("");
-    setTimer(30);
+  
     resendOtp();
   };
 
@@ -60,7 +70,7 @@ const Otp = (props) => {
           <OtpInput
             value={otp}
             onChange={setOtp}
-            numInputs={4}
+            numInputs={6}
             separator={false}
             containerStyle={{
               justifyContent: "center",
@@ -81,7 +91,7 @@ const Otp = (props) => {
           <div className="mt-4">
             <button
               type="submit"
-              disabled={otp.length !== 4}
+              disabled={otp.length !== 6}
               className="rbt-btn btn-md btn-gradient hover-icon-reverse w-100"
             >
               Verify OTP
@@ -98,7 +108,7 @@ const Otp = (props) => {
           ) : (
             <div
               onClick={handleResend}
-              className=" text-lg text-gray-600 text-decoration-underline cursor-pointer hover:text-blue-600"
+              className="cursor-pointer text-lg text-gray-600 text-decoration-underline cursor-pointer hover:text-blue-600"
             >
               Resend OTP
             </div>

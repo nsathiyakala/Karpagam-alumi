@@ -1,13 +1,20 @@
 import FormField from "@/commonComponents/FormFields";
 import Models from "@/imports/models.import";
-import { objectToFormData, useSetState } from "@/utils/commonFunction.utils";
+import {
+  formattedDate,
+  objectToFormData,
+  useSetState,
+} from "@/utils/commonFunction.utils";
 import Link from "next/link";
 import React, { useRef, useEffect } from "react";
 import { message, Modal } from "antd";
 import { GENDER } from "@/utils/constant.utils";
 import DatePickerField from "./datePicker";
+import { useRouter } from "next/navigation";
 
 const MemberData = (props) => {
+
+  const router=useRouter()
   const { updateStep } = props;
 
   const fileInputRef = useRef(null);
@@ -17,13 +24,67 @@ const MemberData = (props) => {
     confrmModelOpen: false,
     confrmModelOpen: false,
     proofModelOpen: false,
+    dob: "",
   });
+  console.log("✌️dob --->", state.dob);
 
   useEffect(() => {
     getCourse();
-    getSalutation();
     getBatch();
+    getMemberData();
   }, []);
+
+  const getMemberData = async () => {
+    try {
+      const memberId = localStorage.getItem("memberId");
+      const res = await Models.member.memberData(memberId);
+      const salutation = await Models.masters.salutation();
+      const SalutationOption = salutation?.results?.map((sal) => ({
+        value: sal.salutation_id,
+        label: sal.salutation_name,
+      }));
+
+      const find = SalutationOption?.find(
+        (item) => item.value == res?.member_data?.salutation
+      );
+
+      const findGender = GENDER?.find(
+        (item) => item.value == res?.member_data?.gender
+      );
+      if (res?.member_data?.batch_detail) {
+        const batch = {
+          value: res?.member_data?.batch_detail?.id,
+          label: res?.member_data?.batch_detail?.title,
+        };
+        setState({ batch });
+      }
+
+      if (res?.member_data?.course_detail) {
+        const course = {
+          value: res?.member_data?.course_detail?.id,
+          label: res?.member_data?.course_detail?.title,
+        };
+        setState({ course });
+      }
+
+      setState({
+        salutation: find,
+        gender: findGender,
+        mobile_no: Number(res?.member_data?.mobile_no),
+        email: res?.member_data?.email,
+        file: state.file,
+        register_no: res?.member_data?.register_no,
+        // dob: res?.member_data?.dob ? new Date(res?.member_data?.dob) : null,
+      });
+      setState({
+        memberData: res?.member_data,
+        salutationList: SalutationOption,
+        memberId,
+      });
+    } catch (error) {
+      console.log("✌️error --->", error);
+    }
+  };
 
   const getCourse = async () => {
     try {
@@ -33,19 +94,6 @@ const MemberData = (props) => {
         label: cou.title,
       }));
       setState({ courseList: CourseOption, hasCourseLoadMore: res?.next });
-    } catch (error) {
-      console.log("✌️error --->", error);
-    }
-  };
-
-  const getSalutation = async () => {
-    try {
-      const res = await Models.masters.salutation();
-      const SalutationOption = res?.results?.map((sal) => ({
-        value: sal.salutation_id,
-        label: sal.salutation_name,
-      }));
-      setState({ salutationList: SalutationOption });
     } catch (error) {
       console.log("✌️error --->", error);
     }
@@ -68,9 +116,21 @@ const MemberData = (props) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      const body = {
+        salutation: state.salutation?.value,
+        gender: state.salutation?.value,
+        profile_picture: state.profile_picture,
+        batch: state.batch?.value,
+        course: state.course?.value,
+        mobile_no: state.mobile_no,
+        email: state.email,
+        file: state.file,
+        register_no: state.register_no,
+      };
 
-      const res = await Models.auth.register({ email: state.email });
-      updateStep(res?.member_id, email);
+      const res = await Models.member.updateMemberData(state.memberId, body);
+      router.push("/userInfo")
+      // updateStep(res?.member_id, email);
     } catch (error) {
       console.log("✌️errorsddsf --->", error);
       if (error?.error == "Email not found in our records") {
@@ -167,7 +227,7 @@ const MemberData = (props) => {
     <>
       <div className="col-lg-6">
         <div className="rbt-contact-form contact-form-style-1 max-width-auto">
-          <h3 className="title">Register</h3>
+          <h3 className="title">Profile Details</h3>
           <form className="max-width-auto" onSubmit={(e) => handleSubmit(e)}>
             <div className="form-group mt-3">
               <FormField
@@ -204,7 +264,7 @@ const MemberData = (props) => {
               />
             </div>
 
-            <div className="form-group mt-3">
+            {/* <div className="form-group mt-3">
               <FormField
                 placeholder="profile_picture"
                 type="file"
@@ -214,7 +274,7 @@ const MemberData = (props) => {
                 error={state.errMsg?.profile_picture}
                 className="applicant-input"
               />
-            </div>
+            </div> */}
             <div className="form-group mt-3">
               <FormField
                 type="loadMoreSelect"
@@ -260,17 +320,16 @@ const MemberData = (props) => {
             </div>
 
             <div className="form-group">
-              <DatePickerField
-                placeholder="Mobile No"
-                name="number"
-                onChange={handleChange}
-                value={state.mobile_no}
-                error={state.errMsg?.mobile_no}
-                required={true}
-                className="applicant-input"
+              <FormField
+                type="date"
+                onChange={(e) => setState({ dob: e.target.value })}
+                name="dob"
+                value={state.dob}
+                placeholder={"Date of Birth"}
+                className="date-field"
               />
-              <span className="focus-border"></span>
             </div>
+            <span className="focus-border"></span>
 
             <div className="form-group">
               <FormField
@@ -278,14 +337,14 @@ const MemberData = (props) => {
                 type="text"
                 name="email"
                 onChange={handleChange}
-                value={state.verifyEmail}
-                error={state?.errMsg?.verifyEmail}
+                value={state.email}
+                error={state?.errMsg?.email}
                 required={true}
               />
               <span className="focus-border"></span>
             </div>
             {/* </div> */}
-            <div className="form-group mt-3 ">
+            {/* <div className="form-group mt-3 ">
               <FormField
                 placeholder="file (Proof of Graduation)"
                 className="applicant-input"
@@ -297,7 +356,7 @@ const MemberData = (props) => {
                 error={state?.errMsg?.file}
                 required={true}
               />
-            </div>
+            </div> */}
 
             <div className="form-group mt-3">
               <FormField

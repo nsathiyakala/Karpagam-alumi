@@ -69,12 +69,14 @@ const Register = (props) => {
       e.preventDefault();
 
       const res = await Models.auth.register({ email: state.email });
-      updateStep(res?.member_id,email);
+      updateStep(res?.member_id,state.email);
     } catch (error) {
       console.log("✌️errorsddsf --->", error);
       if (error?.error == "Email not found in our records") {
         console.log("✌️records --->");
         setState({ confrmModelOpen: true, proofModelOpen: false });
+      }else{
+        message.error(error?.error)
       }
     }
   };
