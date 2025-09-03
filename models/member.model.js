@@ -172,6 +172,21 @@ const member = {
     return promise;
   },
 
+  createUser: (body) => {
+    let promise = new Promise((resolve, reject) => {
+      let url = `creating_user/`;
+      instance()
+        .post(url,body)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(modelError(error));
+        });
+    });
+    return promise;
+  },
+
   filter: (page, body) => {
     let promise = new Promise((resolve, reject) => {
       let url = `filter_by/?page=${page}`;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Register from "./register.component";
 import { useSetState } from "@/utils/commonFunction.utils";
 import Otp from "./otp.component";
@@ -9,8 +9,10 @@ export default function SignInMain() {
     step: 1,
     memberId: null,
     email: "",
+    isLoading: true, // Add loading state
   });
-  return state.step == 3 ? (
+
+  return state.step == 1 ? (
     <Register
       updateStep={(memberId, email) =>
         setState({ step: 2, memberId: memberId, email: email })
@@ -18,16 +20,11 @@ export default function SignInMain() {
     />
   ) : state.step == 2 ? (
     <Otp
+      memberId={state.memberId}
       updateStep={() => {
         setState({ step: 3 });
       }}
       memberEmail={state.email}
     />
-  ) : state.step == 1 ? (
-    <MemberData
-      updateStep={(memberId, email) =>
-        setState({ step: 2, memberId: memberId, email: email })
-      }
-    />
-  ):null;
+  ) : null;
 }

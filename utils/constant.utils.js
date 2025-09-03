@@ -306,15 +306,15 @@ export const ROLE = [
 export const GENDER = [
   {
     label: "Male",
-    value: "M",
+    value: "1",
   },
   {
     label: "Female",
-    value: "F",
+    value: "2",
   },
   {
     label: "Others",
-    value: "O",
+    value: "3",
   },
 ];
 
