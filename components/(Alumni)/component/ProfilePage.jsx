@@ -3,14 +3,7 @@ import Image from "next/image";
 const ProfilePage = () => {
   return (
     <div className="container">
-      <div className="row mb--50">
-        <div className="col-lg-12">
-          <div className="section-title text-center">
-            <span className="subtitle bg-pink-opacity">Our Courses</span>
-            <h2 className="title">Tuition & Program Details</h2>
-          </div>
-        </div>
-      </div>
+      
 
       <div className="row g-5 align-items-start justify-content-center">
         {/* Accordion Section */}
@@ -44,22 +37,28 @@ const ProfilePage = () => {
               <h4>Your Profile Progress</h4>
               <p>Complete your profile to impress recruiters</p>
               <div className="custom-progress-bar">
-                <div className="custom-progress-fill" style={{ width: "85%" }}></div>
+                <div
+                  className="custom-progress-fill"
+                  style={{ width: "85%" }}
+                ></div>
               </div>
               <span className="custom-progress-percent">85%</span>
             </div>
             <div className="d-flex gap-2">
-              <button className="rbt-btn btn-gradient radius-round sm-btn">Edit Profile</button> <button className="rbt-btn btn-gradient radius-round sm-btn">Share Profile</button>
+              <button className="rbt-btn btn-gradient radius-round sm-btn">
+                Edit Profile
+              </button>{" "}
+              <button className="rbt-btn btn-gradient radius-round sm-btn">
+                Share Profile
+              </button>
             </div>
-
-
           </div>
         </div>
 
-        <div className="col-lg-7 ">
+        <div className="col-lg-7">
           <div className="rbt-accordion-style rbt-accordion-01 rbt-accordion-06 accordion">
-            <div className="accordion" id="tutionaccordionExamplea1">
-              {/* Accordion Item 1 */}
+            <div className="accordion" id="profileAccordion">
+              {/* Accordion Item 1 - Personal Info */}
               <div className="accordion-item card">
                 <h2 className="accordion-header card-header" id="headingOne">
                   <button
@@ -77,43 +76,42 @@ const ProfilePage = () => {
                   id="collapseOne"
                   className="accordion-collapse collapse show"
                   aria-labelledby="headingOne"
-                  data-bs-parent="#tutionaccordionExamplea1"
+                  data-bs-parent="#profileAccordion"
                 >
                   <div className="accordion-body card-body">
-                    {/* <h6 className="title">Full-time Undergraduate Program</h6> */}
-                    <div className="table-responsive mobile-table-750">
-                      <div className="custom-info-card">
-
-                        <div className="custom-info-table">
-                          <div className="custom-info-row">
-                            <span className="custom-info-label">Register No :</span>
-                            <span className="custom-info-value">123456</span>
-                          </div>
-                          <div className="custom-info-row">
-                            <span className="custom-info-label">About me :</span>
-                            <span className="custom-info-value">Creative Designer & Developer</span>
-                          </div>
-                          <div className="custom-info-row">
-                            <span className="custom-info-label">Born on :</span>
-                            <span className="custom-info-value">2025-08-28</span>
-                          </div>
-                          <div className="custom-info-row">
-                            <span className="custom-info-label">Gender :</span>
-                            <span className="custom-info-value">Male</span>
-                          </div>
-                          <div className="custom-info-row">
-                            <span className="custom-info-label">Blood Group :</span>
-                            <span className="custom-info-value">A_NEGATIVE</span>
-                          </div>
+                    <div className="custom-info-card">
+                      <div className="custom-info-table">
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">
+                            Register No :
+                          </span>
+                          <span className="custom-info-value">345432</span>
+                        </div>
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">About me :</span>
+                          <span className="custom-info-value">-</span>
+                        </div>
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">Born on :</span>
+                          <span className="custom-info-value">2000-01-04</span>
+                        </div>
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">Gender :</span>
+                          <span className="custom-info-value">Male</span>
+                        </div>
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">
+                            Blood Group :
+                          </span>
+                          <span className="custom-info-value">A_NEGATIVE</span>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Accordion Item 2 */}
+              {/* Accordion Item 2 - Professional Details */}
               <div className="accordion-item card">
                 <h2 className="accordion-header card-header" id="headingTwo">
                   <button
@@ -124,38 +122,165 @@ const ProfilePage = () => {
                     aria-expanded="false"
                     aria-controls="collapseTwo"
                   >
-                    Master of Business Administration
+                    Professional Details
                   </button>
                 </h2>
                 <div
                   id="collapseTwo"
                   className="accordion-collapse collapse"
                   aria-labelledby="headingTwo"
+                  data-bs-parent="#profileAccordion"
+                >
+                  <div className="accordion-body card-body">
+                    <h6 className="title">Teva Pharmaceuticals</h6>
+                    <p>
+                      Pharmaceutical Marketing Manager (2025-01-03 – ) -
+                      Bangalore
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Accordion Item 3 - Education Details */}
+              <div className="accordion-item card">
+                <h2 className="accordion-header card-header" id="headingThree">
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    Education Details
+                  </button>
+                </h2>
+                <div
+                  id="collapseThree"
+                  className="accordion-collapse collapse"
+                  aria-labelledby="headingThree"
+                  data-bs-parent="#profileAccordion"
+                >
+                  <div className="accordion-body card-body">
+                    <h6 className="title">Karpagam College of Pharmacy</h6>
+                    <p>BSc (2017 – 2020) - Bangalore</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Accordion Item 4 - Contact Details */}
+              <div className="accordion-item card">
+                <h2 className="accordion-header card-header" id="headingFour">
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour"
+                    aria-expanded="false"
+                    aria-controls="collapseFour"
+                  >
+                    Contact Details
+                  </button>
+                </h2>
+                <div
+                  id="collapseFour"
+                  className="accordion-collapse collapse"
+                  aria-labelledby="headingFour"
+                  data-bs-parent="#profileAccordion"
+                >
+                  <div className="accordion-body card-body">
+                    <div className="custom-info-card">
+                      <div className="custom-info-table">
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">Address :</span>
+                          <span className="custom-info-value">-</span>
+                        </div>
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">City :</span>
+                          <span className="custom-info-value">Bangalore</span>
+                        </div>
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">
+                            Postal Code :
+                          </span>
+                          <span className="custom-info-value">-</span>
+                        </div>
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">
+                            Contact No :
+                          </span>
+                          <span className="custom-info-value">9876543210</span>
+                        </div>
+                        <div className="custom-info-row">
+                          <span className="custom-info-label">
+                            Email Address :
+                          </span>
+                          <span className="custom-info-value">
+                            test43@gmail.com
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Accordion Item 5 - Milestone */}
+              <div className="accordion-item card">
+                <h2 className="accordion-header card-header" id="headingFive">
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseFive"
+                    aria-expanded="false"
+                    aria-controls="collapseFive"
+                  >
+                    Milestone
+                  </button>
+                </h2>
+                <div
+                  id="collapseFive"
+                  className="accordion-collapse collapse"
+                  aria-labelledby="headingFive"
+                  data-bs-parent="#profileAccordion"
+                >
+                  <div className="accordion-body card-body">
+                    <h6 className="title">Milestone Data: 2020</h6>
+                    <p>Milestone Description</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Accordion Item 6 */}
+              <div className="accordion-item card">
+                <h2 className="accordion-header card-header" id="headingSix">
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseSix"
+                    aria-expanded="false"
+                    aria-controls="collapseSix"
+                  >
+                    Member Skills
+                  </button>
+                </h2>
+                <div
+                  id="collapseSix"
+                  className="accordion-collapse collapse"
+                  aria-labelledby="headingSix"
                   data-bs-parent="#tutionaccordionExamplea1"
                 >
                   <div className="accordion-body card-body">
-                    <h6 className="title">Postgraduate Program</h6>
-                    <div className="table-responsive mobile-table-750">
-                      <table className="rbt-table table table-borderless">
-                        <thead>
-                          <tr>
-                            <th>Program Term</th>
-                            <th>Tuition Cost</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th>Term 1-4</th>
-                            <td>$8,000</td>
-                          </tr>
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <th>Total</th>
-                            <th>$32,000</th>
-                          </tr>
-                        </tfoot>
-                      </table>
+                    <div className="custom-info-card">
+                      <div className="d-flex flex-wrap gap-2">
+                        <span className="badge bg-success px-3 py-2 rounded-pill">
+                          Pharmaceutical Marketing
+                        </span>
+                        {/* Add more skills like this */}
+                        {/* <span className="badge bg-primary px-3 py-2 rounded-pill">Leadership</span> */}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -165,7 +290,6 @@ const ProfilePage = () => {
         </div>
 
         {/* Image Section */}
-
       </div>
     </div>
   );
