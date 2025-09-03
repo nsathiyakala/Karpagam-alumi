@@ -1,6 +1,8 @@
 
 import BackToTop from "@/app/backToTop";
-import MyBasicDetails from "./(edit-basic-profile)";
+import MyProfileSkills from "./(edit-profile-skills)";
+
+// import MyProfileSkills from "./(edit-profile-skills)";
 
 
 export const metadata = {
@@ -8,13 +10,13 @@ export const metadata = {
   description: "Online Courses & Education NEXTJS14 Template",
 };
 
-const MyBasicDetailsPage = async () => {
+const MyProfileSkillsPage = async () => {
   return (
     <>
-      <MyBasicDetails/>
+      <MyProfileSkills/>
       <BackToTop/>
     </>
   );
 };
 
-export default MyBasicDetailsPage;
+export default MyProfileSkillsPage;

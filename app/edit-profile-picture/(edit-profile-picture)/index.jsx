@@ -17,9 +17,10 @@ import MembersMain from "@/components/(Alumni)/component/main/MembersMain";
 import MembersLoginMain from "@/components/(Alumni)/component/main/MembersLoginMain";
 import Form from "@/commonComponents/Form"
 import MyAccountMain from "@/components/(Alumni)/component/KITMyAccount/MyAccountMain";
-import MyProfileMain from "@/components/(Alumni)/component/KITMyAccount/MyProfileMain";
+import MyBasicDetailsMain from "@/components/(Alumni)/component/main/MyBasicDetailsMain";
+import MyProfilePictureMain from "@/components/(Alumni)/component/main/MyProfilePictureMain";
 
-const MyAccount = () => {
+const MyProfilePicture = () => {
   const [token, setToken] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAlumniManager, setIsAlumniManager] = useState(false);
@@ -38,9 +39,9 @@ const MyAccount = () => {
         <MobileMenu />
         <KITHeader headerSticky="rbt-sticky" headerType="" />
 
-        <BreadCrumb title="My Profile" text="My Profile" />
+        <BreadCrumb title="Members" text="Members" />
 
-        <MyProfileMain/>
+        <MyProfilePictureMain/>
 
        
 
@@ -51,4 +52,4 @@ const MyAccount = () => {
   );
 };
 
-export default MyAccount;
+export default MyProfilePicture;

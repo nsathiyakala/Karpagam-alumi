@@ -1,20 +1,19 @@
 
 import BackToTop from "@/app/backToTop";
-import MyBasicDetails from "./(edit-basic-profile)";
-
+import MyAccount from "../(id)/MyAccount";
 
 export const metadata = {
   title: "Histudy - Online Courses & Education NEXTJS14 Template",
   description: "Online Courses & Education NEXTJS14 Template",
 };
 
-const MyBasicDetailsPage = async () => {
+const MyAccountPage = async () => {
   return (
     <>
-      <MyBasicDetails/>
+      <MyAccount/>
       <BackToTop/>
     </>
   );
 };
 
-export default MyBasicDetailsPage;
+export default MyAccountPage;

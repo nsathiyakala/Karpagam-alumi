@@ -189,10 +189,10 @@ const FormField = ({
             onChange={onChange}
             value={value}
             placeholder={placeholder ? placeholder : label}
-            // className={className}
-            className={`${className}  ${
-              value && !placeholder ? "input-has-value" : ""
-            }`}
+            className={className}
+            // className={`${className}  ${
+            //   value && !placeholder ? "input-has-value" : ""
+            // }`}
             pattern="\d{10}"
             maxLength="10"
             disabled={disabled}

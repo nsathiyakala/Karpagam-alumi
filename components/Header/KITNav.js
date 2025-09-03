@@ -2,8 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-
 import { useEffect, useState } from "react";
 
 import { menus } from "@/utils/constant.utils";
@@ -11,11 +9,9 @@ import { useSetState } from "@/utils/commonFunction.utils";
 
 const KITNav = () => {
   const [activeMenuItem, setActiveMenuItem] = useState(null);
-
   const pathname = usePathname();
 
   const isActive = (href) => pathname.startsWith(href);
-
   const toggleMenuItem = (item) => {
     setActiveMenuItem(activeMenuItem === item ? null : item);
   };
@@ -23,73 +19,55 @@ const KITNav = () => {
   const [token, setToken] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAlumniManager, setIsAlumniManager] = useState(false);
-  const [isFatulty, setIsFatulty] = useState(false);
+  const [isFaculty, setIsFaculty] = useState(false);
   const [isAlumni, setIsAlumni] = useState(false);
+  const [member_id, setIsmemberId] = useState("");
+
 
   const [state, setState] = useSetState({
     menuList: menus,
     userMenu: [],
   });
+
   useEffect(() => {
     const Token = localStorage.getItem("token");
-    // if (!Token) {
-    //   window.location.href = "/login";
-    // }
     setToken(Token);
 
-    const Admin = localStorage.getItem("isAdmin");
-    setIsAdmin(Admin);
-
-    const AlumniManager = localStorage.getItem("isAlumniManager");
-    setIsAlumniManager(AlumniManager);
-
-    const Faculty = localStorage.getItem("isFaculty");
-    setIsFatulty(Faculty);
-
-    const Alumni = localStorage.getItem("isAlumni");
-    setIsAlumni(Alumni);
+    setIsAdmin(localStorage.getItem("isAdmin") === "true");
+    setIsAlumniManager(localStorage.getItem("isAlumniManager") === "true");
+    setIsFaculty(localStorage.getItem("isFaculty") === "true");
+    setIsAlumni(localStorage.getItem("isAlumni") === "true");
+    const memberId = localStorage.getItem("member_id")
+    setIsmemberId(memberId)
   }, []);
 
+  console.log("member_id", member_id);
+  
+
   useEffect(() => {
+    const { admin, alumniManager, alumni, faculty, user, guest } =
+      state?.menuList || {};
+
     if (token && isAdmin) {
-      setState({ userMenu: state?.menuList?.admin });
+      console.log("isAdmin");
+      setState({ userMenu: admin });
     } else if (token && isAlumniManager) {
-      setState({ userMenu: state?.menuList?.alumniManager });
+      console.log("isAlumniManager");
+      setState({ userMenu: alumniManager });
     } else if (token && isAlumni) {
-      setState({ userMenu: state?.menuList?.alumni });
-    } else if (token && isFatulty) {
-      setState({ userMenu: state?.menuList?.faculty });
+      console.log("isAlumni");
+      setState({ userMenu: alumni });
+    } else if (token && isFaculty) {
+      console.log("isFaculty");
+      setState({ userMenu: faculty });
     } else if (token) {
-      // logged in but no specific role
-      setState({ userMenu: state?.menuList?.user });
+      console.log("token");
+      setState({ userMenu: user });
     } else {
-      // not logged in
-      setState({ userMenu: state?.menuList?.guest });
+      console.log("guest");
+      setState({ userMenu: guest });
     }
-  }, [token, isAdmin, isAlumniManager, isAlumni, isFatulty, state.menuList]);
-
-  // console.log("menu", state.menuList);
-
-  //   const getUserMenu = () => {
-  //   if (token) {
-  //     return setState({userMenu:state?.menuList?.user})
-
-  //   } else if (isAdmin) {
-  //     return setState({userMenu:state?.menuList?.admin})
-
-  //   } else if (isAlumniManager) {
-  //     return setState({userMenu:state?.menuList?.alumniManager})
-  // ;
-  //   } else if (isAlumni) {
-  //     return setState({userMenu:state?.menuList?.alumni})
-  //   } else if (isFatulty) {
-  //     return setState({userMenu:state?.menuList?.faculty})
-  //   } else {
-  //     return setState({userMenu:state?.menuList?.guest})
-  //   }
-  // };
-
-  // console.log("userMenu", state.userMenu);
+  }, [token, isAdmin, isAlumniManager, isAlumni, isFaculty, state.menuList]);
 
   return (
     <nav className="mainmenu-nav">
@@ -112,4 +90,5 @@ const KITNav = () => {
     </nav>
   );
 };
+
 export default KITNav;
