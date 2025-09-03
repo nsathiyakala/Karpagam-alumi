@@ -15,25 +15,21 @@ import BreadCrumb from "@/components/Common/BreadCrumb";
 import Form from "@/commonComponents/Form";
 import PostJobForm from "@/components/(Alumni)/component/JobBoard/PostJobForm";
 import HelpDeskFormMain from "@/components/(Alumni)/component/main/HelpDeskFormMain";
-import AlumniTicketsTable from "@/components/(Alumni)/component/main/AlumniTicketsTable";
-import { usePathname } from "next/navigation";
+import AlumniTicketsTable from "./AlumniTicketsTable";
 
 
-const HelpDeskForm = () => {
+const AlumniTicketsMain = () => {
+  const [token, setToken] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAlumniManager, setIsAlumniManager] = useState(false);
+  const [isFatulty, setIsFatulty] = useState(false);
+  const [isAlumni, setIsAlumni] = useState(false);
 
-  const pathname = usePathname();
-  const renderContent = () => {
-    if (pathname.includes("/help-desk")) {
-      return <HelpDeskFormMain />;
-    }
-    if (pathname.includes("/help-desk/alumni-tickets")) {
-      return <AlumniTicketsTable />;
-    }
-    // if (pathname.includes("/help-desk/alumni-tikets/id")) {
-    //   return <AllMessagesMain />;
-    // }
-    return null;
-  };
+  useEffect(() => {
+    const Token = localStorage.getItem("token");
+
+    setToken(Token);
+  });
 
   return (
     <Provider store={Store}>
@@ -41,11 +37,11 @@ const HelpDeskForm = () => {
         <MobileMenu />
         <KITHeader headerSticky="rbt-sticky" headerType="" />
 
-        <BreadCrumb title="Help Desk" text="Help Desk" />
+        <BreadCrumb title="Post New Job" text="postjob" />
 
-        {renderContent()}
+        <AlumniTicketsTable/>
 
-        {/* <JobBoardMain />  */}
+         {/* <JobBoardMain />  */}
 
         <Separator />
         <KITFooter />
@@ -54,4 +50,4 @@ const HelpDeskForm = () => {
   );
 };
 
-export default HelpDeskForm;
+export default AlumniTicketsMain;

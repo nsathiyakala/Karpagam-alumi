@@ -10,14 +10,29 @@ import SideBarHelpDesk from "../KITSidebar/SideBarHelpDesk";
 import BreadCrumb from "../../../Common/BreadCrumb";
 import AllTicketsMain from "../KITHelpDesk/AllTicketsMain";
 import OpenTicketsMain from "../KITHelpDesk/OpenTicketsMain";
+import AllMessagesMain from "../KITHelpDesk/AllMessagesMain";
+import AlumniTicketsTable from "./AlumniTicketsTable";
+import { useSetState } from "@/utils/commonFunction.utils";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { usePathname } from "next/navigation";
-import AllMessagesMain from "../KITHelpDesk/AllMessagesMain";
 
 const AllSupportTicketsMain = () => {
+  const [state, setState] = useSetState({
+    alltickets: false,
+  });
+
   const pathname = usePathname();
+
+  // ✅ Move state update logic into useEffect
+  useEffect(() => {
+    if (pathname.includes("/help-desk/alumni-tickets")) {
+      setState({ alltickets: true });
+    } else {
+      setState({ alltickets: false });
+    }
+  }, [pathname]);
 
   const renderContent = () => {
     if (pathname.includes("/help-desk/open-tickets")) {
@@ -29,8 +44,14 @@ const AllSupportTicketsMain = () => {
     if (pathname.includes("/help-desk/all-messages")) {
       return <AllMessagesMain />;
     }
+    if (pathname.includes("/help-desk/alumni-tickets")) {
+      return <AlumniTicketsTable />;
+    }
     return null;
   };
+
+  console.log("Current State:", state);
+  console.log("Current Path:", pathname);
 
   return (
     <Provider store={Store}>
@@ -47,10 +68,12 @@ const AllSupportTicketsMain = () => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="row g-5">
+                        {!state?.alltickets && 
                         <div className="col-lg-3">
                           <SideBarHelpDesk />
-                        </div>
-                        <div className="col-lg-9">{renderContent()}</div>
+                        </div>}
+
+                        <div className={`${state?.alltickets ? "col-lg-12" : "col-lg-9"}`}>{renderContent()}</div>
                       </div>
                     </div>
                   </div>

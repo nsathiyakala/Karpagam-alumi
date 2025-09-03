@@ -106,10 +106,10 @@ const FormField = ({
               name={name}
               onChange={onChange}
               value={value}
-              // className={`${className} flex-grow`}
-              className={`${className} flex-grow ${
-                value && !placeholder ? "input-has-value" : ""
-              }`}
+              className={`${className} flex-grow`}
+              // className={`${className} flex-grow ${
+              //   value && !placeholder ? "input-has-value" : ""
+              // }`}
             />
             <button
               type="button"
@@ -138,10 +138,10 @@ const FormField = ({
             onChange={onChange}
             value={value}
             placeholder={placeholder}
-            // className={className}
-            className={`${className}  ${
-              value && !placeholder ? "input-has-value" : ""
-            }`}
+            className={className}
+            // className={`${className}  ${
+            //   value && !placeholder ? "input-has-value" : ""
+            // }`}
             disabled={disabled}
           />
         ) : type === "textarea" ? (

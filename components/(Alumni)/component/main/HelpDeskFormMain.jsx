@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { DeleteOutlined, FilePdfOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import { Select } from "antd";
+import { message, Select } from "antd";
 import Link from "next/link";
 import { BaseURL } from "@/utils/BaseUrl";
 import {
@@ -161,7 +161,7 @@ const HelpDeskFormMain = () => {
                 className="rbt-btn btn-gradient radius-round sm-btn"
                 href="/help-desk/alumni-tickets"
               >
-                Back
+                All Tickets
               </Link>
             </div>
           </div>
@@ -173,54 +173,62 @@ const HelpDeskFormMain = () => {
                 <form
                   id="contact-form"
                   method="POST"
-                  action="mail.php"
+                 
                   className="rainbow-dynamic-form max-width-auto"
                   onSubmit={handleSubmit}
                 >
+                  
                   <div className="form-grid">
-                    {/* Left Column */}
-                    <div className="form-group">
+
+                    <div className="">
                       <FormField
-                      label="Name"
-                        placeholder="Name"
+                      
+                        label="Name"
                         type="text"
-                        value={fixedFormData.full_name}
-                        // className="applicant-input"
+                        name="name"
+                         value={fixedFormData.full_name}
+                        
+                       
                         required={true}
-                        disabled={true}
                       />
                       <span className="focus-border"></span>
                     </div>
 
-                    <div className="form-group">
+                    {/* Left Column */}
+                    
+
+                   
+                    <div className="">
                       <FormField
                          label="Contact Email"
                         type="email"
+                        name="email"
                         value={fixedFormData.email}
                         // className="applicant-input"
                         required={true}
-                        disabled={true}
+                        
                       />
                       <span className="focus-border"></span>
                     </div>
 
-                    <div className="form-group">
+                    <div className="">
                       <FormField
                        label="Contact Number"
                         type="tel"
                         value={fixedFormData.contact}
                         // className="applicant-input"
                         required={true}
-                        disabled={true}
+                        // disabled={true}
                       />
                       <span className="focus-border"></span>
                     </div>
 
-                    <div className="form-group">
+                    <div className="">
                       <FormField
                         label="Category"
                         type="select"
                         name="category"
+                        className="form-dd "
                         value={formData.category}
                         onChange={handleChange}
                         error={errMsg.category}
@@ -231,7 +239,13 @@ const HelpDeskFormMain = () => {
                       <span className="focus-border"></span>
                     </div>
 
-                    <div className="form-group">
+                    
+
+
+                    
+                  </div>
+
+                  <div className=" w-100 mt-4">
                       <FormField
                         label="Content"
                         type="textarea"
@@ -242,23 +256,6 @@ const HelpDeskFormMain = () => {
                         required={true}
                       />
                       <span className="focus-border"></span>
-                    </div>
-
-
-                    
-                  </div>
-
-                  <div className="form-group w-100">
-                      <FormField
-                        placeholder="Job Description"
-                        type="textarea"
-                        // className="file-input"
-                        name="job_description"
-                        value={formData.job_description}
-                        onChange={(e) => handleChange(e)}
-                        error={errMsg.job_description}
-                        required={true}
-                      />
                     </div>
 
                   {/* Submit */}
