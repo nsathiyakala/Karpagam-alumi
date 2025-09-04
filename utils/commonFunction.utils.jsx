@@ -296,3 +296,8 @@ export const convertTo12HourFormat = (time) => {
   // Format the time as a string
   return `${hoursIn12HourFormat}:${minutes} ${suffix}`;
 };
+
+export const TrimText = (text, length = 100) => {
+  if (!text) return "";
+  return text.length > length ? text.substring(0, length) + "..." : text;
+};
