@@ -12,27 +12,36 @@ import AllTicketsMain from "../KITHelpDesk/AllTicketsMain";
 import OpenTicketsMain from "../KITHelpDesk/OpenTicketsMain";
 import AllMessagesMain from "../KITHelpDesk/AllMessagesMain";
 import AlumniTicketsTable from "./AlumniTicketsTable";
+import ViewAlumniTickets from "./ViewAlumniTickets";
 import { useSetState } from "@/utils/commonFunction.utils";
 
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 const AllSupportTicketsMain = () => {
   const [state, setState] = useSetState({
     alltickets: false,
+    viewtickets: false,
   });
 
+  const { id } = useParams(); // ✅ dynamic id from URL
   const pathname = usePathname();
 
-  // ✅ Move state update logic into useEffect
+  console.log("id", id);
+  
+
   useEffect(() => {
-    if (pathname.includes("/help-desk/alumni-tickets")) {
-      setState({ alltickets: true });
+    if (id) {
+      // ✅ when /help-desk/alumni-tickets/[id]
+      setState({ alltickets: false, viewtickets: true });
+    } else if (pathname.includes("/help-desk/alumni-tickets")) {
+      // ✅ when just /help-desk/alumni-tickets
+      setState({ alltickets: true, viewtickets: false });
     } else {
-      setState({ alltickets: false });
+      setState({ alltickets: false, viewtickets: false });
     }
-  }, [pathname]);
+  }, [pathname, id]);
 
   const renderContent = () => {
     if (pathname.includes("/help-desk/open-tickets")) {
@@ -44,14 +53,15 @@ const AllSupportTicketsMain = () => {
     if (pathname.includes("/help-desk/all-messages")) {
       return <AllMessagesMain />;
     }
+    if (id) {
+   
+      return <ViewAlumniTickets />;
+    }
     if (pathname.includes("/help-desk/alumni-tickets")) {
       return <AlumniTicketsTable />;
     }
     return null;
   };
-
-  console.log("Current State:", state);
-  console.log("Current Path:", pathname);
 
   return (
     <Provider store={Store}>
@@ -62,18 +72,28 @@ const AllSupportTicketsMain = () => {
 
         <div className="rbt-dashboard-area rbt-section-gapBottom section-pad">
           <div className="container-fluid">
-            <div className="row justify-content-center">
-              <div className="col-11 col-xl-10">
-                <div className="container-fluid">
+            <div className="row justify-content-center mx-0 px-0">
+              <div className="col-11 col-xl-10 px-0 mx-0">
+                <div className="container-fluid px-0 mx-0">
                   <div className="row">
-                    <div className="col-lg-12">
+                    <div className="col-lg-12 px-0 mx-0">
                       <div className="row g-5">
-                        {!state?.alltickets && 
-                        <div className="col-lg-3">
-                          <SideBarHelpDesk />
-                        </div>}
+                        {/* show sidebar only when not in list/detail */}
+                        {!state?.alltickets && !state?.viewtickets && (
+                          <div className="col-lg-3">
+                            <SideBarHelpDesk />
+                          </div>
+                        )}
 
-                        <div className={`${state?.alltickets ? "col-lg-12" : "col-lg-9"}`}>{renderContent()}</div>
+                        <div
+                          className={`${
+                            state?.alltickets || state?.viewtickets
+                              ? "col-lg-12"
+                              : "col-lg-9"
+                          }`}
+                        >
+                          {renderContent()}
+                        </div>
                       </div>
                     </div>
                   </div>

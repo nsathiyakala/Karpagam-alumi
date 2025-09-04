@@ -22,16 +22,12 @@ import { usePathname } from "next/navigation";
 const HelpDeskForm = () => {
 
   const pathname = usePathname();
+  
   const renderContent = () => {
     if (pathname.includes("/help-desk")) {
       return <HelpDeskFormMain />;
     }
-    if (pathname.includes("/help-desk/alumni-tickets")) {
-      return <AlumniTicketsTable />;
-    }
-    // if (pathname.includes("/help-desk/alumni-tikets/id")) {
-    //   return <AllMessagesMain />;
-    // }
+   
     return null;
   };
 
@@ -43,7 +39,7 @@ const HelpDeskForm = () => {
 
         <BreadCrumb title="Help Desk" text="Help Desk" />
 
-        {renderContent()}
+        <HelpDeskFormMain />
 
         {/* <JobBoardMain />  */}
 
