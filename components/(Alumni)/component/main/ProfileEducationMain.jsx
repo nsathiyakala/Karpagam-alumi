@@ -334,25 +334,22 @@ const ProfileEducationMain = () => {
                               <li key={index} className="stepper-item d-flex">
                                 <div className="stepper-left">
                                   <div
-                                    className={`stepper-circle ${
-                                      step.className ? "active" : ""
-                                    }`}
+                                    className={`stepper-circle ${step.className ? "active" : ""
+                                      }`}
                                   >
                                     <i className={`${step.icon}`}></i>
                                   </div>
                                   {index < stepsData.length - 1 && (
                                     <div
-                                      className={`stepper-line ${
-                                        step.className ? "completed" : ""
-                                      }`}
+                                      className={`stepper-line ${step.className ? "completed" : ""
+                                        }`}
                                     ></div>
                                   )}
                                 </div>
                                 <div className="stepper-content">
                                   <span
-                                    className={`stepper-text ${
-                                      step.className ? "active" : ""
-                                    }`}
+                                    className={`stepper-text ${step.className ? "active" : ""
+                                      }`}
                                   >
                                     {step.label}
                                   </span>
@@ -371,6 +368,22 @@ const ProfileEducationMain = () => {
                 <div className="rbt-video-area bg-color-white overflow-hidden event-form rbt-shadow-box">
                   <div className="container">
                     <div className="row row--15 gy-5">
+                       <div className="section-title d-flex justify-content-between">
+                          <h4 class="rbt-title-style-3 mb-0">
+                            Highest Educational Details
+                            <div
+                              className="text-gray mt-2"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Please add details of your highest level of qualification. If you have already submitted the details earlier, please add second highest educational qualification details. <br /> <br />
+                              You may <Link href={"/profile-experience"}>
+                              skip this step if not applicable.
+                              </Link> 
+                            </div>
+                          </h4>
+
+                         
+                        </div>
                       <div className="form-wrapper">
                         <div className=" contact-form-style-1 max-width-auto py-0 px-3">
                           <form
@@ -379,7 +392,7 @@ const ProfileEducationMain = () => {
                             onSubmit={(e) => handleSubmit(e)}
                           >
                             {/* Left Column */}
-                            <div className="">
+                            <div className="form-grid">
                               <div className="">
                                 <FormField
                                   type="loadMoreSelect"
@@ -398,7 +411,20 @@ const ProfileEducationMain = () => {
                                   loadMore={() => institutionListLoadMore()}
                                 />
                               </div>
-                               <div className="">
+                              <div className="">
+                                <FormField
+                                  type="text"
+                                  name="degree"
+                                  label="Degree"
+                                  // className={"applicant-input"}
+                                  onChange={handleChange}
+                                  value={formData.degree}
+                                  error={errMsg?.degree}
+                                  required
+                                />
+                              </div>
+
+                              <div className="">
                                 <FormField
                                   type="text"
                                   name="start_year"
@@ -410,7 +436,9 @@ const ProfileEducationMain = () => {
                                   required={true}
                                 />
                               </div>
-                              <div className="w-100">
+
+
+                              <div className="w-100 mt--50">
                                 <input
                                   type="checkbox"
                                   name="is_currently_pursuing"
@@ -431,44 +459,98 @@ const ProfileEducationMain = () => {
                                   Currently Pursuing?
                                 </label>
                               </div>
-                             
+
+
+
+
+                              {formData?.is_currently_pursuing !== true && (
+                                <div className="">
+                                  <FormField
+                                    type="text"
+                                    name="end_year"
+                                    label="End Year"
+                                    // className={"applicant-input"}
+                                    onChange={handleChange}
+                                    value={formData.end_year}
+                                    error={errMsg?.end_year}
+                                  />
+                                </div>
+                              )}
+
 
                               <div className="">
                                 <FormField
-                                  type="text"
-                                  name="end_year"
-                                  label="End Year"
+                                  type="loadMoreSelect"
+                                  name="location"
+                                  label="Location"
                                   // className={"applicant-input"}
-                                  onChange={handleChange}
-                                  value={formData.end_year}
-                                  error={errMsg?.end_year}
+                                  onChange={(value) =>
+                                    setFormData({
+                                      ...formData,
+                                      location: value,
+                                    })
+                                  }
+                                  value={formData.location}
+                                  options={location}
+                                  error={errMsg?.location}
+                                  loadMore={() => locationListLoadMore()}
                                 />
                               </div>
 
-                              <div className="">
-                                <FormField
-                                 type="loadMoreSelect"
-                                name="location"
-                                label="Location"
-                                // className={"applicant-input"}
-                                 onChange={(value) =>
-                                setFormData({
-                                  ...formData,
-                                  location: value,
-                                })
-                              }
-                                value={formData.location}
-                                options={location}
-                                required
-                                error={errMsg?.location}
-                                loadMore={() => locationListLoadMore()}
-                                />
-                              </div>
+
                             </div>
 
-                            <div className="form-submit-group d-flex justify-content-lg-between flex-wrap">
-                                <div>
-                                     <Link
+                            <div className="mt-4 
+                            d-flex justify-content-center align-items-end gap-5 w-100">
+                              <div  style={{ width: "100%" }}
+                              // style={{ width: "250%" }}
+                              >
+                                <FormField
+                                  label="Skills"
+                                  name="skills"
+                                  type="loadMoreSelect"
+                                  // className="applicant-input"
+                                  placeholder="Enter Skills"
+                                  onChange={(value) =>
+                                    setFormData({
+                                      ...formData,
+                                      skills: value,
+                                    })
+                                  }
+                                  options={skills}
+                                  value={formData.skills}
+                                  // isMulti={true}
+                                  required
+                                  loadMore={() => skillListLoadMore()}
+                                />
+
+
+
+                              </div>
+                              {/* <button
+                                type="submit"
+                                className="rbt-btn btn-md btn-gradient hover-icon-reverse "
+                                style={{ cursor: "pointer", width: "100%" }}
+                              >
+                                Add Skills
+                              </button> */}
+
+
+                            </div>
+
+                            <div className="jd-tags mt-3 mb-5 ">
+                              {memberSkills?.map((item, index) => (
+
+                                <span key={index} className="jd-tag">{item?.skill_name}</span>
+
+                              )
+
+                              )}
+                            </div>
+
+                            <div className="form-submit-group d-flex justify-content-between flex-wrap">
+                              <div>
+                                <Link
                                   name="submit"
                                   type="button"
                                   id="submit"
@@ -485,31 +567,31 @@ const ProfileEducationMain = () => {
                                     </span>
                                   </span>
                                 </Link>
-                                  <button
-                                name="submit"
-                                type="submit"
-                                id="submit"
-                                className="rbt-btn btn-md btn-gradient hover-icon-reverse ms-2"
-                              >
-                                <span className="icon-reverse-wrapper">
-                                  <span className="btn-text">
-                                    Save and Continue
+                                <button
+                                  name="submit"
+                                  type="submit"
+                                  id="submit"
+                                  className="rbt-btn btn-md btn-gradient hover-icon-reverse ms-2"
+                                >
+                                  <span className="icon-reverse-wrapper">
+                                    <span className="btn-text">
+                                      Save and Continue
+                                    </span>
+                                    <span className="btn-icon">
+                                      <i className="feather-arrow-right"></i>
+                                    </span>
+                                    <span className="btn-icon">
+                                      <i className="feather-arrow-right"></i>
+                                    </span>
                                   </span>
-                                  <span className="btn-icon">
-                                    <i className="feather-arrow-right"></i>
-                                  </span>
-                                  <span className="btn-icon">
-                                    <i className="feather-arrow-right"></i>
-                                  </span>
-                                </span>
-                              </button>
+                                </button>
 
-                                </div>
-                            
+                              </div>
+
                               <div class="rbt-card-bottom">
                                 <a
                                   class="rbt-btn-link color-primary"
-                                  href="/profile-education"
+                                  href="/profile-experience"
                                 >
                                   {" "}
                                   Skip & Go to Next Step

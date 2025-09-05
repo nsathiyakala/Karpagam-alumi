@@ -195,7 +195,7 @@ const ProfilePhotographMain = () => {
                                 <div className="stepper-content">
                                   <span
                                     className={`stepper-text ${
-                                      index + 1 <= currentStep ? "active" : ""
+                                       step.className ? "active" : ""
                                     }`}
                                   >
                                     {step.label}
@@ -287,7 +287,7 @@ const ProfilePhotographMain = () => {
                               </div>
                             </div>
 
-                            <div className="form-submit-group d-flex justify-content-lg-between flex-wrap">
+                            <div className="form-submit-group d-flex justify-content-between flex-wrap">
                               <div >
                                 
 
