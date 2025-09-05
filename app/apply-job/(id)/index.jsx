@@ -13,10 +13,10 @@ import KITHeader from "@/components/Header/KITHeader";
 import KITFooter from "@/components/Footer/KITFooter";
 import BreadCrumb from "@/components/Common/BreadCrumb";
 
-import BusinessDirectoryMain from "@/components/(Alumni)/component/BusinessDirectory/BusinessDirectoryMain";
-import MyJobListMain from "@/components/(Alumni)/component/main/MyJobListMain";
+import JobDetailMain from "@/components/(Alumni)/component/JobBoard/JobDetailMain";
+import ApplyJobMain from "@/components/(Alumni)/component/main/ApplyJobMain";
 
-const MyJobList = () => {
+const ApplyJob = () => {
   const [token, setToken] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAlumniManager, setIsAlumniManager] = useState(false);
@@ -35,9 +35,9 @@ const MyJobList = () => {
         <MobileMenu />
         <KITHeader headerSticky="rbt-sticky" headerType="" />
 
-        <BreadCrumb title="My Job List" text="My Job List" />
+        <BreadCrumb title="Apply Job" text="Apply Job" />
 
-         <MyJobListMain /> 
+         <ApplyJobMain/> 
 
         <Separator />
         <KITFooter />
@@ -46,4 +46,4 @@ const MyJobList = () => {
   );
 };
 
-export default MyJobList;
+export default ApplyJob;
