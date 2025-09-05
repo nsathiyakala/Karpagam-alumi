@@ -313,7 +313,7 @@ const ProfileEducationMain = () => {
     { label: "Educational Details", icon: "feather-book", className: "active" },
     { label: "Experience", icon: "feather-briefcase " },
     { label: "Contact", icon: "feather-phone-forwarded" },
-    { label: "Scheduler Milestone", icon: "feather-star" },
+    { label: "Milestone", icon: "feather-star" },
   ];
 
   return (

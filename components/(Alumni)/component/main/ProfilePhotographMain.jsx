@@ -155,7 +155,7 @@ const ProfilePhotographMain = () => {
     { label: "Educational Details", icon: "feather-book" },
     { label: "Experience", icon: "feather-briefcase " },
     { label: "Contact", icon: "feather-phone-forwarded" },
-    { label: "Scheduler Milestone", icon: "feather-star" },
+    { label: "Milestone", icon: "feather-star" },
   ];
 
   return (
