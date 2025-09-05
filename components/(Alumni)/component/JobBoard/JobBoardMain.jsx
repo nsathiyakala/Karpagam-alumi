@@ -302,9 +302,8 @@ const JobBoardMain = () => {
   };
 
   const handleSearchFilter = (e) => {
-
     console.log("handleSearchFilter");
-    
+
     const value = e.target.value.toLowerCase();
 
     if (token) {
@@ -322,7 +321,7 @@ const JobBoardMain = () => {
       }
     }
     console.log("token", token);
-    
+
     {
       if (value) {
         const filtered = listOfPosts.filter(
@@ -858,35 +857,35 @@ const JobBoardMain = () => {
                             </Link>
                           </div> */}
 
-                          <div className="rbt-callto-action rbt-cta-default style-2">
-                        <div className="content-wrapper overflow-hidden pt--30 pb--30 bg-color-primary-opacity">
-                          <div className="row gy-5 align-items-end">
-                            <div className="col-lg-8">
-                              <div className="inner">
-                                <div className="content text-left">
-                                  <h5 className="mb--5">
-                                     {listOfPosts.length} record(s) found
-                                  </h5>
-                                  {/* <p className="b3">Create Announcement</p> */}
+                          <div className="rbt-callto-action rbt-cta-default style-2 mb-5">
+                            <div className="content-wrapper overflow-hidden pt--30 pb--30 bg-color-primary-opacity">
+                              <div className="row gy-5 align-items-end">
+                                <div className="col-lg-8">
+                                  <div className="inner">
+                                    <div className="content text-left">
+                                      <h5 className="mb--5">
+                                        {currentDataForAdmin.length} record(s) found
+                                      </h5>
+                                      {/* <p className="b3">Create Announcement</p> */}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="col-lg-4 d-flex justify-content-start justify-content-lg-end">
+                                  <div className="call-to-btn text-start text-lg-end position-relative">
+                                    <Link
+                                      className="rbt-btn btn-gradient radius-round sm-btn"
+                                      href="/my-job-posts"
+                                    >
+                                      <span data-text="Add New Announcement">
+                                        My Job List
+                                      </span>
+                                    </Link>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-4 d-flex justify-content-start justify-content-lg-end">
-                              <div className="call-to-btn text-start text-lg-end position-relative">
-                                <Link
-                                  className="rbt-btn btn-gradient radius-round sm-btn"
-                                  href="/my-job-posts"
-                                >
-                                  <span data-text="Add New Announcement">
-                                    My Job List
-                                  </span>
-                                </Link>
-                              </div>
-                            </div>
                           </div>
-                        </div>
-                      </div>
-                        
+
                           {(isAdmin == "true" || isAlumniManager == "true") && (
                             <div className="rbt-dashboard-table table-responsive mobile-table-750">
                               <table className="rbt-table table table-borderless">
@@ -1028,14 +1027,17 @@ const JobBoardMain = () => {
                           {(isAlumni == "true" || isFatulty == "true") && (
                             <div className="rbt-dashboard-table table-responsive mobile-table-750">
                               <div className="row g-5 m-0">
-                                {listOfPosts.length > 0 ? 
+                                {listOfPosts.length > 0 ? (
                                   listOfPosts.map((value, index) => (
-                                  <div className="col-lg-6 col-12" key={index}>
                                     <div
-                                      className="rbt-card  event-list-card variation-01 rbt-hover relative"
-                                      style={{ position: "relative" }}
+                                      className="col-lg-6 col-12"
+                                      key={index}
                                     >
-                                      {/* Edit Icon in Top Right
+                                      <div
+                                        className="rbt-card  event-list-card variation-01 rbt-hover relative"
+                                        style={{ position: "relative" }}
+                                      >
+                                        {/* Edit Icon in Top Right
                                     <div
                                       className="rbt-button-group"
                                       style={{
@@ -1054,50 +1056,49 @@ const JobBoardMain = () => {
                                       </a>
                                     </div> */}
 
-                                      <div className="rbt-card-body pt-0">
-                                        <ul className="rbt-meta">
-                                          <li>
-                                            <i className="feather-map-pin"></i>
-                                            {value?.location}
-                                          </li>
-                                          <li>
-                                            <i className="feather-calendar"></i>
-                                            {value?.dead_line}
-                                          </li>
+                                        <div className="rbt-card-body pt-0">
+                                          <ul className="rbt-meta">
+                                            <li>
+                                              <i className="feather-map-pin"></i>
+                                              {value?.location}
+                                            </li>
+                                            <li>
+                                              <i className="feather-calendar"></i>
+                                              {value?.dead_line}
+                                            </li>
 
-                                          <li>
-                                            <i className="feather-user"></i>
-                                            {value?.posted_by}
-                                          </li>
-                                        </ul>
-                                        <h4 className="rbt-card-title">
-                                          <Link href={`#`}>
-                                            {value.job_title}
-                                          </Link>
-                                        </h4>
-                                        <p
-                                          className="text-gray mt--dec-40 mb-3"
-                                          style={{ fontSize: "16px" }}
-                                        >
-                                          {TrimText(value.job_description)}
-                                        </p>
-                                        <div className="rbt-card-bottom mt-0">
-                                          <a
-                                            className="rbt-btn-link color-primary"
-                                            href={`/job-details/${value?.id}`}
+                                            <li>
+                                              <i className="feather-user"></i>
+                                              {value?.posted_by}
+                                            </li>
+                                          </ul>
+                                          <h4 className="rbt-card-title">
+                                            <Link href={`#`}>
+                                              {value.job_title}
+                                            </Link>
+                                          </h4>
+                                          <p
+                                            className="text-gray mt--dec-40 mb-3"
+                                            style={{ fontSize: "16px" }}
                                           >
-                                            View Job
-                                            <i className="feather-arrow-right"></i>
-                                          </a>
+                                            {TrimText(value.job_description)}
+                                          </p>
+                                          <div className="rbt-card-bottom mt-0">
+                                            <a
+                                              className="rbt-btn-link color-primary"
+                                              href={`/job-details/${value?.id}`}
+                                            >
+                                              View Job
+                                              <i className="feather-arrow-right"></i>
+                                            </a>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                )) : 
-                                
-                                <div> No Jobs Found</div>
-                                }
-                              
+                                  ))
+                                ) : (
+                                  <div> No Jobs Found</div>
+                                )}
                               </div>
                             </div>
                           )}

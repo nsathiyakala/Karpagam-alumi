@@ -502,7 +502,7 @@ const BusinessDirectoryMain = () => {
 
                     <div className="col-lg-9">
                       <div className="rbt-elements-area bg-color-extra2 mb-5">
-                        <div className="container">
+                        <div className="container-fluid">
                           <div className="row p-0">
                             <div className="col-lg-12 p-0">
                               <form action="#" className="rbt-search-style-1">
@@ -550,7 +550,7 @@ const BusinessDirectoryMain = () => {
                         </div>
                       </div>
 
-                      <div className="rbt-dashboard-content bg-color-white rbt-shadow-box mt-5">
+                      <div className="rbt-dashboard-content p-0 mt-5">
                         <div className="content">
                           <div className="section-title">
                             <h4 className="rbt-title-style-3">
@@ -605,7 +605,7 @@ const BusinessDirectoryMain = () => {
                                         </li>
                                       </ul>
                                       <h4 className="rbt-card-title">
-                                        <Link href={`#`}>
+                                        <Link href={`business-directory/${item.id}`}>
                                           {item.business_name}
                                         </Link>
                                       </h4>
