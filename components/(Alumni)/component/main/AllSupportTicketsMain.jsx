@@ -65,7 +65,7 @@ const AllSupportTicketsMain = () => {
 
   return (
     <Provider store={Store}>
-      <Context>  
+      <Context>
         <MobileMenu />
         <KITHeader headerSticky="rbt-sticky" headerType="" />
         <BreadCrumb title="Help Desk" text="Support Tickets" />
