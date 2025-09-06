@@ -81,48 +81,48 @@ const LoginMain = () => {
 
       success();
 
-      router?.push("/");
+      // router?.push("/");
 
-      // if (
-      //   res?.groups?.Alumni_Manager === true ||
-      //   res?.groups?.Administrator === true ||
-      //   res?.groups?.Student === true ||
-      //   res?.groups?.Alumni === true
-      // ) {
-      //   router?.push("/users");
-      // } else if (res?.groups?.Alumni === true) {
-      //   const modules = res?.modules;
-      //   console.log("✌️modules --->", modules);
+      if (
+        res?.groups?.Alumni_Manager === true ||
+        res?.groups?.Administrator === true ||
+        res?.groups?.Student === true ||
+        res?.groups?.Alumni === true
+      ) {
+        router?.push("/users");
+      } else if (res?.groups?.Alumni === true) {
+        const modules = res?.modules;
+        console.log("✌️modules --->", modules);
 
-      //   // Ensure modules exists before checking individual module status
-      //   if (modules) {
-      //     if (modules.module1 === false) {
-      //       router?.push("/profile-photograph");
-      //     } else if (modules.module2 === false) {
-      //       router?.push("/profile-education");
-      //     } else if (modules.module3 === false) {
-      //       router?.push("/profile-experience");
-      //     } else if (modules.module4 === false) {
-      //       router?.push("/profile-alumni");
-      //     } else if (modules.milestone === false) {
-      //       router?.push("/profile-milestone");
-      //     } else if (
-      //       modules.module1 === true &&
-      //       modules.module2 === true &&
-      //       modules.module3 === true &&
-      //       modules.module4 === true &&
-      //       modules.milestone === true
-      //     ) {
-      //       router?.push("/edit-basic-profile");
-      //     }
-      //   } else {
-      //     console.error("Modules data is missing.");
-      //   }
-      // } else if (res?.groups?.Faculty === true) {
-      //   router?.push("/help-desk/all-support-tickets");
-      // } else {
-      //   console.log("User does not belong to Alumni or Admin groups.");
-      // }
+        // Ensure modules exists before checking individual module status
+        if (modules) {
+          if (modules.module1 === false) {
+            router?.push("/profile-photograph");
+          } else if (modules.module2 === false) {
+            router?.push("/profile-education");
+          } else if (modules.module3 === false) {
+            router?.push("/profile-experience");
+          } else if (modules.module4 === false) {
+            router?.push("/profile-alumni");
+          } else if (modules.milestone === false) {
+            router?.push("/profile-milestone");
+          } else if (
+            modules.module1 === true &&
+            modules.module2 === true &&
+            modules.module3 === true &&
+            modules.module4 === true &&
+            modules.milestone === true
+          ) {
+            router?.push("/edit-basic-profile");
+          }
+        } else {
+          console.error("Modules data is missing.");
+        }
+      } else if (res?.groups?.Faculty === true) {
+        router?.push("/help-desk/all-support-tickets");
+      } else {
+        console.log("User does not belong to Alumni or Admin groups.");
+      }
 
       setFormData({
         username: "",
